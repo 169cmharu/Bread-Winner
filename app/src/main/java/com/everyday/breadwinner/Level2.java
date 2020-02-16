@@ -271,14 +271,13 @@ public class Level2 extends AppCompatActivity implements View.OnTouchListener {
             // DROP BREADS
 
             // BREAD 1
-            bread1Y += 10;
+            bread1Y += 9;
             float bread1CenterX = bread1X + ((float) bread1.getWidth()/2);
             float bread1CenterY = bread1Y + ((float) bread1.getHeight()/2);
             if (hitCheck(bread1CenterX, bread1CenterY)) {
-                bread1X = (float)Math.floor(Math.random() * (screenWidth - bread1.getWidth()));
+                bread1Y = -500.0f;
                 currentScore += 100;
                 scoreLabel.setText(String.valueOf(currentScore));
-                bread1Y = -500.0f;
                 checkNumOfStrawberries();
                 soundPlayer.playHitCorrectBasket();
             }
@@ -295,14 +294,13 @@ public class Level2 extends AppCompatActivity implements View.OnTouchListener {
             bread1.setY(bread1Y);
 
             // BREAD 2
-            bread2Y += 12;
+            bread2Y += 10;
             float bread2CenterX = bread2X + ((float) bread2.getWidth()/2);
             float bread2CenterY = bread2Y + ((float) bread2.getHeight()/2);
             if (hitCheck(bread2CenterX, bread2CenterY)) {
-                bread2X = (float)Math.floor(Math.random() * (screenWidth - bread2.getWidth()));
+                bread2Y = -500.0f;
                 currentScore += 150;
                 scoreLabel.setText(String.valueOf(currentScore));
-                bread2Y = -500.0f;
                 checkNumOfStrawberries();
                 soundPlayer.playHitCorrectBasket();
             }
@@ -319,14 +317,13 @@ public class Level2 extends AppCompatActivity implements View.OnTouchListener {
             bread2.setY(bread2Y);
 
             // BREAD 3
-            bread3Y += 14;
+            bread3Y += 11;
             float bread3CenterX = bread3X + ((float) bread3.getWidth()/2);
             float bread3CenterY = bread3Y + ((float) bread3.getHeight()/2);
             if (hitCheck(bread3CenterX, bread3CenterY)) {
-                bread3X = (float)Math.floor(Math.random() * (screenWidth - bread3.getWidth()));
+                bread3Y = -500.0f;
                 currentScore += 200;
                 scoreLabel.setText(String.valueOf(currentScore));
-                bread3Y = -500.0f;
                 checkNumOfStrawberries();
                 soundPlayer.playHitCorrectBasket();
             }
@@ -343,14 +340,13 @@ public class Level2 extends AppCompatActivity implements View.OnTouchListener {
             bread3.setY(bread3Y);
 
             // BREAD 4
-            bread4Y += 15;
+            bread4Y += 12;
             float bread4CenterX = bread4X + ((float) bread4.getWidth()/2);
             float bread4CenterY = bread4Y + ((float) bread4.getHeight()/2);
             if (hitCheck(bread4CenterX, bread4CenterY)) {
-                bread4X = (float)Math.floor(Math.random() * (screenWidth - bread4.getWidth()));
+                bread4Y = -500.0f;
                 currentScore += 250;
                 scoreLabel.setText(String.valueOf(currentScore));
-                bread4Y = -500.0f;
                 checkNumOfStrawberries();
                 soundPlayer.playHitCorrectBasket();
             }
