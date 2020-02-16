@@ -4,14 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
+import android.os.PowerManager;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
@@ -31,7 +36,7 @@ public class Level2 extends AppCompatActivity implements View.OnTouchListener {
     private int screenHeight, screenWidth;
 
     // Dialogs
-    Dialog successDialog, failDialog, mainMenuDialog;
+    Dialog successDialog, failDialog, mainMenuDialog, newBreadDialog;
 
     // Images
     // TODO: Step 1: Add New Bread ImageView
@@ -60,18 +65,21 @@ public class Level2 extends AppCompatActivity implements View.OnTouchListener {
     // TODO: Step 2.5: Change Data Level
     private TextView scoreLabel;
     private int currentScore, highScore, currentStrawberries, earnedStrawberries, timeCount;
-    private SharedPreferences dataLevel2;
+    private SharedPreferences dataLevel;
 
     // Class
     private Timer timer;
     private Handler handler = new Handler();
     private SoundPlayer soundPlayer;
 
+    // Home Watcher and Flags
+    HomeWatcher mHomeWatcher;
+    boolean musicFlag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_level_1);
+        setContentView(R.layout.activity_level);
 
         decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(
@@ -83,6 +91,35 @@ public class Level2 extends AppCompatActivity implements View.OnTouchListener {
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
         );
 
+        // Background Music
+        SharedPreferences loadToggleState = this.getSharedPreferences("MusicStatus", Context.MODE_PRIVATE);
+        musicFlag = loadToggleState.getBoolean("music", true); //0 is the default value
+
+        // Bind Music
+        if (musicFlag) {
+            doBindService();
+            Intent music = new Intent();
+            music.setClass(this, LevelMusicService.class);
+            startService(music);
+        }
+
+        // Add Home Watcher
+        mHomeWatcher = new HomeWatcher(this);
+        mHomeWatcher.setOnHomePressedListener(new HomeWatcher.OnHomePressedListener() {
+            @Override
+            public void onHomePressed() {
+                if (mServ != null) {
+                    mServ.pauseMusic();
+                }
+            }
+            @Override
+            public void onHomeLongPressed() {
+                if (mServ != null) {
+                    mServ.pauseMusic();
+                }
+            }
+        });
+        mHomeWatcher.startWatch();
         soundPlayer = new SoundPlayer(this);
 
         // FIND IDs
@@ -104,7 +141,7 @@ public class Level2 extends AppCompatActivity implements View.OnTouchListener {
         mainMenuDialog = new Dialog(this);
         successDialog = new Dialog(this);
         failDialog = new Dialog(this);
-        // TODO: Initialized new Bread Dialog
+        newBreadDialog = new Dialog(this);
 
         // SET DAY
         // TODO: Step 4: Change Day
@@ -112,8 +149,8 @@ public class Level2 extends AppCompatActivity implements View.OnTouchListener {
 
         // GET HIGH SCORE
         // TODO: Step 5: Change dataLevel
-        dataLevel2 = getSharedPreferences("LEVEL_2_DATA", Context.MODE_PRIVATE);
-        highScore = dataLevel2.getInt("LEVEL_2_HIGH_SCORE", 0);
+        dataLevel = getSharedPreferences("LEVEL_DATA", Context.MODE_PRIVATE);
+        highScore = dataLevel.getInt("LEVEL_2_HIGH_SCORE", 0);
 
         // START GAME
         startGame();
@@ -129,16 +166,26 @@ public class Level2 extends AppCompatActivity implements View.OnTouchListener {
 
         // Move Bread Out of Screen
         // TODO: Step 6: Move New Bread Out of Screen
-        bread1.setY(3000.0f);
-        bread2.setY(3000.0f);
-        bread3.setY(3000.0f);
-        bread4.setY(3000.0f);
+        bread1.setX((float)Math.floor(Math.random() * (screenWidth - bread1.getWidth())));
+        bread2.setX((float)Math.floor(Math.random() * (screenWidth - bread2.getWidth())));
+        bread3.setX((float)Math.floor(Math.random() * (screenWidth - bread3.getWidth())));
+        bread4.setX((float)Math.floor(Math.random() * (screenWidth - bread4.getWidth())));
+
+        bread1.setY(-500.0f);
+        bread2.setY(-500.0f);
+        bread3.setY(-500.0f);
+        bread4.setY(-500.0f);
 
         // TODO: Step 7: Get New Bread's Y
+        bread1X = bread1.getX();
+        bread2X = bread2.getX();
+        bread3X = bread3.getX();
+        bread4X = bread4.getX();
+
         bread1Y = bread1.getY();
         bread2Y = bread2.getY();
         bread3Y = bread3.getY();
-        bread4Y = bread3.getY();
+        bread4Y = bread4.getY();
 
         // Make Bread Visible
         // TODO: Step 8: Make New Bread Visible
@@ -154,22 +201,60 @@ public class Level2 extends AppCompatActivity implements View.OnTouchListener {
         currentScore = 0;
         scoreLabel.setText(String.valueOf(currentScore));
 
-        currentScore = 150;
-
         // START TIMER
-        // TODO: Move this to New Bread Dialog
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
+
+        // LAUNCH NEW BREAD DIALOG
+        hamburger.setBackgroundResource(R.drawable.close);
+        newBreadDialog.setContentView(R.layout.popup_newbread);
+        Objects.requireNonNull(newBreadDialog.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+
+        // Initialization of Variables + Find IDs in  New Bread Dialog
+        ImageView newBread;
+        Button accept;
+
+        newBread = newBreadDialog.findViewById(R.id.unlockedBread);
+        accept = newBreadDialog.findViewById(R.id.great);
+
+        // TODO: Step 8.5: Change New Bread
+        newBread.setImageResource(R.drawable.bread_4);
+
+        // Show Dialog
+        newBreadDialog.show();
+        // Prevent Dialog from Getting Dismissed
+        newBreadDialog.setCancelable(false);
+        newBreadDialog.setCanceledOnTouchOutside(false);
+
+        // Hide Shadows
+        newBreadDialog.getWindow().getDecorView().setSystemUiVisibility(getWindow().getDecorView().getSystemUiVisibility());
+        newBreadDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        newBreadDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        newBreadDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+
+        accept.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                handler.post(new Runnable() {
+            public void onClick(View v) {
+                soundPlayer.playButtonClicked();
+                newBreadDialog.dismiss();
+            }
+        });
+
+        newBreadDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                timer = new Timer();
+                timer.schedule(new TimerTask() {
                     @Override
                     public void run() {
-                        dropBread();
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                dropBread();
+                            }
+                        });
                     }
-                });
+                }, 0, 20);
             }
-        }, 0, 20);
+        });
 
     }
 
@@ -190,6 +275,7 @@ public class Level2 extends AppCompatActivity implements View.OnTouchListener {
             float bread1CenterX = bread1X + ((float) bread1.getWidth()/2);
             float bread1CenterY = bread1Y + ((float) bread1.getHeight()/2);
             if (hitCheck(bread1CenterX, bread1CenterY)) {
+                bread1X = (float)Math.floor(Math.random() * (screenWidth - bread1.getWidth()));
                 currentScore += 100;
                 scoreLabel.setText(String.valueOf(currentScore));
                 bread1Y = -500.0f;
@@ -213,6 +299,7 @@ public class Level2 extends AppCompatActivity implements View.OnTouchListener {
             float bread2CenterX = bread2X + ((float) bread2.getWidth()/2);
             float bread2CenterY = bread2Y + ((float) bread2.getHeight()/2);
             if (hitCheck(bread2CenterX, bread2CenterY)) {
+                bread2X = (float)Math.floor(Math.random() * (screenWidth - bread2.getWidth()));
                 currentScore += 150;
                 scoreLabel.setText(String.valueOf(currentScore));
                 bread2Y = -500.0f;
@@ -236,6 +323,7 @@ public class Level2 extends AppCompatActivity implements View.OnTouchListener {
             float bread3CenterX = bread3X + ((float) bread3.getWidth()/2);
             float bread3CenterY = bread3Y + ((float) bread3.getHeight()/2);
             if (hitCheck(bread3CenterX, bread3CenterY)) {
+                bread3X = (float)Math.floor(Math.random() * (screenWidth - bread3.getWidth()));
                 currentScore += 200;
                 scoreLabel.setText(String.valueOf(currentScore));
                 bread3Y = -500.0f;
@@ -259,6 +347,7 @@ public class Level2 extends AppCompatActivity implements View.OnTouchListener {
             float bread4CenterX = bread4X + ((float) bread4.getWidth()/2);
             float bread4CenterY = bread4Y + ((float) bread4.getHeight()/2);
             if (hitCheck(bread4CenterX, bread4CenterY)) {
+                bread4X = (float)Math.floor(Math.random() * (screenWidth - bread4.getWidth()));
                 currentScore += 250;
                 scoreLabel.setText(String.valueOf(currentScore));
                 bread4Y = -500.0f;
@@ -273,7 +362,7 @@ public class Level2 extends AppCompatActivity implements View.OnTouchListener {
                 checkNumOfStrawberries();
                 soundPlayer.playHitWrongBasket();
             }
-            // Update Location of Bread 3
+            // Update Location of Bread 4
             bread4.setX(bread4X);
             bread4.setY(bread4Y);
 
@@ -291,7 +380,7 @@ public class Level2 extends AppCompatActivity implements View.OnTouchListener {
     }
 
     // TODO: Step 10: Max Score
-    int maxScore = 9250;
+    int maxScore = 9350;
     double firstCut = maxScore * 0.5;
     double secondCut = maxScore * 0.75;
     double thirdCut = maxScore * 0.95;
@@ -577,14 +666,14 @@ public class Level2 extends AppCompatActivity implements View.OnTouchListener {
             // TODO: Step 21 Change Data Level
             if (currentStrawberries > earnedStrawberries) {
                 earnedStrawberries = currentStrawberries;
-                SharedPreferences.Editor editor = dataLevel2.edit();
+                SharedPreferences.Editor editor = dataLevel.edit();
                 editor.putInt("LEVEL_2_STRAWBERRIES", earnedStrawberries);
                 editor.apply();
             }
 
             // MARK DAY AS COMPLETED
             // TODO: Step 22: Change Data Level
-            SharedPreferences.Editor editor = dataLevel2.edit();
+            SharedPreferences.Editor editor = dataLevel.edit();
             editor.putInt("LEVEL_2_STATUS", 1);
             editor.apply();
         }
@@ -657,10 +746,86 @@ public class Level2 extends AppCompatActivity implements View.OnTouchListener {
         // TODO: Step 25: Change Data Level
         if (currentScore > highScore) {
             highScore = currentScore;
-            SharedPreferences.Editor editor = dataLevel2.edit();
+            SharedPreferences.Editor editor = dataLevel.edit();
             editor.putInt("LEVEL_2_HIGH_SCORE", highScore);
             editor.apply();
         }
+    }
+
+    // For Music Service
+    private boolean mIsBound = false;
+    private LevelMusicService mServ;
+    private ServiceConnection Scon =new ServiceConnection(){
+
+        public void onServiceConnected(ComponentName name, IBinder
+                binder) {
+            mServ = ((LevelMusicService.ServiceBinder)binder).getService();
+        }
+
+        public void onServiceDisconnected(ComponentName name) {
+            mServ = null;
+        }
+    };
+
+    // For Music Service
+    void doBindService(){
+        bindService(new Intent(this,LevelMusicService.class),
+                Scon, Context.BIND_AUTO_CREATE);
+        mIsBound = true;
+    }
+
+    // For Music Service
+    void doUnbindService() {
+        if(mIsBound) {
+            unbindService(Scon);
+            mIsBound = false;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Resume Music Service
+        if (mServ != null) {
+            mServ.resumeMusic();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        PowerManager pm = (PowerManager)
+                getSystemService(Context.POWER_SERVICE);
+        boolean isScreenOn;
+        isScreenOn = false;
+
+        if (pm != null) {
+            if (pm.isInteractive()) isScreenOn = true;
+            else isScreenOn = false;
+        }
+
+        if (!isScreenOn) {
+            if (mServ != null) {
+                mServ.pauseMusic();
+            }
+        }
+    }
+
+    // For Music Service
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        // Unbind Music Service
+        doUnbindService();
+        Intent music = new Intent();
+        music.setClass(this,LevelMusicService.class);
+        stopService(music);
+
+        mHomeWatcher.stopWatch();
+
     }
 
     // For Navigation
