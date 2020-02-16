@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="425dp"
+    android:layout_gravity="center"
+    android:background="@drawable/board"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+    <TextView
+        android:id="@+id/currentDay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/josefin_sans_bold"
+        android:gravity="center"
+        android:text="@string/d1"
+        android:textColor="@color/cream"
+        android:textSize="25sp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-5dp"
+        android:fontFamily="@font/josefin_sans_bold"
+        android:gravity="center"
+        android:text="@string/success"
+        android:textColor="@color/cream"
+        android:textSize="40sp" />
+
+    <TextView
+        android:id="@+id/targetScore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/josefin_sans"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="@string/target_score"
+        android:textColor="@color/cream"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/currentScore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/josefin_sans"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="@string/current_score"
+        android:textColor="@color/cream"
+        android:textSize="22sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/josefin_sans_bold"
+        android:gravity="center"
+        android:text="@string/strawberries_earned"
+        android:textColor="@color/cream"
+        android:textSize="30sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/strawberry_1"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/without_strawberry" />
+
+        <ImageView
+            android:id="@+id/strawberry_2"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/without_strawberry" />
+
+        <ImageView
+            android:id="@+id/strawberry_3"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:src="@drawable/without_strawberry" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:background="@drawable/custom_button"
+            android:fontFamily="@font/josefin_sans_bold"
+            android:text="@string/next_day"
+            android:textAllCaps="false"
+            android:textColor="@color/cream"
+            android:textSize="22sp" />
+
+        <Button
+            android:id="@+id/btnMenu"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:background="@drawable/custom_button"
+            android:fontFamily="@font/josefin_sans_bold"
+            android:text="@string/bmenu"
+            android:textAllCaps="false"
+            android:textColor="@color/cream"
+            android:layout_marginTop="8dp"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+</LinearLayout>

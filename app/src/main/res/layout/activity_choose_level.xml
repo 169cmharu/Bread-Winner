@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/home2_bg"
+    android:orientation="vertical"
+    tools:context=".ChooseLevelActivity">
+
+    <!-- Hamburger Button -->
+    <Button
+        android:id="@+id/btnHamburger"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/menu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/weekLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/btnPrev"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/previous"
+            android:visibility="invisible"/>
+
+        <TextView
+            android:id="@+id/weekNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/josefin_sans_bold"
+            android:gravity="center_horizontal"
+            android:text="@string/w1"
+            android:textColor="@color/colorPrimary"
+            android:textSize="60sp" />
+
+        <Button
+            android:id="@+id/btnNext"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/next" />
+    </LinearLayout>
+
+    <!-- Week 1 -->
+    <LinearLayout
+        android:id="@+id/week1Layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:orientation="vertical"
+        android:layout_alignTop="@+id/weekLayout">
+
+        <!-- Row 1 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnDay1"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="55dp"
+                android:layout_height="58dp"
+                android:background="@drawable/level"
+                android:fontFamily="@font/josefin_sans_bold"
+                android:text="@string/_1"
+                android:textAlignment="center"
+                android:textColor="@color/cream"
+                android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/btnDay2"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="55dp"
+                android:layout_height="58dp"
+                android:layout_marginStart="30dp"
+                android:background="@drawable/level"
+                android:fontFamily="@font/josefin_sans_bold"
+                android:text="@string/_2"
+                android:textAlignment="center"
+                android:textColor="@color/cream"
+                android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/btnDay3"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="55dp"
+                android:layout_height="58dp"
+                android:layout_marginStart="30dp"
+                android:background="@drawable/level"
+                android:fontFamily="@font/josefin_sans_bold"
+                android:text="@string/_3"
+                android:textColor="@color/cream"
+                android:textSize="25sp" />
+        </LinearLayout>
+
+        <!-- Row 2 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnDay4"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="55dp"
+                android:layout_height="58dp"
+                android:background="@drawable/level"
+                android:fontFamily="@font/josefin_sans_bold"
+                android:text="@string/_4"
+                android:textAlignment="center"
+                android:textColor="@color/cream"
+                android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/btnDay5"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="55dp"
+                android:layout_height="58dp"
+                android:layout_marginStart="30dp"
+                android:background="@drawable/level"
+                android:fontFamily="@font/josefin_sans_bold"
+                android:text="@string/_5"
+                android:textAlignment="center"
+                android:textColor="@color/cream"
+                android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/btnDay6"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="55dp"
+                android:layout_height="58dp"
+                android:layout_marginStart="30dp"
+                android:background="@drawable/level"
+                android:fontFamily="@font/josefin_sans_bold"
+                android:text="@string/_6"
+                android:textAlignment="center"
+                android:textColor="@color/cream"
+                android:textSize="25sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Week 2 -->
+    <LinearLayout
+        android:id="@+id/week2Layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:orientation="vertical"
+        android:layout_alignTop="@+id/weekLayout"
+        android:visibility="invisible">
+
+        <!-- Row 1 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnDay7"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="55dp"
+                android:layout_height="58dp"
+                android:background="@drawable/level"
+                android:fontFamily="@font/josefin_sans_bold"
+                android:text="@string/_7"
+                android:textAlignment="center"
+                android:textColor="@color/cream"
+                android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/btnDay8"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="55dp"
+                android:layout_height="58dp"
+                android:layout_marginStart="30dp"
+                android:background="@drawable/level"
+                android:fontFamily="@font/josefin_sans_bold"
+                android:text="@string/_8"
+                android:textAlignment="center"
+                android:textColor="@color/cream"
+                android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/btnDay9"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="55dp"
+                android:layout_height="58dp"
+                android:layout_marginStart="30dp"
+                android:background="@drawable/level"
+                android:fontFamily="@font/josefin_sans_bold"
+                android:text="@string/_9"
+                android:textColor="@color/cream"
+                android:textSize="25sp" />
+        </LinearLayout>
+
+        <!-- Row 2 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnDay10"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="55dp"
+                android:layout_height="58dp"
+                android:background="@drawable/level"
+                android:fontFamily="@font/josefin_sans_bold"
+                android:text="@string/_10"
+                android:textAlignment="center"
+                android:textColor="@color/cream"
+                android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/btnDay11"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="55dp"
+                android:layout_height="58dp"
+                android:layout_marginStart="30dp"
+                android:background="@drawable/level"
+                android:fontFamily="@font/josefin_sans_bold"
+                android:text="@string/_11"
+                android:textAlignment="center"
+                android:textColor="@color/cream"
+                android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/btnDay12"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="55dp"
+                android:layout_height="58dp"
+                android:layout_marginStart="30dp"
+                android:background="@drawable/level"
+                android:fontFamily="@font/josefin_sans_bold"
+                android:text="@string/_12"
+                android:textAlignment="center"
+                android:textColor="@color/cream"
+                android:textSize="25sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Week 3 -->
+    <LinearLayout
+        android:id="@+id/week3Layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:orientation="vertical"
+        android:layout_alignTop="@+id/weekLayout"
+        android:visibility="invisible">
+
+        <!-- Row 1 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnDay13"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="55dp"
+                android:layout_height="58dp"
+                android:background="@drawable/level"
+                android:fontFamily="@font/josefin_sans_bold"
+                android:text="@string/_13"
+                android:textAlignment="center"
+                android:textColor="@color/cream"
+                android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/btnDay14"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="55dp"
+                android:layout_height="58dp"
+                android:layout_marginStart="30dp"
+                android:background="@drawable/level"
+                android:fontFamily="@font/josefin_sans_bold"
+                android:text="@string/_14"
+                android:textAlignment="center"
+                android:textColor="@color/cream"
+                android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/btnDay15"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="55dp"
+                android:layout_height="58dp"
+                android:layout_marginStart="30dp"
+                android:background="@drawable/level"
+                android:fontFamily="@font/josefin_sans_bold"
+                android:text="@string/_15"
+                android:textColor="@color/cream"
+                android:textSize="25sp" />
+        </LinearLayout>
+
+        <!-- Row 2 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnDay16"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="55dp"
+                android:layout_height="58dp"
+                android:background="@drawable/level"
+                android:fontFamily="@font/josefin_sans_bold"
+                android:text="@string/_16"
+                android:textAlignment="center"
+                android:textColor="@color/cream"
+                android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/btnDay17"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="55dp"
+                android:layout_height="58dp"
+                android:layout_marginStart="30dp"
+                android:background="@drawable/level"
+                android:fontFamily="@font/josefin_sans_bold"
+                android:text="@string/_17"
+                android:textAlignment="center"
+                android:textColor="@color/cream"
+                android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/btnDay18"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="55dp"
+                android:layout_height="58dp"
+                android:layout_marginStart="30dp"
+                android:background="@drawable/level"
+                android:fontFamily="@font/josefin_sans_bold"
+                android:text="@string/_18"
+                android:textAlignment="center"
+                android:textColor="@color/cream"
+                android:textSize="25sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

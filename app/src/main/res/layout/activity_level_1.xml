@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainArea"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/pantry_bg"
+    android:orientation="vertical"
+    tools:context=".Level1">
+
+    <!-- Hamburger Button -->
+    <Button
+        android:id="@+id/btnHamburger"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/menu" />
+
+    <LinearLayout
+        android:id="@+id/headerCon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:gravity="end"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/c_day"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:elegantTextHeight="true"
+                android:fontFamily="@font/josefin_sans"
+                android:gravity="center"
+                android:text="Day 0"
+                android:textColor="@color/colorPrimary"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-4dp"
+                android:fontFamily="@font/josefin_sans_bold"
+                android:text="0"
+                android:textColor="@color/colorPrimaryDark"
+                android:textDirection="rtl"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-3dp">
+
+                <ImageView
+                    android:id="@+id/straw_1"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:contentDescription="@string/sb1"
+                    android:src="@drawable/without_strawberry" />
+
+                <ImageView
+                    android:id="@+id/straw_2"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="7dp"
+                    android:contentDescription="@string/sb2"
+                    android:src="@drawable/without_strawberry" />
+
+                <ImageView
+                    android:id="@+id/straw_3"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="7dp"
+                    android:contentDescription="@string/sb3"
+                    android:src="@drawable/without_strawberry" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/hand"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/right_hand"
+        android:layout_alignParentBottom="true"/>
+
+    <ImageView
+        android:id="@+id/bread_1"
+        android:layout_width="61dp"
+        android:layout_height="59dp"
+        android:contentDescription="@string/b1"
+        android:src="@drawable/bread_1"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:id="@+id/bread_2"
+        android:layout_width="61dp"
+        android:layout_height="48dp"
+        android:contentDescription="@string/b2"
+        android:src="@drawable/bread_2"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:id="@+id/bread_3"
+        android:layout_width="65dp"
+        android:layout_height="52dp"
+        android:contentDescription="@string/b3"
+        android:src="@drawable/bread_3"
+        android:visibility="invisible"/>
+
+
+
+</RelativeLayout>
