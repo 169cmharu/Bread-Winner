@@ -34,6 +34,7 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
     Dialog successDialog, failDialog, mainMenuDialog;
 
     // Images
+    // TODO: Step 1: Add New Bread ImageView
     private ImageView bread1, bread2, bread3;
     private ImageView sb1, sb2, sb3;
     private ImageView hand;
@@ -45,6 +46,7 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
     private int handSize;
 
     // Positions
+    // TODO: Step 2: Add New Bread X and Y
     private float handX, handY;
     private float bread1X, bread1Y;
     private float bread2X, bread2Y;
@@ -90,6 +92,7 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
         sb2 = findViewById(R.id.straw_2);
         sb3 = findViewById(R.id.straw_3);
 
+        // TODO: Step 3: Find New Bread ID
         bread1 = findViewById(R.id.bread_1);
         bread2 = findViewById(R.id.bread_2);
         bread3 = findViewById(R.id.bread_3);
@@ -98,11 +101,14 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
         mainMenuDialog = new Dialog(this);
         successDialog = new Dialog(this);
         failDialog = new Dialog(this);
+        // TODO: Initialized new Bread Dialog
 
         // SET DAY
+        // TODO: Step 4: Change Day
         currentDay.setText(R.string.d1);
 
         // GET HIGH SCORE
+        // TODO: Step 5: Change dataLevel
         dataLevel1 = getSharedPreferences("LEVEL_1_DATA", Context.MODE_PRIVATE);
         highScore = dataLevel1.getInt("LEVEL_1_HIGH_SCORE", 0);
 
@@ -119,15 +125,18 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
         screenHeight = size.y - 100;
 
         // Move Bread Out of Screen
+        // TODO: Step 6: Move New Bread Out of Screen
         bread1.setY(3000.0f);
         bread2.setY(3000.0f);
         bread3.setY(3000.0f);
 
+        // TODO: Step 7: Get New Bread's Y
         bread1Y = bread1.getY();
         bread2Y = bread2.getY();
         bread3Y = bread3.getY();
 
         // Make Bread Visible
+        // TODO: Step 8: Make New Bread Visible
         bread1.setVisibility(View.VISIBLE);
         bread2.setVisibility(View.VISIBLE);
         bread3.setVisibility(View.VISIBLE);
@@ -142,6 +151,7 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
         currentScore = 150;
 
         // START TIMER
+        // TODO: Move this to New Bread Dialog
         timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -168,6 +178,7 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
             hand.setX(0.0f);
 
             // DROP BREADS
+
             // BREAD 1
             bread1Y += 10;
             float bread1CenterX = bread1X + ((float) bread1.getWidth()/2);
@@ -182,7 +193,7 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
             if (bread1.getY() > screenHeight) {
                 bread1X = (float)Math.floor(Math.random() * (screenWidth - bread1.getWidth()));
                 bread1Y = -500.0f;
-                currentScore -= 50;
+                currentScore -= 25;
                 scoreLabel.setText(String.valueOf(currentScore));
                 checkNumOfStrawberries();
                 soundPlayer.playHitWrongBasket();
@@ -228,7 +239,7 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
             if (bread3.getY() > screenHeight) {
                 bread3X = (float)Math.floor(Math.random() * (screenWidth - bread3.getWidth()));
                 bread3Y = -500.0f;
-                currentScore -= 50;
+                currentScore -= 75;
                 scoreLabel.setText(String.valueOf(currentScore));
                 checkNumOfStrawberries();
                 soundPlayer.playHitWrongBasket();
@@ -236,6 +247,8 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
             // Update Location of Bread 3
             bread3.setX(bread3X);
             bread3.setY(bread3Y);
+
+            // TODO: Step 9: Add New Bread
         }
         else {
             endGame();
@@ -247,6 +260,7 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
         return handX <= x && x <= handX + handSize && handY <= y && y <= screenHeight;
     }
 
+    // TODO: Step 10: Max Score
     int maxScore = 5500;
     double firstCut = maxScore * 0.5;
     double secondCut = maxScore * 0.75;
@@ -299,6 +313,7 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
         timer.cancel();
         timer = null;
 
+        // TODO: Step 11: Hide New Bread
         hand.setVisibility(View.INVISIBLE);
         bread1.setVisibility(View.INVISIBLE);
         bread2.setVisibility(View.INVISIBLE);
@@ -324,7 +339,7 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
                 strawberry3 = successDialog.findViewById(R.id.strawberry_3);
 
                 // Get Values from string.xml
-                // TODO: Step 10: Change d & td
+                // TODO: Step 12: Change d & td
                 String strCurrentDay = getString(R.string.d1);
                 String strTargetScore = getString(R.string.td1);
 
@@ -354,7 +369,7 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
                 successDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                 successDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
 
-                // TODO: Step 11: Change Next Day
+                // TODO: Step 13: Change Next Day
                 nextDay = successDialog.findViewById(R.id.btnNext);
                 nextDay.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -366,7 +381,7 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
                     }
                 });
 
-                // TODO: Step 12: Change packageContext
+                // TODO: Step 14: Change packageContext
                 backToMenu = successDialog.findViewById(R.id.btnMenu);
                 backToMenu.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -397,7 +412,7 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
                 strawberry3 = successDialog.findViewById(R.id.strawberry_3);
 
                 // Get Values from string.xml
-                // TODO: Step 14: Change d & td
+                // TODO: Step 15: Change d & td
                 String strCurrentDay = getString(R.string.d1);
                 String strTargetScore = getString(R.string.td1);
 
@@ -427,7 +442,7 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
                 successDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                 successDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
 
-                // TODO: Step 15: Change Next Day
+                // TODO: Step 16: Change Next Day
                 nextDay = successDialog.findViewById(R.id.btnNext);
                 nextDay.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -439,7 +454,7 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
                     }
                 });
 
-                // TODO: Step 16: Change packageContext
+                // TODO: Step 17: Change packageContext
                 backToMenu = successDialog.findViewById(R.id.btnMenu);
                 backToMenu.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -471,7 +486,7 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
                 strawberry3 = successDialog.findViewById(R.id.strawberry_3);
 
                 // Get Values from string.xml
-                // TODO: Step 17: Change d & td
+                // TODO: Step 18: Change d & td
                 String strCurrentDay = getString(R.string.d1);
                 String strTargetScore = getString(R.string.td1);
 
@@ -501,7 +516,7 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
                 successDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                 successDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
 
-                // TODO: Step 18: Change Next Day
+                // TODO: Step 19: Change Next Day
                 nextDay = successDialog.findViewById(R.id.btnNext);
                 nextDay.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -513,7 +528,7 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
                     }
                 });
 
-                // TODO: Step 19: Change packageContext
+                // TODO: Step 20: Change packageContext
                 backToMenu = successDialog.findViewById(R.id.btnMenu);
                 backToMenu.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -528,6 +543,7 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
             }
 
             // UPDATE EARNED STRAWBERRIES
+            // TODO: Step 21 Change Data Level
             if (currentStrawberries > earnedStrawberries) {
                 earnedStrawberries = currentStrawberries;
                 SharedPreferences.Editor editor = dataLevel1.edit();
@@ -536,6 +552,7 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
             }
 
             // MARK DAY AS COMPLETED
+            // TODO: Step 22: Change Data Level
             SharedPreferences.Editor editor = dataLevel1.edit();
             editor.putInt("LEVEL_1_STATUS", 1);
             editor.apply();
@@ -556,7 +573,7 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
             currentScoreOnly = failDialog.findViewById(R.id.currentScoreOnly);
 
             // Get Values from string.xml
-            // TODO: Step 20: Change d & td
+            // TODO: Step 23: Change d & td
             String strCurrentDay = getString(R.string.d1);
             String strTargetScore = getString(R.string.td1);
 
@@ -581,7 +598,7 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
             failDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
             failDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
 
-            // TODO: Step 21: Change Next Day
+            // TODO: Step 24: Change Next Day
             retryDay = failDialog.findViewById(R.id.btnRetry);
             retryDay.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -593,7 +610,7 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
                 }
             });
 
-            // TODO: Step 22: Change packageContext
+            // TODO: Step 25: Change packageContext
             backToMenu = failDialog.findViewById(R.id.btnRetryMenu);
             backToMenu.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -607,6 +624,7 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
         }
 
         // UPDATE HIGH SCORE
+        // TODO: Step 26: Change Data Level
         if (currentScore > highScore) {
             highScore = currentScore;
             SharedPreferences.Editor editor = dataLevel1.edit();

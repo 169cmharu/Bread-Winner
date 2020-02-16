@@ -108,6 +108,7 @@
 
     <!-- Board Text -->
     <string name="settings">Settings</string>
+    <string name="new_bread">New Bread!</string>
     <string name="paused">Paused</string>
     <string name="leaving">Are u leaving already? :c</string>
     <string name="success">Success!</string>
@@ -115,10 +116,11 @@
     <string name="target_score">Target Score: 0</string>
     <string name="current_score">High Score: 0</string>
     <string name="strawberries_earned">Strawberries Earned</string>
+    <string name="great">Great!</string>
 
     <!-- Target Score -->
     <string name="td1">Target Score: 2750</string>
-    <string name="td2">Target Score: 750</string>
+    <string name="td2">Target Score: 4625</string>
     <string name="td3">Target Score: 1000</string>
     <string name="td4">Target Score: 1250</string>
     <string name="td5">Target Score: 1500</string>

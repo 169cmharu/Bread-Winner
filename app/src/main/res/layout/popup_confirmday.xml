@@ -96,6 +96,19 @@
             android:textAllCaps="false"
             android:textColor="@color/cream"
             android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/lockMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Complete previous day to unlock this!"
+            android:fontFamily="@font/josefin_sans_bold"
+            android:textColor="@color/cream"
+            android:textSize="20sp"
+            android:layout_marginTop="-40dp"
+            android:gravity="center"
+            android:visibility="invisible"
+            />
     </LinearLayout>
 
 </LinearLayout>

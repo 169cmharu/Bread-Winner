@@ -392,10 +392,11 @@ public class ChooseLevelActivity extends AppCompatActivity {
             Objects.requireNonNull(confirmDayMenu.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
 
             // Edit Values in Confirm Menu According to Day
-            TextView currentDay, targetScore;
+            TextView currentDay, targetScore, lockMessage;
             Button startGame;
             currentDay = confirmDayMenu.findViewById(R.id.currentDay);
             targetScore = confirmDayMenu.findViewById(R.id.targetScore);
+            lockMessage = confirmDayMenu.findViewById(R.id.lockMessage);
 
             // Get Values from string.xml
             String strCurrentDay = getString(R.string.d2);
@@ -424,6 +425,7 @@ public class ChooseLevelActivity extends AppCompatActivity {
 
             if (day1Status != 1) {
                 startGame.setVisibility(View.INVISIBLE);
+                lockMessage.setVisibility(View.VISIBLE);
             }
             else {
                 startGame.setVisibility(View.VISIBLE);
@@ -432,8 +434,8 @@ public class ChooseLevelActivity extends AppCompatActivity {
             startGame.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Intent startDay = new Intent(ChooseLevelActivity.this, Level2.class);
-//                    startActivity(startDay);
+                    Intent startDay = new Intent(ChooseLevelActivity.this, Level2.class);
+                    startActivity(startDay);
                     if (mServ != null) {
                         mServ.pauseMusic();
                     }
