@@ -157,4 +157,12 @@
         android:src="@drawable/bread_7"
         android:visibility="invisible"/>
 
+    <ImageView
+        android:id="@+id/bread_8"
+        android:layout_width="68dp"
+        android:layout_height="27dp"
+        android:contentDescription="@string/b8"
+        android:src="@drawable/bread_8"
+        android:visibility="invisible"/>
+
 </RelativeLayout>

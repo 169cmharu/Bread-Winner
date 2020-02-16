@@ -466,7 +466,7 @@ public class Level5 extends AppCompatActivity implements View.OnTouchListener {
     }
 
     // TODO: Step 10: Max Score
-    int maxScore = 16400;
+    int maxScore = 22000;
     double firstCut = maxScore * 0.5;
     double secondCut = maxScore * 0.75;
     double thirdCut = maxScore * 0.95;
@@ -696,8 +696,8 @@ public class Level5 extends AppCompatActivity implements View.OnTouchListener {
 
                 // Get Values from string.xml
                 // TODO: Step 18: Change d & td
-                String strCurrentDay = getString(R.string.d4);
-                String strTargetScore = getString(R.string.td4);
+                String strCurrentDay = getString(R.string.d5);
+                String strTargetScore = getString(R.string.td5);
 
                 // Convert Score to String
                 String strCurrentScore = Integer.toString(currentScore);
