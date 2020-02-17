@@ -81,15 +81,28 @@
     <string name="b21">Bread 21</string>
     <string name="b22">Bread 22</string>
 
+    <!-- Alternative Text for Rotten Breads -->
+    <string name="rb8">Rotten Bread 8</string>
+    <string name="rb9">Rotten Bread 9</string>
+    <string name="rb10">Rotten Bread 10</string>
+    <string name="rb11">Rotten Bread 11</string>
+    <string name="rb12">Rotten Bread 12</string>
+    <string name="rb13">Rotten Bread 13</string>
+    <string name="rb14">Rotten Bread 14</string>
+    <string name="rb15">Rotten Bread 15</string>
+    <string name="rb16">Rotten Bread 16</string>
+    <string name="rb17">Rotten Bread 17</string>
+    <string name="rb18">Rotten Bread 18</string>
+    <string name="rb19">Rotten Bread 19</string>
+    <string name="rb20">Rotten Bread 20</string>
+    <string name="rb21">Rotten Bread 21</string>
+    <string name="rb22">Rotten Bread 22</string>
+
+
     <!-- Alternative Text for Strawberries -->
     <string name="sb1">Strawberry 1</string>
     <string name="sb2">Strawberry 2</string>
     <string name="sb3">Strawberry 3</string>
-
-    <!-- Alternative Text for Baskets -->
-    <string name="bk1">Basket 1</string>
-    <string name="bk2">Basket 2</string>
-    <string name="bk3">Basket 3</string>
 
     <!-- Button Text -->
     <string name="start_day">Start!</string>
@@ -109,6 +122,9 @@
     <!-- Board Text -->
     <string name="settings">Settings</string>
     <string name="new_bread">New Bread!</string>
+    <string name="two_breads">New Breads!</string>
+    <string name="new_bread_text">Find out more about this bread in the menu</string>
+    <string name="two_breads_text">Find out more about these breads in the menu</string>
     <string name="paused">Paused</string>
     <string name="leaving">Are u leaving already? :c</string>
     <string name="success">Success!</string>

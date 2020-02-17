@@ -159,10 +159,56 @@
 
     <ImageView
         android:id="@+id/bread_8"
-        android:layout_width="68dp"
-        android:layout_height="27dp"
+        android:layout_width="70dp"
+        android:layout_height="29dp"
         android:contentDescription="@string/b8"
         android:src="@drawable/bread_8"
         android:visibility="invisible"/>
+
+    <ImageView
+        android:id="@+id/bread_9"
+        android:layout_width="72dp"
+        android:layout_height="35dp"
+        android:contentDescription="@string/b9"
+        android:src="@drawable/bread_9"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:id="@+id/bread_10"
+        android:layout_width="47dp"
+        android:layout_height="35dp"
+        android:contentDescription="@string/b10"
+        android:src="@drawable/bread_10"
+        android:visibility="invisible"/>
+
+
+    <!-- Rotten Bread -->
+    <ImageView
+        android:id="@+id/rbread_8"
+        android:layout_width="70dp"
+        android:layout_height="29dp"
+        android:contentDescription="@string/rb8"
+        android:src="@drawable/rbread_8"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:id="@+id/rbread_9"
+        android:layout_width="72dp"
+        android:layout_height="35dp"
+        android:contentDescription="@string/rb9"
+        android:src="@drawable/rbread_9"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:id="@+id/rbread_10"
+        android:layout_width="47dp"
+        android:layout_height="35dp"
+        android:contentDescription="@string/rb10"
+        android:src="@drawable/rbread_10"
+        android:visibility="invisible"/>
+
+
+
+
 
 </RelativeLayout>

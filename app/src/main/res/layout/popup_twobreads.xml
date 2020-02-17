@@ -13,7 +13,7 @@
         android:layout_marginTop="50dp"
         android:fontFamily="@font/josefin_sans_bold"
         android:gravity="center"
-        android:text="@string/new_bread"
+        android:text="@string/two_breads"
         android:textColor="@color/cream"
         android:textSize="40sp" />
 
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/josefin_sans_bold"
         android:gravity="center"
-        android:text="@string/new_bread_text"
+        android:text="@string/two_breads_text"
         android:textColor="@color/cream"
         android:textSize="18sp"
         android:paddingStart="5dp"
@@ -31,15 +31,29 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="15dp"
         android:gravity="center"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/unlockedBread"
-            android:layout_width="175dp"
-            android:layout_height="175dp"
-            android:src="@drawable/bread_4" />
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/unlockedBread1"
+                    android:layout_width="125dp"
+                    android:layout_height="125dp"
+                    android:src="@drawable/bread_9" />
+                <ImageView
+                    android:id="@+id/unlockedBread2"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/bread_10"
+                    android:layout_marginStart="15dp"/>
+        </LinearLayout>
 
         <Button
             android:id="@+id/great"
@@ -50,7 +64,8 @@
             android:text="@string/great"
             android:textAllCaps="false"
             android:textColor="@color/cream"
-            android:textSize="22sp" />
+            android:textSize="22sp"
+            android:layout_marginTop="15dp"/>
     </LinearLayout>
 
 </LinearLayout>
