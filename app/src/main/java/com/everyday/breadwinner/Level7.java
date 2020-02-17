@@ -321,7 +321,6 @@ public class Level7 extends AppCompatActivity implements View.OnTouchListener {
             bread8.setY(bread8Y);
 
             // ROTTEN BREAD 8
-            // BREAD 8
             rbread8Y += 9;
             float rbread8CenterX = rbread8X + ((float) rbread8.getWidth()/2);
             float rbread8CenterY = rbread8Y + ((float) rbread8.getHeight()/2);
@@ -379,7 +378,6 @@ public class Level7 extends AppCompatActivity implements View.OnTouchListener {
             if (rbread9.getY() > screenHeight) {
                 rbread9X = (float)Math.floor(Math.random() * (screenWidth - rbread9.getWidth()));
                 rbread9Y = -500.0f;
-                currentScore -= 250;
                 scoreLabel.setText(String.valueOf(currentScore));
                 checkNumOfStrawberries();
             }
@@ -401,6 +399,7 @@ public class Level7 extends AppCompatActivity implements View.OnTouchListener {
             if (bread10.getY() > screenHeight) {
                 bread10X = (float)Math.floor(Math.random() * (screenWidth - bread10.getWidth()));
                 bread10Y = -500.0f;
+                currentScore -= 275;
                 scoreLabel.setText(String.valueOf(currentScore));
                 checkNumOfStrawberries();
                 soundPlayer.playHitWrongBasket();

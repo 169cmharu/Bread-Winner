@@ -140,11 +140,11 @@
     <string name="td3">Target Score: 6550</string>
     <string name="td4">Target Score: 8200</string>
     <string name="td5">Target Score: 11000</string>
+    <string name="td6">Target Score: 14000</string>
+    <string name="td7">Target Score: 7050</string>
+    <string name="td8">Target Score: 10600</string>
 
-    <string name="td6">Target Score: 1000</string>
-    <string name="td7">Target Score: 1500</string>
-    <string name="td8">Target Score: 2000</string>
-    <string name="td9">Target Score: 2500</string>
+    <string name="td9">Target Score: 10600</string>
     <string name="td10">Target Score: 3000</string>
     <string name="td11">Target Score: 1500</string>
     <string name="td12">Target Score: 2250</string>
