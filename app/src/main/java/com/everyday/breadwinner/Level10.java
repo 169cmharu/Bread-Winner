@@ -580,7 +580,7 @@ public class Level10 extends AppCompatActivity implements View.OnTouchListener {
             bread13.setX(bread13X);
             bread13.setY(bread13Y);
 
-            // ROTTEN BREAD 12
+            // ROTTEN BREAD 13
             rbread13Y += 14;
             float rbread13CenterX = rbread13X + ((float) rbread13.getWidth()/2);
             float rbread13CenterY = rbread13Y + ((float) rbread13.getHeight()/2);
@@ -616,7 +616,7 @@ public class Level10 extends AppCompatActivity implements View.OnTouchListener {
     }
 
     // TODO: Step 10: Max Score
-    int maxScore = 30750;
+    int maxScore = 39850;
     double firstCut = maxScore * 0.5;
     double secondCut = maxScore * 0.75;
     double thirdCut = maxScore * 0.95;
