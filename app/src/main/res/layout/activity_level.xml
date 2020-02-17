@@ -213,6 +213,13 @@
         android:src="@drawable/bread_14"
         android:visibility="invisible"/>
 
+    <ImageView
+        android:id="@+id/bread_15"
+        android:layout_width="80dp"
+        android:layout_height="58dp"
+        android:contentDescription="@string/b15"
+        android:src="@drawable/bread_15"
+        android:visibility="invisible"/>
 
     <!-- Rotten Bread -->
     <ImageView
@@ -269,6 +276,14 @@
         android:layout_height="45dp"
         android:contentDescription="@string/rb14"
         android:src="@drawable/rbread_14"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:id="@+id/rbread_15"
+        android:layout_width="80dp"
+        android:layout_height="58dp"
+        android:contentDescription="@string/rb15"
+        android:src="@drawable/rbread_15"
         android:visibility="invisible"/>
 
 

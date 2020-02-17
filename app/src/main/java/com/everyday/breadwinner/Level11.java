@@ -638,7 +638,7 @@ public class Level11 extends AppCompatActivity implements View.OnTouchListener {
             bread14.setX(bread14X);
             bread14.setY(bread14Y);
 
-            // ROTTEN BREAD 13
+            // ROTTEN BREAD 14
             rbread14Y += 15;
             float rbread14CenterX = rbread14X + ((float) rbread14.getWidth()/2);
             float rbread14CenterY = rbread14Y + ((float) rbread14.getHeight()/2);
