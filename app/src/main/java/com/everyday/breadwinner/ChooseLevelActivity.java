@@ -46,6 +46,7 @@ public class ChooseLevelActivity extends AppCompatActivity {
     int day6Status, day6HighScore, day6EarnedStrawberries;
     int day7Status, day7HighScore, day7EarnedStrawberries;
     int day8Status, day8HighScore, day8EarnedStrawberries;
+    int day9Status, day9HighScore, day9EarnedStrawberries;
 
 
     @Override
@@ -351,6 +352,10 @@ public class ChooseLevelActivity extends AppCompatActivity {
         day8Status = dataLevel.getInt("LEVEL_8_STATUS", 0);
         day8HighScore = dataLevel.getInt("LEVEL_8_HIGH_SCORE", 0);
         day8EarnedStrawberries = dataLevel.getInt("LEVEL_8_STRAWBERRIES", 0);
+
+        day9Status = dataLevel.getInt("LEVEL_9_STATUS", 0);
+        day9HighScore = dataLevel.getInt("LEVEL_9_HIGH_SCORE", 0);
+        day9EarnedStrawberries = dataLevel.getInt("LEVEL_9_STRAWBERRIES", 0);
     }
 
     public void selectDay(int day) {
@@ -939,6 +944,7 @@ public class ChooseLevelActivity extends AppCompatActivity {
                 strawberry2.setImageResource(R.drawable.with_strawberry);
                 strawberry3.setImageResource(R.drawable.with_strawberry);
             }
+
             // Show Dialog
             confirmDayMenu.show();
             confirmDayMenu.getWindow().getDecorView().setSystemUiVisibility(getWindow().getDecorView().getSystemUiVisibility());
@@ -982,18 +988,41 @@ public class ChooseLevelActivity extends AppCompatActivity {
             Objects.requireNonNull(confirmDayMenu.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
 
             // Edit Values in Confirm Menu According to Day
-            TextView currentDay, targetScore;
+            TextView currentDay, targetScore, highScore, lockMessage;
+            ImageView strawberry1, strawberry2, strawberry3;
             Button startGame;
+
             currentDay = confirmDayMenu.findViewById(R.id.currentDay);
             targetScore = confirmDayMenu.findViewById(R.id.targetScore);
+            highScore = confirmDayMenu.findViewById(R.id.currentScore);
+            strawberry1 = confirmDayMenu.findViewById(R.id.strawberry_1);
+            strawberry2 = confirmDayMenu.findViewById(R.id.strawberry_2);
+            strawberry3 = confirmDayMenu.findViewById(R.id.strawberry_3);
+            lockMessage = confirmDayMenu.findViewById(R.id.lockMessage);
 
             // Get Values from string.xml
             String strCurrentDay = getString(R.string.d9);
             String strTargetScore = getString(R.string.td9);
+            String strHighScore = "High Score: " + day9HighScore;
 
             // Set Values
             currentDay.setText(strCurrentDay);
             targetScore.setText(strTargetScore);
+            highScore.setText(strHighScore);
+
+            // Show Strawberries Earned
+            if (day9EarnedStrawberries == 1) {
+                strawberry1.setImageResource(R.drawable.with_strawberry);
+            }
+            else if (day9EarnedStrawberries == 2) {
+                strawberry1.setImageResource(R.drawable.with_strawberry);
+                strawberry2.setImageResource(R.drawable.with_strawberry);
+            }
+            else if (day9EarnedStrawberries == 3) {
+                strawberry1.setImageResource(R.drawable.with_strawberry);
+                strawberry2.setImageResource(R.drawable.with_strawberry);
+                strawberry3.setImageResource(R.drawable.with_strawberry);
+            }
 
             // Show Dialog
             confirmDayMenu.show();
@@ -1011,11 +1040,20 @@ public class ChooseLevelActivity extends AppCompatActivity {
             });
 
             startGame = confirmDayMenu.findViewById(R.id.btnStart);
+
+            if (day8Status != 1) {
+                startGame.setVisibility(View.INVISIBLE);
+                lockMessage.setVisibility(View.VISIBLE);
+            }
+            else {
+                startGame.setVisibility(View.VISIBLE);
+            }
+
             startGame.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Intent startDay = new Intent(ChooseLevelActivity.this, Level1.class);
-//                    startActivity(startDay);
+                    Intent startDay = new Intent(ChooseLevelActivity.this, Level9.class);
+                    startActivity(startDay);
                     if (mServ != null) {
                         mServ.pauseMusic();
                     }

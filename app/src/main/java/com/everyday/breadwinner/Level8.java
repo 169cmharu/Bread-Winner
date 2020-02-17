@@ -442,7 +442,7 @@ public class Level8 extends AppCompatActivity implements View.OnTouchListener {
             rbread10.setY(rbread10Y);
 
             // BREAD 11
-            bread11Y += 11;
+            bread11Y += 12;
             float bread11CenterX = bread11X + ((float) bread11.getWidth()/2);
             float bread11CenterY = bread11Y + ((float) bread11.getHeight()/2);
             if (hitCheck(bread11CenterX, bread11CenterY)) {
@@ -465,7 +465,7 @@ public class Level8 extends AppCompatActivity implements View.OnTouchListener {
             bread11.setY(bread11Y);
 
             // ROTTEN BREAD 11
-            rbread11Y += 11;
+            rbread11Y += 12;
             float rbread11CenterX = rbread11X + ((float) rbread11.getWidth()/2);
             float rbread11CenterY = rbread11Y + ((float) rbread11.getHeight()/2);
             if (hitCheck(rbread11CenterX, rbread11CenterY)) {
@@ -499,7 +499,7 @@ public class Level8 extends AppCompatActivity implements View.OnTouchListener {
     }
 
     // TODO: Step 10: Max Score
-    int maxScore = 21200;
+    int maxScore = 22300;
     double firstCut = maxScore * 0.5;
     double secondCut = maxScore * 0.75;
     double thirdCut = maxScore * 0.95;
