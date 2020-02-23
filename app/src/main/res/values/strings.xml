@@ -50,12 +50,34 @@
     <string name="d16">Day 16</string>
     <string name="d17">Day 17</string>
     <string name="d18">Day 18</string>
-    <string name="d19">Day 19</string>
-    <string name="d20">Day 20</string>
+
+    <!-- Unlocked Days -->
+    <string name="ud1">Available at Day 1</string>
+    <string name="ud2">Available at Day 1</string>
+    <string name="ud3">Available at Day 1</string>
+    <string name="ud4">Available at Day 2</string>
+    <string name="ud5">Available at Day 3</string>
+    <string name="ud6">Available at Day 4</string>
+    <string name="ud7">Available at Day 5</string>
+    <string name="ud8">Available at Day 6</string>
+    <string name="ud9">Available at Day 7</string>
+    <string name="ud10">Available at Day 7</string>
+    <string name="ud11">Available at Day 8</string>
+    <string name="ud12">Available at Day 9</string>
+    <string name="ud13">Available at Day 10</string>
+    <string name="ud14">Available at Day 11</string>
+    <string name="ud15">Available at Day 12</string>
+    <string name="ud16">Available at Day 13</string>
+    <string name="ud17">Available at Day 13</string>
+    <string name="ud18">Available at Day 14</string>
+    <string name="ud19">Available at Day 15</string>
+    <string name="ud20">Available at Day 16</string>
+    <string name="ud21">Available at Day 17</string>
+    <string name="ud22">Available at Day 18</string>
 
     <!-- Alternative Text -->
     <string name="logo">App Logo</string>
-    <string name="splashlogo">Splah Logo</string>
+    <string name="splashlogo">Splash Logo</string>
 
     <!-- Alternative Text for Breads -->
     <string name="b1">Bread 1</string>
@@ -80,6 +102,30 @@
     <string name="b20">Bread 20</string>
     <string name="b21">Bread 21</string>
     <string name="b22">Bread 22</string>
+
+    <!-- Bread Names   -->
+    <string name="nb1">Cupcake</string>
+    <string name="nb2">Sprinkle Donut</string>
+    <string name="nb3">Muffin</string>
+    <string name="nb4">Anadama bread</string>
+    <string name="nb5">French Baguette</string>
+    <string name="nb6">Scotch Pancakes</string>
+    <string name="nb7">Bread 7</string>
+    <string name="nb8">Rye Bread</string>
+    <string name="nb9">Zopt</string>
+    <string name="nb10">Bread Roll</string>
+    <string name="nb11">Borodinsky bread</string>
+    <string name="nb12">Pretzel</string>
+    <string name="nb13">Breadstick</string>
+    <string name="nb14">Pane di Altamura</string>
+    <string name="nb15">Croissant</string>
+    <string name="nb16">Black Bread</string>
+    <string name="nb17">Brioche Bread</string>
+    <string name="nb18">Sufganiyot</string>
+    <string name="nb19">Bammy</string>
+    <string name="nb20">Cookies</string>
+    <string name="nb21">Peanut Butter and Jelly Triangles</string>
+    <string name="nb22">Glazed Donut</string>
 
     <!-- Alternative Text for Rotten Breads -->
     <string name="rb8">Rotten Bread 8</string>
@@ -124,6 +170,7 @@
     <string name="new_bread">New Bread!</string>
     <string name="two_breads">New Breads!</string>
     <string name="new_bread_text">Find out more about this bread in the menu</string>
+    <string name="click_bread">Tap the bread to know more</string>
     <string name="two_breads_text">Find out more about these breads in the menu</string>
     <string name="paused">Paused</string>
     <string name="leaving">Are u leaving already? :c</string>
@@ -147,7 +194,7 @@
     <string name="td10">Target Score: 19925</string>
     <string name="td11">Target Score: 25075</string>
     <string name="td12">Target Score: 31100</string>
-    
+
     <string name="td13">Target Score: 3000</string>
     <string name="td14">Target Score: 3750</string>
     <string name="td15">Target Score: 4500</string>

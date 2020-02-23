@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Level13"></activity>
+        <activity android:name=".AlmanacActivity"></activity>
+        <activity android:name=".Level13" />
         <activity android:name=".Level12" />
         <activity android:name=".Level11" />
         <activity android:name=".Level10" />

@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
         almanacButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                openAlmanac();
                 soundPlayer.playButtonClicked();
             }
         });
@@ -121,6 +122,11 @@ public class MainActivity extends AppCompatActivity {
                 soundPlayer.playButtonClicked();
             }
         });
+    }
+
+    public void openAlmanac() {
+        Intent almanacIntent = new Intent(this, AlmanacActivity.class);
+        startActivity(almanacIntent);
     }
 
     public void openSelectDay() {
