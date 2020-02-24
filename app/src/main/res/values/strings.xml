@@ -102,6 +102,7 @@
     <string name="b20">Bread 20</string>
     <string name="b21">Bread 21</string>
     <string name="b22">Bread 22</string>
+    <string name="bunknown">\???</string>
 
     <!-- Bread Names   -->
     <string name="nb1">Cupcake</string>
@@ -126,6 +127,7 @@
     <string name="nb20">Cookies</string>
     <string name="nb21">Peanut Butter and Jelly Triangles</string>
     <string name="nb22">Glazed Donut</string>
+    <string name="nbunknown">\???</string>
 
     <!-- Alternative Text for Rotten Breads -->
     <string name="rb8">Rotten Bread 8</string>
