@@ -11,10 +11,10 @@
     <Button
         android:id="@+id/btnHamburger"
         style="?android:attr/borderlessButtonStyle"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/menu" />
 
     <LinearLayout
@@ -31,7 +31,7 @@
             android:gravity="center"
             android:text="@string/b1"
             android:textColor="@color/colorPrimary"
-            android:textSize="26sp" />
+            android:textSize="22sp" />
 
         <TextView
             android:id="@+id/breadName"
@@ -40,19 +40,21 @@
             android:fontFamily="@font/josefin_sans_bold"
             android:gravity="center"
             android:text="@string/nb1"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
             android:textColor="@color/colorPrimary"
-            android:textSize="35sp" />
+            android:textSize="38sp" />
 
         <TextView
             android:id="@+id/availability"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/josefin_sans_bold"
             android:gravity="center"
             android:text="@string/ud1"
-            android:textColor="@color/grey"
-            android:textSize="20sp" />
+            android:textColor="@color/colorPrimary"
+            android:textSize="22sp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -61,7 +63,7 @@
             android:gravity="center"
             android:text="@string/click_bread"
             android:textColor="@color/grey"
-            android:textSize="15sp" />
+            android:textSize="18sp" />
     </LinearLayout>
 
     <!-- Table  -->
@@ -113,7 +115,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="190dp"
+        android:layout_marginBottom="185dp"
         android:gravity="center">
 
         <ImageView

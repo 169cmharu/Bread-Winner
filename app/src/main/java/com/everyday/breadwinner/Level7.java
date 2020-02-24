@@ -321,7 +321,7 @@ public class Level7 extends AppCompatActivity implements View.OnTouchListener {
             bread8.setY(bread8Y);
 
             // ROTTEN BREAD 8
-            rbread8Y += 9;
+            rbread8Y += 6;
             float rbread8CenterX = rbread8X + ((float) rbread8.getWidth()/2);
             float rbread8CenterY = rbread8Y + ((float) rbread8.getHeight()/2);
             if (hitCheck(rbread8CenterX, rbread8CenterY)) {
@@ -365,7 +365,7 @@ public class Level7 extends AppCompatActivity implements View.OnTouchListener {
             bread9.setY(bread9Y);
 
             // ROTTEN BREAD 9
-            rbread9Y += 10;
+            rbread9Y += 7;
             float rbread9CenterX = rbread9X + ((float) rbread9.getWidth()/2);
             float rbread9CenterY = rbread9Y + ((float) rbread9.getHeight()/2);
             if (hitCheck(rbread9CenterX, rbread9CenterY)) {
@@ -409,7 +409,7 @@ public class Level7 extends AppCompatActivity implements View.OnTouchListener {
             bread10.setY(bread10Y);
 
             // ROTTEN BREAD 10
-            rbread10Y += 11;
+            rbread10Y += 8;
             float rbread10CenterX = rbread10X + ((float) rbread10.getWidth()/2);
             float rbread10CenterY = rbread10Y + ((float) rbread10.getHeight()/2);
             if (hitCheck(rbread10CenterX, rbread10CenterY)) {

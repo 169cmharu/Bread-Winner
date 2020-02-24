@@ -15,16 +15,16 @@
         android:gravity="center"
         android:text="@string/new_bread"
         android:textColor="@color/cream"
-        android:textSize="40sp" />
+        android:textSize="38sp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/josefin_sans_bold"
+        android:fontFamily="@font/josefin_sans"
         android:gravity="center"
         android:text="@string/new_bread_text"
         android:textColor="@color/cream"
-        android:textSize="18sp"
+        android:textSize="22sp"
         android:paddingStart="5dp"
         android:paddingEnd="5dp" />
 

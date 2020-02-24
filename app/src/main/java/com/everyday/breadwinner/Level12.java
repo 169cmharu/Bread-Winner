@@ -389,25 +389,25 @@ public class Level12 extends AppCompatActivity implements View.OnTouchListener {
             bread8.setY(bread8Y);
 
             // ROTTEN BREAD 8
-            rbread8Y += 9;
-            float rbread8CenterX = rbread8X + ((float) rbread8.getWidth()/2);
-            float rbread8CenterY = rbread8Y + ((float) rbread8.getHeight()/2);
-            if (hitCheck(rbread8CenterX, rbread8CenterY)) {
-                rbread8Y = -500.0f;
-                currentScore -= 450;
-                scoreLabel.setText(String.valueOf(currentScore));
-                checkNumOfStrawberries();
-                soundPlayer.playHitWrongBasket();
-            }
-            if (rbread8.getY() > screenHeight) {
-                rbread8X = (float)Math.floor(Math.random() * (screenWidth - rbread8.getWidth()));
-                rbread8Y = -500.0f;
-                scoreLabel.setText(String.valueOf(currentScore));
-                checkNumOfStrawberries();
-            }
-            // Update Location of Bread 8
-            rbread8.setX(rbread8X);
-            rbread8.setY(rbread8Y);
+//            rbread8Y += 6;
+//            float rbread8CenterX = rbread8X + ((float) rbread8.getWidth()/2);
+//            float rbread8CenterY = rbread8Y + ((float) rbread8.getHeight()/2);
+//            if (hitCheck(rbread8CenterX, rbread8CenterY)) {
+//                rbread8Y = -500.0f;
+//                currentScore -= 450;
+//                scoreLabel.setText(String.valueOf(currentScore));
+//                checkNumOfStrawberries();
+//                soundPlayer.playHitWrongBasket();
+//            }
+//            if (rbread8.getY() > screenHeight) {
+//                rbread8X = (float)Math.floor(Math.random() * (screenWidth - rbread8.getWidth()));
+//                rbread8Y = -500.0f;
+//                scoreLabel.setText(String.valueOf(currentScore));
+//                checkNumOfStrawberries();
+//            }
+//            // Update Location of Bread 8
+//            rbread8.setX(rbread8X);
+//            rbread8.setY(rbread8Y);
 
             // BREAD 9
             bread9Y += 10;
@@ -433,25 +433,25 @@ public class Level12 extends AppCompatActivity implements View.OnTouchListener {
             bread9.setY(bread9Y);
 
             // ROTTEN BREAD 9
-            rbread9Y += 10;
-            float rbread9CenterX = rbread9X + ((float) rbread9.getWidth()/2);
-            float rbread9CenterY = rbread9Y + ((float) rbread9.getHeight()/2);
-            if (hitCheck(rbread9CenterX, rbread9CenterY)) {
-                rbread9Y = -500.0f;
-                currentScore -= 500;
-                scoreLabel.setText(String.valueOf(currentScore));
-                checkNumOfStrawberries();
-                soundPlayer.playHitWrongBasket();
-            }
-            if (rbread9.getY() > screenHeight) {
-                rbread9X = (float)Math.floor(Math.random() * (screenWidth - rbread9.getWidth()));
-                rbread9Y = -500.0f;
-                scoreLabel.setText(String.valueOf(currentScore));
-                checkNumOfStrawberries();
-            }
-            // Update Location of Bread 9
-            rbread9.setX(rbread9X);
-            rbread9.setY(rbread9Y);
+//            rbread9Y += 7;
+//            float rbread9CenterX = rbread9X + ((float) rbread9.getWidth()/2);
+//            float rbread9CenterY = rbread9Y + ((float) rbread9.getHeight()/2);
+//            if (hitCheck(rbread9CenterX, rbread9CenterY)) {
+//                rbread9Y = -500.0f;
+//                currentScore -= 500;
+//                scoreLabel.setText(String.valueOf(currentScore));
+//                checkNumOfStrawberries();
+//                soundPlayer.playHitWrongBasket();
+//            }
+//            if (rbread9.getY() > screenHeight) {
+//                rbread9X = (float)Math.floor(Math.random() * (screenWidth - rbread9.getWidth()));
+//                rbread9Y = -500.0f;
+//                scoreLabel.setText(String.valueOf(currentScore));
+//                checkNumOfStrawberries();
+//            }
+//            // Update Location of Bread 9
+//            rbread9.setX(rbread9X);
+//            rbread9.setY(rbread9Y);
 
             // BREAD 10
             bread10Y += 11;
@@ -477,25 +477,25 @@ public class Level12 extends AppCompatActivity implements View.OnTouchListener {
             bread10.setY(bread10Y);
 
             // ROTTEN BREAD 10
-            rbread10Y += 11;
-            float rbread10CenterX = rbread10X + ((float) rbread10.getWidth()/2);
-            float rbread10CenterY = rbread10Y + ((float) rbread10.getHeight()/2);
-            if (hitCheck(rbread10CenterX, rbread10CenterY)) {
-                rbread10Y = -500.0f;
-                currentScore -= 550;
-                scoreLabel.setText(String.valueOf(currentScore));
-                checkNumOfStrawberries();
-                soundPlayer.playHitWrongBasket();
-            }
-            if (rbread10.getY() > screenHeight) {
-                rbread10X = (float)Math.floor(Math.random() * (screenWidth - rbread10.getWidth()));
-                rbread10Y = -500.0f;
-                scoreLabel.setText(String.valueOf(currentScore));
-                checkNumOfStrawberries();
-            }
-            // Update Location of Bread 10
-            rbread10.setX(rbread10X);
-            rbread10.setY(rbread10Y);
+//            rbread10Y += 8;
+//            float rbread10CenterX = rbread10X + ((float) rbread10.getWidth()/2);
+//            float rbread10CenterY = rbread10Y + ((float) rbread10.getHeight()/2);
+//            if (hitCheck(rbread10CenterX, rbread10CenterY)) {
+//                rbread10Y = -500.0f;
+//                currentScore -= 550;
+//                scoreLabel.setText(String.valueOf(currentScore));
+//                checkNumOfStrawberries();
+//                soundPlayer.playHitWrongBasket();
+//            }
+//            if (rbread10.getY() > screenHeight) {
+//                rbread10X = (float)Math.floor(Math.random() * (screenWidth - rbread10.getWidth()));
+//                rbread10Y = -500.0f;
+//                scoreLabel.setText(String.valueOf(currentScore));
+//                checkNumOfStrawberries();
+//            }
+//            // Update Location of Bread 10
+//            rbread10.setX(rbread10X);
+//            rbread10.setY(rbread10Y);
 
             // BREAD 11
             bread11Y += 12;
@@ -521,25 +521,25 @@ public class Level12 extends AppCompatActivity implements View.OnTouchListener {
             bread11.setY(bread11Y);
 
             // ROTTEN BREAD 11
-            rbread11Y += 12;
-            float rbread11CenterX = rbread11X + ((float) rbread11.getWidth()/2);
-            float rbread11CenterY = rbread11Y + ((float) rbread11.getHeight()/2);
-            if (hitCheck(rbread11CenterX, rbread11CenterY)) {
-                rbread11Y = -500.0f;
-                currentScore -= 600;
-                scoreLabel.setText(String.valueOf(currentScore));
-                checkNumOfStrawberries();
-                soundPlayer.playHitWrongBasket();
-            }
-            if (rbread11.getY() > screenHeight) {
-                rbread11X = (float)Math.floor(Math.random() * (screenWidth - rbread11.getWidth()));
-                rbread11Y = -500.0f;
-                scoreLabel.setText(String.valueOf(currentScore));
-                checkNumOfStrawberries();
-            }
-            // Update Location of Bread 11
-            rbread11.setX(rbread11X);
-            rbread11.setY(rbread11Y);
+//            rbread11Y += 9;
+//            float rbread11CenterX = rbread11X + ((float) rbread11.getWidth()/2);
+//            float rbread11CenterY = rbread11Y + ((float) rbread11.getHeight()/2);
+//            if (hitCheck(rbread11CenterX, rbread11CenterY)) {
+//                rbread11Y = -500.0f;
+//                currentScore -= 600;
+//                scoreLabel.setText(String.valueOf(currentScore));
+//                checkNumOfStrawberries();
+//                soundPlayer.playHitWrongBasket();
+//            }
+//            if (rbread11.getY() > screenHeight) {
+//                rbread11X = (float)Math.floor(Math.random() * (screenWidth - rbread11.getWidth()));
+//                rbread11Y = -500.0f;
+//                scoreLabel.setText(String.valueOf(currentScore));
+//                checkNumOfStrawberries();
+//            }
+//            // Update Location of Bread 11
+//            rbread11.setX(rbread11X);
+//            rbread11.setY(rbread11Y);
 
             // BREAD 12
             bread12Y += 13;
@@ -565,25 +565,25 @@ public class Level12 extends AppCompatActivity implements View.OnTouchListener {
             bread12.setY(bread12Y);
 
             // ROTTEN BREAD 12
-            rbread12Y += 13;
-            float rbread12CenterX = rbread12X + ((float) rbread12.getWidth()/2);
-            float rbread12CenterY = rbread12Y + ((float) rbread12.getHeight()/2);
-            if (hitCheck(rbread12CenterX, rbread12CenterY)) {
-                rbread12Y = -500.0f;
-                currentScore -= 650;
-                scoreLabel.setText(String.valueOf(currentScore));
-                checkNumOfStrawberries();
-                soundPlayer.playHitWrongBasket();
-            }
-            if (rbread12.getY() > screenHeight) {
-                rbread12X = (float)Math.floor(Math.random() * (screenWidth - rbread12.getWidth()));
-                rbread12Y = -500.0f;
-                scoreLabel.setText(String.valueOf(currentScore));
-                checkNumOfStrawberries();
-            }
-            // Update Location of Bread 12
-            rbread12.setX(rbread12X);
-            rbread12.setY(rbread12Y);
+//            rbread12Y += 10;
+//            float rbread12CenterX = rbread12X + ((float) rbread12.getWidth()/2);
+//            float rbread12CenterY = rbread12Y + ((float) rbread12.getHeight()/2);
+//            if (hitCheck(rbread12CenterX, rbread12CenterY)) {
+//                rbread12Y = -500.0f;
+//                currentScore -= 650;
+//                scoreLabel.setText(String.valueOf(currentScore));
+//                checkNumOfStrawberries();
+//                soundPlayer.playHitWrongBasket();
+//            }
+//            if (rbread12.getY() > screenHeight) {
+//                rbread12X = (float)Math.floor(Math.random() * (screenWidth - rbread12.getWidth()));
+//                rbread12Y = -500.0f;
+//                scoreLabel.setText(String.valueOf(currentScore));
+//                checkNumOfStrawberries();
+//            }
+//            // Update Location of Bread 12
+//            rbread12.setX(rbread12X);
+//            rbread12.setY(rbread12Y);
 
             // BREAD 13
             bread13Y += 14;
@@ -609,7 +609,7 @@ public class Level12 extends AppCompatActivity implements View.OnTouchListener {
             bread13.setY(bread13Y);
 
             // ROTTEN BREAD 13
-            rbread13Y += 14;
+            rbread13Y += 11;
             float rbread13CenterX = rbread13X + ((float) rbread13.getWidth()/2);
             float rbread13CenterY = rbread13Y + ((float) rbread13.getHeight()/2);
             if (hitCheck(rbread13CenterX, rbread13CenterY)) {
@@ -653,7 +653,7 @@ public class Level12 extends AppCompatActivity implements View.OnTouchListener {
             bread14.setY(bread14Y);
 
             // ROTTEN BREAD 14
-            rbread14Y += 15;
+            rbread14Y += 12;
             float rbread14CenterX = rbread14X + ((float) rbread14.getWidth()/2);
             float rbread14CenterY = rbread14Y + ((float) rbread14.getHeight()/2);
             if (hitCheck(rbread14CenterX, rbread14CenterY)) {
@@ -697,7 +697,7 @@ public class Level12 extends AppCompatActivity implements View.OnTouchListener {
             bread15.setY(bread15Y);
 
             // ROTTEN BREAD 15
-            rbread15Y += 16;
+            rbread15Y += 13;
             float rbread15CenterX = rbread15X + ((float) rbread15.getWidth()/2);
             float rbread15CenterY = rbread15Y + ((float) rbread15.getHeight()/2);
             if (hitCheck(rbread15CenterX, rbread15CenterY)) {

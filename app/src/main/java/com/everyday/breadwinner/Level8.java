@@ -332,26 +332,26 @@ public class Level8 extends AppCompatActivity implements View.OnTouchListener {
             bread8.setX(bread8X);
             bread8.setY(bread8Y);
 
-            // ROTTEN BREAD 8
-            rbread8Y += 9;
-            float rbread8CenterX = rbread8X + ((float) rbread8.getWidth()/2);
-            float rbread8CenterY = rbread8Y + ((float) rbread8.getHeight()/2);
-            if (hitCheck(rbread8CenterX, rbread8CenterY)) {
-                rbread8Y = -500.0f;
-                currentScore -= 450;
-                scoreLabel.setText(String.valueOf(currentScore));
-                checkNumOfStrawberries();
-                soundPlayer.playHitWrongBasket();
-            }
-            if (rbread8.getY() > screenHeight) {
-                rbread8X = (float)Math.floor(Math.random() * (screenWidth - rbread8.getWidth()));
-                rbread8Y = -500.0f;
-                scoreLabel.setText(String.valueOf(currentScore));
-                checkNumOfStrawberries();
-            }
-            // Update Location of Bread 8
-            rbread8.setX(rbread8X);
-            rbread8.setY(rbread8Y);
+//            // ROTTEN BREAD 8
+//            rbread8Y += 6;
+//            float rbread8CenterX = rbread8X + ((float) rbread8.getWidth()/2);
+//            float rbread8CenterY = rbread8Y + ((float) rbread8.getHeight()/2);
+//            if (hitCheck(rbread8CenterX, rbread8CenterY)) {
+//                rbread8Y = -500.0f;
+//                currentScore -= 450;
+//                scoreLabel.setText(String.valueOf(currentScore));
+//                checkNumOfStrawberries();
+//                soundPlayer.playHitWrongBasket();
+//            }
+//            if (rbread8.getY() > screenHeight) {
+//                rbread8X = (float)Math.floor(Math.random() * (screenWidth - rbread8.getWidth()));
+//                rbread8Y = -500.0f;
+//                scoreLabel.setText(String.valueOf(currentScore));
+//                checkNumOfStrawberries();
+//            }
+//            // Update Location of Bread 8
+//            rbread8.setX(rbread8X);
+//            rbread8.setY(rbread8Y);
 
             // BREAD 9
             bread9Y += 10;
@@ -377,7 +377,7 @@ public class Level8 extends AppCompatActivity implements View.OnTouchListener {
             bread9.setY(bread9Y);
 
             // ROTTEN BREAD 9
-            rbread9Y += 10;
+            rbread9Y += 7;
             float rbread9CenterX = rbread9X + ((float) rbread9.getWidth()/2);
             float rbread9CenterY = rbread9Y + ((float) rbread9.getHeight()/2);
             if (hitCheck(rbread9CenterX, rbread9CenterY)) {
@@ -421,7 +421,7 @@ public class Level8 extends AppCompatActivity implements View.OnTouchListener {
             bread10.setY(bread10Y);
 
             // ROTTEN BREAD 10
-            rbread10Y += 11;
+            rbread10Y += 8;
             float rbread10CenterX = rbread10X + ((float) rbread10.getWidth()/2);
             float rbread10CenterY = rbread10Y + ((float) rbread10.getHeight()/2);
             if (hitCheck(rbread10CenterX, rbread10CenterY)) {
@@ -465,7 +465,7 @@ public class Level8 extends AppCompatActivity implements View.OnTouchListener {
             bread11.setY(bread11Y);
 
             // ROTTEN BREAD 11
-            rbread11Y += 12;
+            rbread11Y += 9;
             float rbread11CenterX = rbread11X + ((float) rbread11.getWidth()/2);
             float rbread11CenterY = rbread11Y + ((float) rbread11.getHeight()/2);
             if (hitCheck(rbread11CenterX, rbread11CenterY)) {
