@@ -33,8 +33,11 @@ public class SplashActivity extends AppCompatActivity {
         new CountDownTimer(3000, 1000) {
             @Override
             public void onFinish() {
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                startActivity(new Intent(SplashActivity.this, Scene1.class));
                 finish();
+
+//                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+//                finish();
             }
 
             @Override

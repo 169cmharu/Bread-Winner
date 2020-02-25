@@ -184,8 +184,8 @@
     <string name="great">Great!</string>
 
     <!-- Target Score -->
-    <string name="td1">Target Score: 2800</string>
-    <string name="td2">Target Score: 4675</string>
+    <string name="td1">Target Score: 2300</string>
+    <string name="td2">Target Score: 3800</string>
     <string name="td3">Target Score: 6550</string>
     <string name="td4">Target Score: 8200</string>
     <string name="td5">Target Score: 11000</string>
@@ -205,4 +205,6 @@
     <string name="td18">Target Score: 4000</string>
     <string name="td19">Target Score: 5000</string>
     <string name="td20">Target Score: 6000</string>
+
+    <string name="tap">Tap anywhere to continue</string>
 </resources>

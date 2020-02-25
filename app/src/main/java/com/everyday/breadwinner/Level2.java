@@ -166,10 +166,10 @@ public class Level2 extends AppCompatActivity implements View.OnTouchListener {
 
         // Move Bread Out of Screen
         // TODO: Step 6: Move New Bread Out of Screen
-        bread1.setX((float)Math.floor(Math.random() * (screenWidth - bread1.getWidth())));
-        bread2.setX((float)Math.floor(Math.random() * (screenWidth - bread2.getWidth())));
-        bread3.setX((float)Math.floor(Math.random() * (screenWidth - bread3.getWidth())));
-        bread4.setX((float)Math.floor(Math.random() * (screenWidth - bread4.getWidth())));
+        bread1.setX((float)Math.floor(Math.random() * (screenWidth - bread1.getWidth() - 20.0f)));
+        bread2.setX((float)Math.floor(Math.random() * (screenWidth - bread2.getWidth() - 20.0f)));
+        bread3.setX((float)Math.floor(Math.random() * (screenWidth - bread3.getWidth() - 20.0f)));
+        bread4.setX((float)Math.floor(Math.random() * (screenWidth - bread4.getWidth() - 20.0f)));
 
         bread1.setY(-500.0f);
         bread2.setY(-500.0f);
@@ -275,6 +275,7 @@ public class Level2 extends AppCompatActivity implements View.OnTouchListener {
             float bread1CenterX = bread1X + ((float) bread1.getWidth()/2);
             float bread1CenterY = bread1Y + ((float) bread1.getHeight()/2);
             if (hitCheck(bread1CenterX, bread1CenterY)) {
+                bread1X = (float)Math.floor(Math.random() * (screenWidth - bread1.getWidth() - 20.0f));
                 bread1Y = -500.0f;
                 currentScore += 100;
                 scoreLabel.setText(String.valueOf(currentScore));
@@ -282,7 +283,7 @@ public class Level2 extends AppCompatActivity implements View.OnTouchListener {
                 soundPlayer.playHitCorrectBasket();
             }
             if (bread1.getY() > screenHeight) {
-                bread1X = (float)Math.floor(Math.random() * (screenWidth - bread1.getWidth()));
+                bread1X = (float)Math.floor(Math.random() * (screenWidth - bread1.getWidth() - 20.0f));
                 bread1Y = -500.0f;
                 currentScore -= 25;
                 scoreLabel.setText(String.valueOf(currentScore));
@@ -298,6 +299,7 @@ public class Level2 extends AppCompatActivity implements View.OnTouchListener {
             float bread2CenterX = bread2X + ((float) bread2.getWidth()/2);
             float bread2CenterY = bread2Y + ((float) bread2.getHeight()/2);
             if (hitCheck(bread2CenterX, bread2CenterY)) {
+                bread2X = (float)Math.floor(Math.random() * (screenWidth - bread2.getWidth() - 20.0f));
                 bread2Y = -500.0f;
                 currentScore += 150;
                 scoreLabel.setText(String.valueOf(currentScore));
@@ -305,7 +307,7 @@ public class Level2 extends AppCompatActivity implements View.OnTouchListener {
                 soundPlayer.playHitCorrectBasket();
             }
             if (bread2.getY() > screenHeight) {
-                bread2X = (float)Math.floor(Math.random() * (screenWidth - bread2.getWidth()));
+                bread2X = (float)Math.floor(Math.random() * (screenWidth - bread2.getWidth() - 20.0f));
                 bread2Y = -500.0f;
                 currentScore -= 50;
                 scoreLabel.setText(String.valueOf(currentScore));
@@ -321,6 +323,7 @@ public class Level2 extends AppCompatActivity implements View.OnTouchListener {
             float bread3CenterX = bread3X + ((float) bread3.getWidth()/2);
             float bread3CenterY = bread3Y + ((float) bread3.getHeight()/2);
             if (hitCheck(bread3CenterX, bread3CenterY)) {
+                bread3X = (float)Math.floor(Math.random() * (screenWidth - bread3.getWidth() - 20.0f));
                 bread3Y = -500.0f;
                 currentScore += 200;
                 scoreLabel.setText(String.valueOf(currentScore));
@@ -328,7 +331,7 @@ public class Level2 extends AppCompatActivity implements View.OnTouchListener {
                 soundPlayer.playHitCorrectBasket();
             }
             if (bread3.getY() > screenHeight) {
-                bread3X = (float)Math.floor(Math.random() * (screenWidth - bread3.getWidth()));
+                bread3X = (float)Math.floor(Math.random() * (screenWidth - bread3.getWidth() - 20.0f));
                 bread3Y = -500.0f;
                 currentScore -= 75;
                 scoreLabel.setText(String.valueOf(currentScore));
@@ -344,6 +347,7 @@ public class Level2 extends AppCompatActivity implements View.OnTouchListener {
             float bread4CenterX = bread4X + ((float) bread4.getWidth()/2);
             float bread4CenterY = bread4Y + ((float) bread4.getHeight()/2);
             if (hitCheck(bread4CenterX, bread4CenterY)) {
+                bread4X = (float)Math.floor(Math.random() * (screenWidth - bread4.getWidth() - 20.0f));
                 bread4Y = -500.0f;
                 currentScore += 250;
                 scoreLabel.setText(String.valueOf(currentScore));
@@ -351,7 +355,7 @@ public class Level2 extends AppCompatActivity implements View.OnTouchListener {
                 soundPlayer.playHitCorrectBasket();
             }
             if (bread4.getY() > screenHeight) {
-                bread4X = (float)Math.floor(Math.random() * (screenWidth - bread4.getWidth()));
+                bread4X = (float)Math.floor(Math.random() * (screenWidth - bread4.getWidth() - 20.0f));
                 bread4Y = -500.0f;
                 currentScore -= 100;
                 scoreLabel.setText(String.valueOf(currentScore));
@@ -376,7 +380,7 @@ public class Level2 extends AppCompatActivity implements View.OnTouchListener {
     }
 
     // TODO: Step 10: Max Score
-    int maxScore = 9350;
+    int maxScore = 7600;
     double firstCut = maxScore * 0.5;
     double secondCut = maxScore * 0.75;
     double thirdCut = maxScore * 0.95;

@@ -31,7 +31,6 @@ public class ChooseLevelActivity extends AppCompatActivity {
     Dialog confirmDayMenu, mainMenuDialog;
     private LinearLayout week1, week2, week3;
     Button hamburger, prevPage, nextPage;
-    int currentWeek = 1;
     private TextView weekNum;
     boolean musicFlag, soundFlag = true;
     private SoundPlayer soundPlayer;
@@ -50,7 +49,7 @@ public class ChooseLevelActivity extends AppCompatActivity {
     int day10Status, day10HighScore, day10EarnedStrawberries;
     int day11Status, day11HighScore, day11EarnedStrawberries;
     int day12Status, day12HighScore, day12EarnedStrawberries;
-
+    int currentWeek = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,16 +58,14 @@ public class ChooseLevelActivity extends AppCompatActivity {
 
         // decorView
         decorView = getWindow().getDecorView();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
-            decorView.setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-            );
-        }
+        decorView.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+        );
         soundPlayer = new SoundPlayer(this);
 
         // Background Music
@@ -147,29 +144,7 @@ public class ChooseLevelActivity extends AppCompatActivity {
                 soundPlayer.playButtonClicked();
             }
         });
-        prevPage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                soundPlayer.playButtonClicked();
-                if (currentWeek == 3) {
-                    nextPage.setVisibility(View.VISIBLE);
-                    weekNum.setText(R.string.w2);
-                    week1.setVisibility(View.INVISIBLE);
-                    week2.setVisibility(View.VISIBLE);
-                    week3.setVisibility(View.INVISIBLE);
-                    currentWeek = 2;
-                }
-                else if (currentWeek == 2) {
-                    prevPage.setVisibility(View.INVISIBLE);
-                    nextPage.setVisibility(View.VISIBLE);
-                    weekNum.setText(R.string.w1);
-                    week1.setVisibility(View.VISIBLE);
-                    week2.setVisibility(View.INVISIBLE);
-                    week3.setVisibility(View.INVISIBLE);
-                    currentWeek = 1;
-                }
-            }
-        });
+
         nextPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -193,6 +168,31 @@ public class ChooseLevelActivity extends AppCompatActivity {
 
             }
         });
+
+        prevPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                soundPlayer.playButtonClicked();
+                if (currentWeek == 3) {
+                    nextPage.setVisibility(View.VISIBLE);
+                    weekNum.setText(R.string.w2);
+                    week1.setVisibility(View.INVISIBLE);
+                    week2.setVisibility(View.VISIBLE);
+                    week3.setVisibility(View.INVISIBLE);
+                    currentWeek = 2;
+                }
+                else if (currentWeek == 2) {
+                    prevPage.setVisibility(View.INVISIBLE);
+                    nextPage.setVisibility(View.VISIBLE);
+                    weekNum.setText(R.string.w1);
+                    week1.setVisibility(View.VISIBLE);
+                    week2.setVisibility(View.INVISIBLE);
+                    week3.setVisibility(View.INVISIBLE);
+                    currentWeek = 1;
+                }
+            }
+        });
+
         day1Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
