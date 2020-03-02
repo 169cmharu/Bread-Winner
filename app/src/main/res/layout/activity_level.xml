@@ -269,6 +269,14 @@
         android:src="@drawable/bread_21"
         android:visibility="invisible"/>
 
+    <ImageView
+        android:id="@+id/bread_22"
+        android:layout_width="65dp"
+        android:layout_height="50dp"
+        android:contentDescription="@string/b22"
+        android:src="@drawable/bread_22"
+        android:visibility="invisible"/>
+
     <!-- Special Strawberry   -->
     <ImageView
         android:id="@+id/specialSb"
@@ -389,6 +397,14 @@
         android:layout_height="55dp"
         android:contentDescription="@string/rb21"
         android:src="@drawable/rbread_21"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:id="@+id/rbread_22"
+        android:layout_width="65dp"
+        android:layout_height="50dp"
+        android:contentDescription="@string/rb22"
+        android:src="@drawable/rbread_22"
         android:visibility="invisible"/>
 
 
