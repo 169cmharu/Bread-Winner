@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -14,6 +15,8 @@ public class Scene9 extends AppCompatActivity {
 
     private long backPressedTime;
     private Toast backToast;
+
+    private Button skip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +41,22 @@ public class Scene9 extends AppCompatActivity {
                 Intent nextScene = new Intent(Scene9.this, Scene10.class);
                 startActivity(nextScene);
                 overridePendingTransition(0, 0);
+                finish();
             }
         });
+
+        skip = findViewById(R.id.skip);
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                skipIntro();
+            }
+        });
+    }
+
+    public void skipIntro() {
+        Intent skipIntent = new Intent(this, MainActivity.class);
+        startActivity(skipIntent);
     }
 
     @Override

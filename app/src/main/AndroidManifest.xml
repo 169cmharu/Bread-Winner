@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Scene12"></activity>
+        <activity android:name=".Level14"></activity>
+        <activity android:name=".Scene12" />
         <activity android:name=".Scene11" />
         <activity android:name=".Scene10" />
         <activity android:name=".Scene9" />
@@ -34,6 +35,28 @@
         <activity android:name=".Level4" />
         <activity android:name=".Level3" />
         <activity android:name=".Level2" />
+        <activity android:name=".B1_Cupcake" />
+        <activity android:name=".B2_Sprinkle" />
+        <activity android:name=".B3_Muffin" />
+        <activity android:name=".B4_Anadama" />
+        <activity android:name=".B5_FBaguette" />
+        <activity android:name=".B6_Scotch" />
+        <activity android:name=".B7_LBaccia" />
+        <activity android:name=".B8_Marraqueta" />
+        <activity android:name=".B9_Zopf" />
+        <activity android:name=".B10_broll" />
+        <activity android:name=".B11_Borodinsky" />
+        <activity android:name=".B12_Pretzel" />
+        <activity android:name=".B13_Bsticks" />
+        <activity android:name=".B14_Altamura" />
+        <activity android:name=".B15_Croissant" />
+        <activity android:name=".B16_Rbread" />
+        <activity android:name=".B17_Brioche" />
+        <activity android:name=".B18_Sufganiyah" />
+        <activity android:name=".B19_Bammy" />
+        <activity android:name=".B20_Cookies" />
+        <activity android:name=".B21_PButter" />
+        <activity android:name=".B22_GDonut" />
 
         <service
             android:name=".HomeMusicService"

@@ -622,6 +622,123 @@ public class AlmanacActivity extends AppCompatActivity {
             }
         });
 
+        // Add Click Listener
+        selectedBread.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (currentBread == 1) {
+                    soundPlayer.playButtonClicked();
+                    Intent detailsBread = new Intent(AlmanacActivity.this, B1_Cupcake.class);
+                    startActivity(detailsBread);
+                }
+                else if (currentBread == 2) {
+                    soundPlayer.playButtonClicked();
+                    Intent detailsBread = new Intent(AlmanacActivity.this, B2_Sprinkle.class);
+                    startActivity(detailsBread);
+                }
+                else if (currentBread == 3) {
+                    soundPlayer.playButtonClicked();
+                    Intent detailsBread = new Intent(AlmanacActivity.this, B3_Muffin.class);
+                    startActivity(detailsBread);
+                }
+                else if (currentBread == 4) {
+                    soundPlayer.playButtonClicked();
+                    Intent detailsBread = new Intent(AlmanacActivity.this, B4_Anadama.class);
+                    startActivity(detailsBread);
+                }
+                else if (currentBread == 5) {
+                    soundPlayer.playButtonClicked();
+                    Intent detailsBread = new Intent(AlmanacActivity.this, B5_FBaguette.class);
+                    startActivity(detailsBread);
+                }
+                else if (currentBread == 6) {
+                    soundPlayer.playButtonClicked();
+                    Intent detailsBread = new Intent(AlmanacActivity.this, B6_Scotch.class);
+                    startActivity(detailsBread);
+                }
+                else if (currentBread == 7) {
+                    soundPlayer.playButtonClicked();
+                    Intent detailsBread = new Intent(AlmanacActivity.this, B7_LBaccia.class);
+                    startActivity(detailsBread);
+                }
+                else if (currentBread == 8) {
+                    soundPlayer.playButtonClicked();
+                    Intent detailsBread = new Intent(AlmanacActivity.this, B8_Marraqueta.class);
+                    startActivity(detailsBread);
+                }
+                else if (currentBread == 9) {
+                    soundPlayer.playButtonClicked();
+                    Intent detailsBread = new Intent(AlmanacActivity.this, B9_Zopf.class);
+                    startActivity(detailsBread);
+                }
+                else if (currentBread == 10) {
+                    soundPlayer.playButtonClicked();
+                    Intent detailsBread = new Intent(AlmanacActivity.this, B10_broll.class);
+                    startActivity(detailsBread);
+                }
+                else if (currentBread == 11) {
+                    soundPlayer.playButtonClicked();
+                    Intent detailsBread = new Intent(AlmanacActivity.this, B11_Borodinsky.class);
+                    startActivity(detailsBread);
+                }
+                else if (currentBread == 12) {
+                    soundPlayer.playButtonClicked();
+                    Intent detailsBread = new Intent(AlmanacActivity.this, B12_Pretzel.class);
+                    startActivity(detailsBread);
+                }
+                else if (currentBread == 13) {
+                    soundPlayer.playButtonClicked();
+                    Intent detailsBread = new Intent(AlmanacActivity.this, B13_Bsticks.class);
+                    startActivity(detailsBread);
+                }
+                else if (currentBread == 14) {
+                    soundPlayer.playButtonClicked();
+                    Intent detailsBread = new Intent(AlmanacActivity.this, B14_Altamura.class);
+                    startActivity(detailsBread);
+                }
+                else if (currentBread == 15) {
+                    soundPlayer.playButtonClicked();
+                    Intent detailsBread = new Intent(AlmanacActivity.this, B15_Croissant.class);
+                    startActivity(detailsBread);
+                }
+                else if (currentBread == 16) {
+                    soundPlayer.playButtonClicked();
+                    Intent detailsBread = new Intent(AlmanacActivity.this, B16_Rbread.class);
+                    startActivity(detailsBread);
+                }
+                else if (currentBread == 17) {
+                    soundPlayer.playButtonClicked();
+                    Intent detailsBread = new Intent(AlmanacActivity.this, B17_Brioche.class);
+                    startActivity(detailsBread);
+                }
+                else if (currentBread == 18) {
+                    soundPlayer.playButtonClicked();
+                    Intent detailsBread = new Intent(AlmanacActivity.this, B18_Sufganiyah.class);
+                    startActivity(detailsBread);
+                }
+                else if (currentBread == 19) {
+                    soundPlayer.playButtonClicked();
+                    Intent detailsBread = new Intent(AlmanacActivity.this, B19_Bammy.class);
+                    startActivity(detailsBread);
+                }
+                else if (currentBread == 20) {
+                    soundPlayer.playButtonClicked();
+                    Intent detailsBread = new Intent(AlmanacActivity.this, B20_Cookies.class);
+                    startActivity(detailsBread);
+                }
+                else if (currentBread == 21) {
+                    soundPlayer.playButtonClicked();
+                    Intent detailsBread = new Intent(AlmanacActivity.this, B21_PButter.class);
+                    startActivity(detailsBread);
+                }
+                else if (currentBread == 22) {
+                    soundPlayer.playButtonClicked();
+                    Intent detailsBread = new Intent(AlmanacActivity.this, B22_GDonut.class);
+                    startActivity(detailsBread);
+                }
+            }
+        });
+
     }
 
     Button musicBtn;

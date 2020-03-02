@@ -103,6 +103,7 @@
     <string name="b21">Bread 21</string>
     <string name="b22">Bread 22</string>
     <string name="bunknown">\???</string>
+    <string name="bspecial">Special Strawberry</string>
 
     <!-- Bread Names   -->
     <string name="nb1">Cupcake</string>
@@ -111,18 +112,18 @@
     <string name="nb4">Anadama bread</string>
     <string name="nb5">French Baguette</string>
     <string name="nb6">Scotch Pancakes</string>
-    <string name="nb7">Bread 7</string>
-    <string name="nb8">Rye Bread</string>
-    <string name="nb9">Zopt</string>
+    <string name="nb7">La Baccia Bread</string>
+    <string name="nb8">Marraqueta bread</string>
+    <string name="nb9">Zopf</string>
     <string name="nb10">Bread Roll</string>
     <string name="nb11">Borodinsky bread</string>
     <string name="nb12">Pretzel</string>
-    <string name="nb13">Breadstick</string>
+    <string name="nb13">Breadsticks</string>
     <string name="nb14">Pane di Altamura</string>
     <string name="nb15">Croissant</string>
-    <string name="nb16">Black Bread</string>
+    <string name="nb16">Rye Bread</string>
     <string name="nb17">Brioche Bread</string>
-    <string name="nb18">Sufganiyot</string>
+    <string name="nb18">Sufganiyah</string>
     <string name="nb19">Bammy</string>
     <string name="nb20">Cookies</string>
     <string name="nb21">Peanut Butter and Jelly Triangles</string>
@@ -196,8 +197,8 @@
     <string name="td10">Target Score: 19925</string>
     <string name="td11">Target Score: 25075</string>
     <string name="td12">Target Score: 31100</string>
+    <string name="td13">Target Score: 18,200</string>
 
-    <string name="td13">Target Score: 3000</string>
     <string name="td14">Target Score: 3750</string>
     <string name="td15">Target Score: 4500</string>
     <string name="td16">Target Score: 2000</string>
@@ -207,4 +208,265 @@
     <string name="td20">Target Score: 6000</string>
 
     <string name="tap">Tap anywhere to continue</string>
+
+    <!--Cupcake-->
+
+    <string name="def">Definition: </string>
+    <string name="ing">Main Ingredients: </string>
+    <string name="origin">Place of Origin: </string>
+
+    <string name="def_b1">A cupcake is a small cake designed to serve one person,
+                        which may be baked in a small thin paper or aluminum
+                        cup. As with larger cakes, icing and other cake decorations
+                        such as fruit and candy may be applied.
+    </string>
+
+    <string name="origin_b1">United States</string>
+
+    <!--Sprinkle Donut-->
+
+    <string name="def_b2">A soft and pillow yeasted doughnuts covered
+                          with a decadent chocolate glaze and festive
+                          sprinkles.
+    </string>
+
+    <string name="origin_b2">Netherlands</string>
+
+    <!--Muffin-->
+
+    <string name="def_b3">A muffin is an individual-sized, baked product. It can
+                          refer to two distinct items, a part-raised flatbread that
+                          is baked and then cooked on a griddle (typically un-
+                          sweetened) and a cupcake-like quickbread (often
+                          sweetened) that is chemically leavened and then
+                          baked in a mold.
+    </string>
+
+    <string name="origin_b3">Wales</string>
+
+    <!--Anadama-->
+
+    <string name="def_b4">Anadama Bread is a traditional yeast bread of
+                          New England in the United States made with
+                          wheat flour, cornmeal, molasses and sometimes
+                          rye flour.
+    </string>
+
+    <string name="origin_b4">United States</string>
+
+    <!--Baguette-->
+
+    <string name="def_b5">A baguette is a long, thin load of French Bread
+                          that is commonly made from basic lean dough.
+                          It is distinguishable by its length and crisp crust.
+                          A baguette has a diameter of about 5 or 6 cm
+                          and a usual length of about 65 cm, although
+                          a baguette can be up to 1 m long.
+    </string>
+
+    <string name="origin_b5">France</string>
+
+    <!--Scotch-->
+
+    <string name="def_b6">Scotch pancakes are also known as ‘drop’or ‘dropped scones’,
+                          because soft dollops of mixture are dropped onto the cooking surface.
+    </string>
+
+    <string name="origin_b6">Scotland</string>
+
+    <!--Baccia-->
+
+    <string name="def_b7">Light, flaky, soft textured sandwich roll
+                          great for Paninis burgers, chicken
+                          sandwiches, and deli-style sandwiches.
+    </string>
+
+    <string name="origin_b7">Italy</string>
+
+    <!--Marraqueta-->
+
+    <string name="def_b8">Marraqueta is a crispy South American
+                          bread made with flour, salt, water and
+                          yeast. This wheat bread has a crunchy
+                          texture, and is very popular in Chile,
+                          Brazil etc.
+    </string>
+
+    <string name="origin_b8">Chile</string>
+
+    <!--Zopf-->
+
+    <string name="def_b9">Zopf is a type of Swiss, Austrian or
+                          Bavarian bread made from white
+                          flour, milk, eggs, butter and yeast.
+    </string>
+
+    <string name="origin_b9">Switzerland</string>
+
+    <!--Roll-->
+
+    <string name="def_b10">A roll is a small, usually round or oblong
+                          individual loaf of bread served as a meal
+                          accompaniment (eaten plain or with butter).
+    </string>
+
+    <string name="origin_b10">Europe</string>
+
+
+    <!--Borodinsky-->
+
+    <string name="def_b11">Borodinsky bread or borodino bread is a
+                           dark brown sourdough rye bread of Russian
+                           origin, traditionally swetened with molasses and
+                           flavored with coriander and caraway seeds.
+    </string>
+
+    <string name="origin_b11">Russia</string>
+
+    <!--Pretzel-->
+
+    <string name="def_b12">A pretzel is a type of baked pastry made from dough that
+                           is commonly shaped into a knot. The traditional pretzel shape
+                           is a distinctive symmetrical form, with the ends of a long strip
+                           of dough intertwined and then twisted back onto itself in a
+                           particular way (a pretzel loop).
+    </string>
+
+    <string name="origin_b12">Germany</string>
+
+    <!--Breadsticks-->
+
+    <string name="def_b13">Also known as grissini, grissino or dipping sticks are generally
+                           pencil-sized sticks of crisp, dry baked bread that originated in
+                           Italy.
+    </string>
+
+    <string name="origin_b13">Italy</string>
+
+    <!--Altamura-->
+
+    <string name="def_b14">Pane di Altamura is a type of Italian
+                           naturaly leavened bread made from
+                           remilled durum wheat semola from the
+                           Altamura area of the Provincia di Bari,
+                           in the Apulia region.
+    </string>
+
+    <string name="origin_b14">Altamura</string>
+
+    <!--Croissant-->
+
+    <string name="def_b15">A croissant is a buttery, flaky, viennoiserie pastry of
+                           Austrian origin, named for its historical crescent shape.
+                           Croissants and other viennoiserie are made of a layered
+                           yeast-leavened dough.
+    </string>
+
+    <string name="origin_b15">Austria</string>
+
+    <!--Rye-->
+
+    <string name="def_b16">A type of
+                           bread made with proportions of flour
+                           from rye grain. It can be light or dark
+                           in color, depending on the type of flour
+                           used and addition of coloring agents, and
+                           it typically denser than bread made from
+                           wheat flour.
+    </string>
+
+    <string name="origin_b16">Europe, North America
+                              and Israel</string>
+
+    <!--Brioche-->
+
+    <string name="def_b17">Brioche is a bread of French origin that is similar to a
+                           highly enriched pastry, and whose high egg and butter
+                           content give it a rich and tender crumb.
+    </string>
+
+    <string name="origin_b17">France</string>
+
+    <!--Sufganiyah-->
+
+    <string name="def_b18">Sufganiyah is a round jelly doughnut
+                           eaten in Israel and around the world
+                           on the Jewish festival of Hanukkah.
+                           The doughnut is deep-fried, filled with
+                           jam or custard, and then top with
+                           powdered sugar.
+    </string>
+
+    <string name="origin_b18">Israel</string>
+
+    <!--Bammy-->
+
+    <string name="def_b19">a traditional Jamaican cassava flatbread descended from the simple
+                           flatbread eaten by the Arawaks, Jamaicas original inhabitants. Today
+                           it is produced in many rural communities and sold in stores
+                           and by street vendors in Jamaica and abroad.
+    </string>
+
+    <string name="origin_b19">Jamaica</string>
+
+    <!--Cookies-->
+
+    <string name="def_b20">A Cookie is a baked or cooked food that is typically
+                           small, flat and sweet. It is usually contains flour, sugar
+                           and some type of oil or fat. It may include other
+                           ingredients such as raisins, oats, chocolate chips,
+                           nuts, etc.
+    </string>
+
+    <string name="origin_b20">Persia</string>
+
+    <!--Pbutter Jelly-->
+
+    <string name="def_b21">A peanut-butter and jelly (or jam)
+                           sandwich, or PB and J, includes one or
+                           more layers of peanut butter and
+                           one of more layers of jelly or jam
+                           on bread.
+    </string>
+
+    <string name="origin_b21">United States</string>
+
+    <!--GDonut-->
+
+    <string name="def_b22">A doughnut or donut is type of fried dough confection
+                           or dessert food. The doughnut is popular in many
+                           countries and is prepared in various forms as a sweet
+                           snack that can be homemade or purchased in bakeries,
+                           supermarkets, food stalls, and franchised specialty
+                           vendors. Once fried, doughnuts may be glazed with
+                           a sugar icing, spread with icing etc.
+    </string>
+
+    <string name="origin_b22">New York</string>
+
+    <!--Ingredients Used-->
+
+    <string name="butter">Butter</string>
+    <string name="flour">Flour</string>
+    <string name="sugar">Sugar</string>
+    <string name="egg">Eggs</string>
+    <string name="bsoda">Baking Soda</string>
+    <string name="milk">Milk</string>
+    <string name="vanilla">Vanilla</string>
+    <string name="cornmeal">Cornmeal</string>
+    <string name="molasses">Molasses</string>
+    <string name="water">Water</string>
+    <string name="yeast">Yeast</string>
+    <string name="salt">Salt</string>
+    <string name="c_oil">Canola Oil</string>
+    <string name="oil">Oil</string>
+    <string name="bpowder">Baking powder</string>
+    <string name="msyrup">Malt Syrup</string>
+    <string name="coriander">Coriander</string>
+    <string name="caraway">Caraway</string>
+    <string name="cream">Cream</string>
+    <string name="dough">Dough</string>
+    <string name="jam">Jam</string>
+    <string name="cassava">Cassava</string>
+    <string name="pbutter">Peanut Butter</string>
 </resources>
