@@ -237,7 +237,31 @@
         android:src="@drawable/bread_17"
         android:visibility="invisible"/>
 
+    <ImageView
+        android:id="@+id/bread_18"
+        android:layout_width="45dp"
+        android:layout_height="35dp"
+        android:contentDescription="@string/b18"
+        android:src="@drawable/bread_18"
+        android:visibility="invisible"/>
 
+    <ImageView
+        android:id="@+id/bread_19"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:contentDescription="@string/b19"
+        android:src="@drawable/bread_19"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:id="@+id/bread_20"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:contentDescription="@string/b20"
+        android:src="@drawable/bread_20"
+        android:visibility="invisible"/>
+
+    <!-- Special Strawberry   -->
     <ImageView
         android:id="@+id/specialSb"
         android:layout_width="30dp"
@@ -325,6 +349,30 @@
         android:layout_height="57dp"
         android:contentDescription="@string/rb17"
         android:src="@drawable/rbread_17"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:id="@+id/rbread_18"
+        android:layout_width="45dp"
+        android:layout_height="35dp"
+        android:contentDescription="@string/rb18"
+        android:src="@drawable/rbread_18"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:id="@+id/rbread_19"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:contentDescription="@string/rb19"
+        android:src="@drawable/rbread_19"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:id="@+id/rbread_20"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:contentDescription="@string/rb20"
+        android:src="@drawable/rbread_20"
         android:visibility="invisible"/>
 
 

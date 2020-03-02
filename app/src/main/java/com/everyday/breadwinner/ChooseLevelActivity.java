@@ -1492,8 +1492,8 @@ public class ChooseLevelActivity extends AppCompatActivity {
             startGame.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Intent startDay = new Intent(ChooseLevelActivity.this, Level1.class);
-//                    startActivity(startDay);
+                    Intent startDay = new Intent(ChooseLevelActivity.this, Level14.class);
+                    startActivity(startDay);
                     if (mServ != null) {
                         mServ.pauseMusic();
                     }
@@ -1571,8 +1571,8 @@ public class ChooseLevelActivity extends AppCompatActivity {
             startGame.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Intent startDay = new Intent(ChooseLevelActivity.this, Level1.class);
-//                    startActivity(startDay);
+                    Intent startDay = new Intent(ChooseLevelActivity.this, Level15.class);
+                    startActivity(startDay);
                     if (mServ != null) {
                         mServ.pauseMusic();
                     }
@@ -1650,8 +1650,8 @@ public class ChooseLevelActivity extends AppCompatActivity {
             startGame.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Intent startDay = new Intent(ChooseLevelActivity.this, Level1.class);
-//                    startActivity(startDay);
+                    Intent startDay = new Intent(ChooseLevelActivity.this, Level16.class);
+                    startActivity(startDay);
                     if (mServ != null) {
                         mServ.pauseMusic();
                     }
