@@ -197,15 +197,12 @@
     <string name="td10">Target Score: 19925</string>
     <string name="td11">Target Score: 25075</string>
     <string name="td12">Target Score: 31100</string>
-    <string name="td13">Target Score: 18,200</string>
-
-    <string name="td14">Target Score: 3750</string>
-    <string name="td15">Target Score: 4500</string>
-    <string name="td16">Target Score: 2000</string>
-    <string name="td17">Target Score: 3000</string>
-    <string name="td18">Target Score: 4000</string>
-    <string name="td19">Target Score: 5000</string>
-    <string name="td20">Target Score: 6000</string>
+    <string name="td13">Target Score: 18200</string>
+    <string name="td14">Target Score: 24500</string>
+    <string name="td15">Target Score: 31600</string>
+    <string name="td16">Target Score: 39950</string>
+    <string name="td17">Target Score: 47475</string>
+    <string name="td18">Target Score: 56700</string>
 
     <string name="tap">Tap anywhere to continue</string>
 
