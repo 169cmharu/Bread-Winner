@@ -1,17 +1,25 @@
 package com.everyday.breadwinner;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+
 public class Scene11 extends AppCompatActivity {
     private View decorView;
-    private RelativeLayout mainLayout;
+    private View mainLayout;
+    ImageView speechBubble;
 
     private long backPressedTime;
     private Toast backToast;
@@ -35,13 +43,27 @@ public class Scene11 extends AppCompatActivity {
         );
 
         mainLayout = findViewById(R.id.mainLayout);
+        speechBubble = findViewById(R.id.sb_11);
+        YoYo.with(Techniques.FadeIn)
+                .duration(500)
+                .playOn(speechBubble);
+
         mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent nextScene = new Intent(Scene11.this, Scene12.class);
-                startActivity(nextScene);
-                overridePendingTransition(0, 0);
-                finish();
+                presentScene12(v);
+
+                new CountDownTimer(3000, 1000) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        finish();
+                    }
+                }.start();
             }
         });
 
@@ -49,14 +71,45 @@ public class Scene11 extends AppCompatActivity {
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                skipIntro();
+                presentMain(v);
+
+                new CountDownTimer(3000, 1000) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        finish();
+                    }
+                }.start();
             }
         });
     }
 
-    public void skipIntro() {
-        Intent skipIntent = new Intent(this, MainActivity.class);
-        startActivity(skipIntent);
+    public void presentScene12(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, Scene12.class);
+        intent.putExtra(Scene12.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(Scene12.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentMain(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra(MainActivity.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(MainActivity.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
     }
 
     @Override

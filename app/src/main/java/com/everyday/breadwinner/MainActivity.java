@@ -1,7 +1,10 @@
 package com.everyday.breadwinner;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
 
+import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.ComponentName;
@@ -14,13 +17,22 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.Animation;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 
 public class MainActivity extends AppCompatActivity {
     private View decorView;
@@ -29,9 +41,19 @@ public class MainActivity extends AppCompatActivity {
     Button hamburger;
     boolean musicFlag, soundFlag = true;
     private SoundPlayer soundPlayer;
+    Button startButton;
+    Button settingsButton;
+    Button almanacButton;
+    ImageView logo;
 
     private long backPressedTime;
     private Toast backToast;
+
+    private View mainLayout;
+    public static final String EXTRA_CIRCULAR_REVEAL_X = "EXTRA_CIRCULAR_REVEAL_X";
+    public static final String EXTRA_CIRCULAR_REVEAL_Y = "EXTRA_CIRCULAR_REVEAL_Y";
+    private int revealX;
+    private int revealY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +70,28 @@ public class MainActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
         );
+
+        mainLayout = findViewById(R.id.mainLayout);
+        final Intent intent = getIntent();
+        if (savedInstanceState == null && intent.hasExtra(EXTRA_CIRCULAR_REVEAL_X) && intent.hasExtra(EXTRA_CIRCULAR_REVEAL_Y)) {
+            mainLayout.setVisibility(View.INVISIBLE);
+            revealX = intent.getIntExtra(EXTRA_CIRCULAR_REVEAL_X, 0);
+            revealY = intent.getIntExtra(EXTRA_CIRCULAR_REVEAL_Y, 0);
+
+            ViewTreeObserver viewTreeObserver = mainLayout.getViewTreeObserver();
+            if (viewTreeObserver.isAlive()) {
+                viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        revealActivity(revealX, revealY);
+                        mainLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    }
+                });
+            }
+        } else {
+            mainLayout.setVisibility(View.VISIBLE);
+        }
+
         soundPlayer = new SoundPlayer(this);
 
         // Background Music
@@ -81,9 +125,6 @@ public class MainActivity extends AppCompatActivity {
         mHomeWatcher.startWatch();
 
         // START MAIN CODE
-        Button startButton;
-        Button settingsButton;
-        Button almanacButton;
         mainMenuDialog = new Dialog(this);
 
         // Find Buttons by their ID
@@ -92,26 +133,46 @@ public class MainActivity extends AppCompatActivity {
         settingsButton = findViewById(R.id.btnSettings);
         hamburger = findViewById(R.id.btnHamburger);
 
+        logo = findViewById(R.id.logoIcon);
+        YoYo.with(Techniques.Bounce)
+                .duration(1000)
+                .repeat(Animation.INFINITE)
+                .playOn(logo);
+
         // Add Click Listener
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openSelectDay();
+                YoYo.with(Techniques.Pulse)
+                        .duration(400)
+                        .playOn(startButton);
                 soundPlayer.playButtonClicked();
+                presentSelectDay(v);
             }
         });
 
         almanacButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openAlmanac();
+                YoYo.with(Techniques.Pulse)
+                        .duration(400)
+                        .playOn(almanacButton);
                 soundPlayer.playButtonClicked();
+                presentAlmanac(v);
             }
         });
 
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                YoYo.with(Techniques.Pulse)
+                        .duration(400)
+                        .playOn(settingsButton);
+
+                YoYo.with(Techniques.Pulse)
+                        .duration(400)
+                        .playOn(hamburger);
+
                 launchMenu();
                 soundPlayer.playButtonClicked();
             }
@@ -120,20 +181,48 @@ public class MainActivity extends AppCompatActivity {
         hamburger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                YoYo.with(Techniques.Pulse)
+                        .duration(400)
+                        .playOn(hamburger);
                 launchMenu();
                 soundPlayer.playButtonClicked();
             }
         });
     }
 
-    public void openAlmanac() {
-        Intent almanacIntent = new Intent(this, AlmanacActivity.class);
-        startActivity(almanacIntent);
+    protected void revealActivity(int x, int y) {
+        float finalRadius = (float) (Math.max(mainLayout.getWidth(), mainLayout.getHeight()) * 1.1);
+
+        Animator circularReveal = ViewAnimationUtils.createCircularReveal(mainLayout, x, y, 0, finalRadius);
+        circularReveal.setDuration(1000);
+        circularReveal.setInterpolator(new AccelerateInterpolator());
+
+        mainLayout.setVisibility(View.VISIBLE);
+        circularReveal.start();
     }
 
-    public void openSelectDay() {
-        Intent levelIntent = new Intent(this, ChooseLevelActivity.class);
-        startActivity(levelIntent);
+    public void presentSelectDay(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, ChooseLevelActivity.class);
+        intent.putExtra(ChooseLevelActivity.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(ChooseLevelActivity.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentAlmanac(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, AlmanacActivity.class);
+        intent.putExtra(AlmanacActivity.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(AlmanacActivity.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
     }
 
     Button musicBtn;
@@ -153,6 +242,9 @@ public class MainActivity extends AppCompatActivity {
         mainMenuDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
+                YoYo.with(Techniques.Pulse)
+                        .duration(400)
+                        .playOn(hamburger);
                 hamburger.setBackgroundResource(R.drawable.menu);
             }
         });

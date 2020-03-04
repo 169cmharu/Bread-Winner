@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/home1_bg"
@@ -21,7 +22,7 @@
         style="?android:attr/borderlessButtonStyle" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/logoIcon"
         android:layout_width="185dp"
         android:layout_height="185dp"
         android:layout_marginTop="45dp"
@@ -38,7 +39,7 @@
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
+        app:layout_constraintTop_toBottomOf="@+id/logoIcon">
 
         <!--  Start Button -->
         <Button

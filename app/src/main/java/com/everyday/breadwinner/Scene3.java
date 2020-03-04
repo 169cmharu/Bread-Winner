@@ -1,22 +1,39 @@
 package com.everyday.breadwinner;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
 
+import android.animation.Animator;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.ViewTreeObserver;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+
 public class Scene3 extends AppCompatActivity {
     private View decorView;
-    private RelativeLayout mainLayout;
+    private View mainLayout;
+    ImageView speechBubble;
 
     private long backPressedTime;
     private Toast backToast;
 
     private Button skip;
+
+    public static final String EXTRA_CIRCULAR_REVEAL_X = "EXTRA_CIRCULAR_REVEAL_X";
+    public static final String EXTRA_CIRCULAR_REVEAL_Y = "EXTRA_CIRCULAR_REVEAL_Y";
+    private int revealX;
+    private int revealY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +52,44 @@ public class Scene3 extends AppCompatActivity {
         );
 
         mainLayout = findViewById(R.id.mainLayout);
+        final Intent intent = getIntent();
+        if (savedInstanceState == null && intent.hasExtra(EXTRA_CIRCULAR_REVEAL_X) && intent.hasExtra(EXTRA_CIRCULAR_REVEAL_Y)) {
+            mainLayout.setVisibility(View.INVISIBLE);
+            revealX = intent.getIntExtra(EXTRA_CIRCULAR_REVEAL_X, 0);
+            revealY = intent.getIntExtra(EXTRA_CIRCULAR_REVEAL_Y, 0);
+
+
+            ViewTreeObserver viewTreeObserver = mainLayout.getViewTreeObserver();
+            if (viewTreeObserver.isAlive()) {
+                viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        revealActivity(revealX, revealY);
+                        mainLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    }
+                });
+            }
+        } else {
+            mainLayout.setVisibility(View.VISIBLE);
+        }
+
+        speechBubble = findViewById(R.id.sb_3);
         mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent nextScene = new Intent(Scene3.this, Scene4.class);
-                startActivity(nextScene);
-                overridePendingTransition(0, 0);
-                finish();
+                presentScene4(v);
+
+                new CountDownTimer(3000, 1000) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        finish();
+                    }
+                }.start();
             }
         });
 
@@ -49,14 +97,56 @@ public class Scene3 extends AppCompatActivity {
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                skipIntro();
+                presentMain(v);
+
+                new CountDownTimer(3000, 1000) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        finish();
+                    }
+                }.start();
             }
         });
     }
 
-    public void skipIntro() {
-        Intent skipIntent = new Intent(this, MainActivity.class);
-        startActivity(skipIntent);
+    protected void revealActivity(int x, int y) {
+        float finalRadius = (float) (Math.max(mainLayout.getWidth(), mainLayout.getHeight()) * 1.1);
+
+        Animator circularReveal = ViewAnimationUtils.createCircularReveal(mainLayout, x, y, 0, finalRadius);
+        circularReveal.setDuration(1000);
+        circularReveal.setInterpolator(new AccelerateInterpolator());
+
+        mainLayout.setVisibility(View.VISIBLE);
+        circularReveal.start();
+    }
+
+    public void presentScene4(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, Scene4.class);
+        intent.putExtra(Scene4.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(Scene4.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentMain(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra(MainActivity.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(MainActivity.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
     }
 
     @Override

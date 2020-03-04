@@ -2,6 +2,7 @@ package com.everyday.breadwinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.Animator;
 import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -17,11 +18,17 @@ import android.os.IBinder;
 import android.os.PowerManager;
 import android.text.Layout;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.ViewTreeObserver;
 import android.view.WindowManager;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 
 import java.util.Objects;
 
@@ -34,6 +41,12 @@ public class ChooseLevelActivity extends AppCompatActivity {
     private TextView weekNum;
     boolean musicFlag, soundFlag = true;
     private SoundPlayer soundPlayer;
+
+    private View mainLayout;
+    public static final String EXTRA_CIRCULAR_REVEAL_X = "EXTRA_CIRCULAR_REVEAL_X";
+    public static final String EXTRA_CIRCULAR_REVEAL_Y = "EXTRA_CIRCULAR_REVEAL_Y";
+    private int revealX;
+    private int revealY;
 
     // Shared Preferences
     private SharedPreferences dataLevel;
@@ -72,6 +85,29 @@ public class ChooseLevelActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
         );
+
+        mainLayout = findViewById(R.id.mainLayout);
+        final Intent intent = getIntent();
+        if (savedInstanceState == null && intent.hasExtra(EXTRA_CIRCULAR_REVEAL_X) && intent.hasExtra(EXTRA_CIRCULAR_REVEAL_Y)) {
+            mainLayout.setVisibility(View.INVISIBLE);
+            revealX = intent.getIntExtra(EXTRA_CIRCULAR_REVEAL_X, 0);
+            revealY = intent.getIntExtra(EXTRA_CIRCULAR_REVEAL_Y, 0);
+
+
+            ViewTreeObserver viewTreeObserver = mainLayout.getViewTreeObserver();
+            if (viewTreeObserver.isAlive()) {
+                viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        revealActivity(revealX, revealY);
+                        mainLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    }
+                });
+            }
+        } else {
+            mainLayout.setVisibility(View.VISIBLE);
+        }
+
         soundPlayer = new SoundPlayer(this);
 
         // Background Music
@@ -146,6 +182,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
         hamburger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                YoYo.with(Techniques.Pulse)
+                        .duration(400)
+                        .playOn(hamburger);
                 launchMenu();
                 soundPlayer.playButtonClicked();
             }
@@ -155,21 +194,34 @@ public class ChooseLevelActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 soundPlayer.playButtonClicked();
+                YoYo.with(Techniques.Pulse)
+                        .duration(400)
+                        .playOn(nextPage);
+
                 if (currentWeek == 1) {
+                    currentWeek = 2;
                     prevPage.setVisibility(View.VISIBLE);
                     weekNum.setText(R.string.w2);
                     week1.setVisibility(View.INVISIBLE);
                     week2.setVisibility(View.VISIBLE);
                     week3.setVisibility(View.INVISIBLE);
-                    currentWeek = 2;
+
+                    YoYo.with(Techniques.BounceInRight)
+                            .duration(500)
+                            .playOn(week2);
+
                 }
                 else if (currentWeek == 2) {
+                    currentWeek = 3;
                     nextPage.setVisibility(View.INVISIBLE);
                     weekNum.setText(R.string.w3);
                     week1.setVisibility(View.INVISIBLE);
                     week2.setVisibility(View.INVISIBLE);
                     week3.setVisibility(View.VISIBLE);
-                    currentWeek = 3;
+
+                    YoYo.with(Techniques.BounceInRight)
+                            .duration(500)
+                            .playOn(week3);
                 }
 
             }
@@ -179,22 +231,34 @@ public class ChooseLevelActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 soundPlayer.playButtonClicked();
+                YoYo.with(Techniques.Pulse)
+                        .duration(400)
+                        .playOn(prevPage);
+
                 if (currentWeek == 3) {
+                    currentWeek = 2;
                     nextPage.setVisibility(View.VISIBLE);
                     weekNum.setText(R.string.w2);
                     week1.setVisibility(View.INVISIBLE);
                     week2.setVisibility(View.VISIBLE);
                     week3.setVisibility(View.INVISIBLE);
-                    currentWeek = 2;
+
+                    YoYo.with(Techniques.BounceInLeft)
+                            .duration(500)
+                            .playOn(week2);
                 }
                 else if (currentWeek == 2) {
+                    currentWeek = 1;
                     prevPage.setVisibility(View.INVISIBLE);
                     nextPage.setVisibility(View.VISIBLE);
                     weekNum.setText(R.string.w1);
                     week1.setVisibility(View.VISIBLE);
                     week2.setVisibility(View.INVISIBLE);
                     week3.setVisibility(View.INVISIBLE);
-                    currentWeek = 1;
+
+                    YoYo.with(Techniques.BounceInLeft)
+                            .duration(500)
+                            .playOn(week1);
                 }
             }
         });
@@ -204,6 +268,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             public void onClick(View v) {
                 selectDay(1);
                 soundPlayer.playButtonClicked();
+                YoYo.with(Techniques.Pulse)
+                        .duration(400)
+                        .playOn(hamburger);
             }
         });
         day2Btn.setOnClickListener(new View.OnClickListener() {
@@ -211,6 +278,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             public void onClick(View v) {
                 selectDay(2);
                 soundPlayer.playButtonClicked();
+                YoYo.with(Techniques.Pulse)
+                        .duration(400)
+                        .playOn(hamburger);
             }
         });
         day3Btn.setOnClickListener(new View.OnClickListener() {
@@ -218,6 +288,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             public void onClick(View v) {
                 selectDay(3);
                 soundPlayer.playButtonClicked();
+                YoYo.with(Techniques.Pulse)
+                        .duration(400)
+                        .playOn(hamburger);
             }
         });
         day4Btn.setOnClickListener(new View.OnClickListener() {
@@ -225,6 +298,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             public void onClick(View v) {
                 selectDay(4);
                 soundPlayer.playButtonClicked();
+                YoYo.with(Techniques.Pulse)
+                        .duration(400)
+                        .playOn(hamburger);
             }
         });
         day5Btn.setOnClickListener(new View.OnClickListener() {
@@ -232,6 +308,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             public void onClick(View v) {
                 selectDay(5);
                 soundPlayer.playButtonClicked();
+                YoYo.with(Techniques.Pulse)
+                        .duration(400)
+                        .playOn(hamburger);
             }
         });
         day6Btn.setOnClickListener(new View.OnClickListener() {
@@ -239,6 +318,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             public void onClick(View v) {
                 selectDay(6);
                 soundPlayer.playButtonClicked();
+                YoYo.with(Techniques.Pulse)
+                        .duration(400)
+                        .playOn(hamburger);
             }
         });
         day7Btn.setOnClickListener(new View.OnClickListener() {
@@ -246,6 +328,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             public void onClick(View v) {
                 selectDay(7);
                 soundPlayer.playButtonClicked();
+                YoYo.with(Techniques.Pulse)
+                        .duration(400)
+                        .playOn(hamburger);
             }
         });
         day8Btn.setOnClickListener(new View.OnClickListener() {
@@ -253,6 +338,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             public void onClick(View v) {
                 selectDay(8);
                 soundPlayer.playButtonClicked();
+                YoYo.with(Techniques.Pulse)
+                        .duration(400)
+                        .playOn(hamburger);
             }
         });
         day9Btn.setOnClickListener(new View.OnClickListener() {
@@ -260,6 +348,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             public void onClick(View v) {
                 selectDay(9);
                 soundPlayer.playButtonClicked();
+                YoYo.with(Techniques.Pulse)
+                        .duration(400)
+                        .playOn(hamburger);
             }
         });
         day10Btn.setOnClickListener(new View.OnClickListener() {
@@ -267,6 +358,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             public void onClick(View v) {
                 selectDay(10);
                 soundPlayer.playButtonClicked();
+                YoYo.with(Techniques.Pulse)
+                        .duration(400)
+                        .playOn(hamburger);
             }
         });
         day11Btn.setOnClickListener(new View.OnClickListener() {
@@ -274,6 +368,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             public void onClick(View v) {
                 selectDay(11);
                 soundPlayer.playButtonClicked();
+                YoYo.with(Techniques.Pulse)
+                        .duration(400)
+                        .playOn(hamburger);
             }
         });
         day12Btn.setOnClickListener(new View.OnClickListener() {
@@ -281,6 +378,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             public void onClick(View v) {
                 selectDay(12);
                 soundPlayer.playButtonClicked();
+                YoYo.with(Techniques.Pulse)
+                        .duration(400)
+                        .playOn(hamburger);
             }
         });
         day13Btn.setOnClickListener(new View.OnClickListener() {
@@ -288,6 +388,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             public void onClick(View v) {
                 selectDay(13);
                 soundPlayer.playButtonClicked();
+                YoYo.with(Techniques.Pulse)
+                        .duration(400)
+                        .playOn(hamburger);
             }
         });
         day14Btn.setOnClickListener(new View.OnClickListener() {
@@ -295,6 +398,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             public void onClick(View v) {
                 selectDay(14);
                 soundPlayer.playButtonClicked();
+                YoYo.with(Techniques.Pulse)
+                        .duration(400)
+                        .playOn(hamburger);
             }
         });
         day15Btn.setOnClickListener(new View.OnClickListener() {
@@ -302,6 +408,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             public void onClick(View v) {
                 selectDay(15);
                 soundPlayer.playButtonClicked();
+                YoYo.with(Techniques.Pulse)
+                        .duration(400)
+                        .playOn(hamburger);
             }
         });
         day16Btn.setOnClickListener(new View.OnClickListener() {
@@ -309,6 +418,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             public void onClick(View v) {
                 selectDay(16);
                 soundPlayer.playButtonClicked();
+                YoYo.with(Techniques.Pulse)
+                        .duration(400)
+                        .playOn(hamburger);
             }
         });
         day17Btn.setOnClickListener(new View.OnClickListener() {
@@ -316,6 +428,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             public void onClick(View v) {
                 selectDay(17);
                 soundPlayer.playButtonClicked();
+                YoYo.with(Techniques.Pulse)
+                        .duration(400)
+                        .playOn(hamburger);
             }
         });
         day18Btn.setOnClickListener(new View.OnClickListener() {
@@ -323,6 +438,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             public void onClick(View v) {
                 selectDay(18);
                 soundPlayer.playButtonClicked();
+                YoYo.with(Techniques.Pulse)
+                        .duration(400)
+                        .playOn(hamburger);
             }
         });
 
@@ -403,6 +521,17 @@ public class ChooseLevelActivity extends AppCompatActivity {
         day18EarnedStrawberries = dataLevel.getInt("LEVEL_18_STRAWBERRIES", 0);
     }
 
+    protected void revealActivity(int x, int y) {
+        float finalRadius = (float) (Math.max(mainLayout.getWidth(), mainLayout.getHeight()) * 1.1);
+
+        Animator circularReveal = ViewAnimationUtils.createCircularReveal(mainLayout, x, y, 0, finalRadius);
+        circularReveal.setDuration(1000);
+        circularReveal.setInterpolator(new AccelerateInterpolator());
+
+        mainLayout.setVisibility(View.VISIBLE);
+        circularReveal.start();
+    }
+
     public void selectDay(int day) {
         if (day == 1) {
             hamburger.setBackgroundResource(R.drawable.close);
@@ -457,6 +586,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             confirmDayMenu.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialog) {
+                    YoYo.with(Techniques.Pulse)
+                            .duration(400)
+                            .playOn(hamburger);
                     hamburger.setBackgroundResource(R.drawable.menu);
                 }
             });
@@ -527,6 +659,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             confirmDayMenu.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialog) {
+                    YoYo.with(Techniques.Pulse)
+                            .duration(400)
+                            .playOn(hamburger);
                     hamburger.setBackgroundResource(R.drawable.menu);
                 }
             });
@@ -606,6 +741,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             confirmDayMenu.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialog) {
+                    YoYo.with(Techniques.Pulse)
+                            .duration(400)
+                            .playOn(hamburger);
                     hamburger.setBackgroundResource(R.drawable.menu);
                 }
             });
@@ -685,6 +823,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             confirmDayMenu.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialog) {
+                    YoYo.with(Techniques.Pulse)
+                            .duration(400)
+                            .playOn(hamburger);
                     hamburger.setBackgroundResource(R.drawable.menu);
                 }
             });
@@ -764,6 +905,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             confirmDayMenu.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialog) {
+                    YoYo.with(Techniques.Pulse)
+                            .duration(400)
+                            .playOn(hamburger);
                     hamburger.setBackgroundResource(R.drawable.menu);
                 }
             });
@@ -843,6 +987,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             confirmDayMenu.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialog) {
+                    YoYo.with(Techniques.Pulse)
+                            .duration(400)
+                            .playOn(hamburger);
                     hamburger.setBackgroundResource(R.drawable.menu);
                 }
             });
@@ -922,6 +1069,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             confirmDayMenu.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialog) {
+                    YoYo.with(Techniques.Pulse)
+                            .duration(400)
+                            .playOn(hamburger);
                     hamburger.setBackgroundResource(R.drawable.menu);
                 }
             });
@@ -1001,6 +1151,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             confirmDayMenu.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialog) {
+                    YoYo.with(Techniques.Pulse)
+                            .duration(400)
+                            .playOn(hamburger);
                     hamburger.setBackgroundResource(R.drawable.menu);
                 }
             });
@@ -1080,6 +1233,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             confirmDayMenu.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialog) {
+                    YoYo.with(Techniques.Pulse)
+                            .duration(400)
+                            .playOn(hamburger);
                     hamburger.setBackgroundResource(R.drawable.menu);
                 }
             });
@@ -1159,6 +1315,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             confirmDayMenu.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialog) {
+                    YoYo.with(Techniques.Pulse)
+                            .duration(400)
+                            .playOn(hamburger);
                     hamburger.setBackgroundResource(R.drawable.menu);
                 }
             });
@@ -1238,6 +1397,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             confirmDayMenu.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialog) {
+                    YoYo.with(Techniques.Pulse)
+                            .duration(400)
+                            .playOn(hamburger);
                     hamburger.setBackgroundResource(R.drawable.menu);
                 }
             });
@@ -1317,6 +1479,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             confirmDayMenu.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialog) {
+                    YoYo.with(Techniques.Pulse)
+                            .duration(400)
+                            .playOn(hamburger);
                     hamburger.setBackgroundResource(R.drawable.menu);
                 }
             });
@@ -1396,6 +1561,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             confirmDayMenu.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialog) {
+                    YoYo.with(Techniques.Pulse)
+                            .duration(400)
+                            .playOn(hamburger);
                     hamburger.setBackgroundResource(R.drawable.menu);
                 }
             });
@@ -1475,6 +1643,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             confirmDayMenu.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialog) {
+                    YoYo.with(Techniques.Pulse)
+                            .duration(400)
+                            .playOn(hamburger);
                     hamburger.setBackgroundResource(R.drawable.menu);
                 }
             });
@@ -1554,6 +1725,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             confirmDayMenu.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialog) {
+                    YoYo.with(Techniques.Pulse)
+                            .duration(400)
+                            .playOn(hamburger);
                     hamburger.setBackgroundResource(R.drawable.menu);
                 }
             });
@@ -1633,6 +1807,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             confirmDayMenu.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialog) {
+                    YoYo.with(Techniques.Pulse)
+                            .duration(400)
+                            .playOn(hamburger);
                     hamburger.setBackgroundResource(R.drawable.menu);
                 }
             });
@@ -1712,6 +1889,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             confirmDayMenu.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialog) {
+                    YoYo.with(Techniques.Pulse)
+                            .duration(400)
+                            .playOn(hamburger);
                     hamburger.setBackgroundResource(R.drawable.menu);
                 }
             });
@@ -1791,6 +1971,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             confirmDayMenu.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialog) {
+                    YoYo.with(Techniques.Pulse)
+                            .duration(400)
+                            .playOn(hamburger);
                     hamburger.setBackgroundResource(R.drawable.menu);
                 }
             });
@@ -1838,6 +2021,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
         mainMenuDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
+                YoYo.with(Techniques.Pulse)
+                        .duration(400)
+                        .playOn(hamburger);
                 hamburger.setBackgroundResource(R.drawable.menu);
             }
         });

@@ -2,6 +2,7 @@ package com.everyday.breadwinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.Animator;
 import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -16,10 +17,17 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.ViewTreeObserver;
 import android.view.WindowManager;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 
 import java.util.Objects;
 
@@ -28,13 +36,20 @@ public class AlmanacActivity extends AppCompatActivity {
     HomeWatcher mHomeWatcher;
     boolean musicFlag, soundFlag = true;
     private SoundPlayer soundPlayer;
+    private View mainLayout;
 
     Dialog mainMenuDialog;
 
     private ImageView selectedBread;
     private TextView breadNum, breadName, availability;
     private Button hamburger, prevBread, nextBread;
+    private LinearLayout headerCon;
     int currentBread = 1;
+
+    public static final String EXTRA_CIRCULAR_REVEAL_X = "EXTRA_CIRCULAR_REVEAL_X";
+    public static final String EXTRA_CIRCULAR_REVEAL_Y = "EXTRA_CIRCULAR_REVEAL_Y";
+    private int revealX;
+    private int revealY;
 
     private SharedPreferences dataLevel;
     int day1Status, day2Status, day3Status, day4Status, day5Status, day6Status;
@@ -56,6 +71,28 @@ public class AlmanacActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
         );
+        mainLayout = findViewById(R.id.mainLayout);
+        final Intent intent = getIntent();
+        if (savedInstanceState == null && intent.hasExtra(EXTRA_CIRCULAR_REVEAL_X) && intent.hasExtra(EXTRA_CIRCULAR_REVEAL_Y)) {
+            mainLayout.setVisibility(View.INVISIBLE);
+            revealX = intent.getIntExtra(EXTRA_CIRCULAR_REVEAL_X, 0);
+            revealY = intent.getIntExtra(EXTRA_CIRCULAR_REVEAL_Y, 0);
+
+
+            ViewTreeObserver viewTreeObserver = mainLayout.getViewTreeObserver();
+            if (viewTreeObserver.isAlive()) {
+                viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        revealActivity(revealX, revealY);
+                        mainLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    }
+                });
+            }
+        } else {
+            mainLayout.setVisibility(View.VISIBLE);
+        }
+
         soundPlayer = new SoundPlayer(this);
 
         // Background Music
@@ -94,6 +131,9 @@ public class AlmanacActivity extends AppCompatActivity {
             public void onClick(View v) {
                 launchMenu();
                 soundPlayer.playButtonClicked();
+                YoYo.with(Techniques.Pulse)
+                        .duration(400)
+                        .playOn(hamburger);
             }
         });
 
@@ -114,8 +154,15 @@ public class AlmanacActivity extends AppCompatActivity {
         day10Status = dataLevel.getInt("LEVEL_10_STATUS", 0);
         day11Status = dataLevel.getInt("LEVEL_11_STATUS", 0);
         day12Status = dataLevel.getInt("LEVEL_12_STATUS", 0);
+        day13Status = dataLevel.getInt("LEVEL_13_STATUS", 0);
+        day14Status = dataLevel.getInt("LEVEL_14_STATUS", 0);
+        day15Status = dataLevel.getInt("LEVEL_15_STATUS", 0);
+        day16Status = dataLevel.getInt("LEVEL_16_STATUS", 0);
+        day17Status = dataLevel.getInt("LEVEL_17_STATUS", 0);
+        day18Status = dataLevel.getInt("LEVEL_18_STATUS", 0);
 
         // Select Current Bread
+        headerCon = findViewById(R.id.headerCon);
         breadNum = findViewById(R.id.breadNum);
         breadName = findViewById(R.id.breadName);
         availability = findViewById(R.id.availability);
@@ -126,8 +173,20 @@ public class AlmanacActivity extends AppCompatActivity {
         nextBread.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                soundPlayer.playButtonClicked();
+                YoYo.with(Techniques.Pulse)
+                        .duration(400)
+                        .playOn(nextBread);
+
+                YoYo.with(Techniques.BounceInDown)
+                        .duration(400)
+                        .playOn(headerCon);
+
+                YoYo.with(Techniques.BounceInDown)
+                        .duration(400)
+                        .playOn(selectedBread);
+
                 if (currentBread == 1) {
-                    soundPlayer.playButtonClicked();
                     currentBread += 1;
                     breadNum.setText(R.string.b2);
                     breadName.setText(R.string.nb2);
@@ -137,7 +196,6 @@ public class AlmanacActivity extends AppCompatActivity {
                     prevBread.setVisibility(View.VISIBLE);
                 }
                 else if (currentBread == 2) {
-                    soundPlayer.playButtonClicked();
                     currentBread += 1;
                     breadNum.setText(R.string.b3);
                     breadName.setText(R.string.nb3);
@@ -145,7 +203,6 @@ public class AlmanacActivity extends AppCompatActivity {
                     selectedBread.setImageResource(R.drawable.bread_3);
                 }
                 else if (currentBread == 3) {
-                    soundPlayer.playButtonClicked();
                     currentBread += 1;
                     breadNum.setText(R.string.b4);
                     if (day1Status == 1) {
@@ -159,7 +216,6 @@ public class AlmanacActivity extends AppCompatActivity {
                     selectedBread.setImageResource(R.drawable.bread_4);
                 }
                 else if (currentBread == 4) {
-                    soundPlayer.playButtonClicked();
                     currentBread += 1;
                     breadNum.setText(R.string.b5);
                     if (day2Status == 1) {
@@ -172,7 +228,6 @@ public class AlmanacActivity extends AppCompatActivity {
                     selectedBread.setImageResource(R.drawable.bread_5);
                 }
                 else if (currentBread == 5) {
-                    soundPlayer.playButtonClicked();
                     currentBread += 1;
                     breadNum.setText(R.string.b6);
                     if (day3Status == 1) {
@@ -185,7 +240,6 @@ public class AlmanacActivity extends AppCompatActivity {
                     selectedBread.setImageResource(R.drawable.bread_6);
                 }
                 else if (currentBread == 6) {
-                    soundPlayer.playButtonClicked();
                     currentBread += 1;
                     breadNum.setText(R.string.b7);
                     if (day4Status == 1) {
@@ -198,7 +252,6 @@ public class AlmanacActivity extends AppCompatActivity {
                     selectedBread.setImageResource(R.drawable.bread_7);
                 }
                 else if (currentBread == 7) {
-                    soundPlayer.playButtonClicked();
                     currentBread += 1;
                     breadNum.setText(R.string.b8);
                     if (day5Status == 1) {
@@ -211,7 +264,6 @@ public class AlmanacActivity extends AppCompatActivity {
                     selectedBread.setImageResource(R.drawable.bread_8);
                 }
                 else if (currentBread == 8) {
-                    soundPlayer.playButtonClicked();
                     currentBread += 1;
                     breadNum.setText(R.string.b9);
                     if (day6Status == 1) {
@@ -224,7 +276,6 @@ public class AlmanacActivity extends AppCompatActivity {
                     selectedBread.setImageResource(R.drawable.bread_9);
                 }
                 else if (currentBread == 9) {
-                    soundPlayer.playButtonClicked();
                     currentBread += 1;
                     breadNum.setText(R.string.b10);
                     if (day6Status == 1) {
@@ -237,7 +288,6 @@ public class AlmanacActivity extends AppCompatActivity {
                     selectedBread.setImageResource(R.drawable.bread_10);
                 }
                 else if (currentBread == 10) {
-                    soundPlayer.playButtonClicked();
                     currentBread += 1;
                     breadNum.setText(R.string.b11);
                     if (day7Status == 1) {
@@ -250,7 +300,6 @@ public class AlmanacActivity extends AppCompatActivity {
                     selectedBread.setImageResource(R.drawable.bread_11);
                 }
                 else if (currentBread == 11) {
-                    soundPlayer.playButtonClicked();
                     currentBread += 1;
                     breadNum.setText(R.string.b12);
                     if (day8Status == 1) {
@@ -263,7 +312,6 @@ public class AlmanacActivity extends AppCompatActivity {
                     selectedBread.setImageResource(R.drawable.bread_12);
                 }
                 else if (currentBread == 12) {
-                    soundPlayer.playButtonClicked();
                     currentBread += 1;
                     breadNum.setText(R.string.b13);
                     if (day9Status == 1) {
@@ -276,7 +324,6 @@ public class AlmanacActivity extends AppCompatActivity {
                     selectedBread.setImageResource(R.drawable.bread_13);
                 }
                 else if (currentBread == 13) {
-                    soundPlayer.playButtonClicked();
                     currentBread += 1;
                     breadNum.setText(R.string.b14);
                     if (day10Status == 1) {
@@ -289,7 +336,6 @@ public class AlmanacActivity extends AppCompatActivity {
                     selectedBread.setImageResource(R.drawable.bread_14);
                 }
                 else if (currentBread == 14) {
-                    soundPlayer.playButtonClicked();
                     currentBread += 1;
                     breadNum.setText(R.string.b15);
                     if (day11Status == 1) {
@@ -302,7 +348,6 @@ public class AlmanacActivity extends AppCompatActivity {
                     selectedBread.setImageResource(R.drawable.bread_15);
                 }
                 else if (currentBread == 15) {
-                    soundPlayer.playButtonClicked();
                     currentBread += 1;
                     breadNum.setText(R.string.b16);
                     if (day12Status == 1) {
@@ -315,7 +360,6 @@ public class AlmanacActivity extends AppCompatActivity {
                     selectedBread.setImageResource(R.drawable.bread_16);
                 }
                 else if (currentBread == 16) {
-                    soundPlayer.playButtonClicked();
                     currentBread += 1;
                     breadNum.setText(R.string.b17);
                     if (day12Status == 1) {
@@ -328,42 +372,63 @@ public class AlmanacActivity extends AppCompatActivity {
                     selectedBread.setImageResource(R.drawable.bread_17);
                 }
                 else if (currentBread == 17) {
-                    soundPlayer.playButtonClicked();
                     currentBread += 1;
                     breadNum.setText(R.string.b18);
-                    breadName.setText(R.string.nb18);
+                    if (day13Status == 1) {
+                        breadName.setText(R.string.nb18);
+                    }
+                    else {
+                        breadName.setText(R.string.nbunknown);
+                    }
                     availability.setText(R.string.ud18);
                     selectedBread.setImageResource(R.drawable.bread_18);
                 }
                 else if (currentBread == 18) {
-                    soundPlayer.playButtonClicked();
                     currentBread += 1;
                     breadNum.setText(R.string.b19);
-                    breadName.setText(R.string.nb19);
+                    if (day14Status == 1) {
+                        breadName.setText(R.string.nb19);
+                    }
+                    else {
+                        breadName.setText(R.string.nbunknown);
+                    }
+
                     availability.setText(R.string.ud19);
                     selectedBread.setImageResource(R.drawable.bread_19);
                 }
                 else if (currentBread == 19) {
-                    soundPlayer.playButtonClicked();
                     currentBread += 1;
                     breadNum.setText(R.string.b20);
-                    breadName.setText(R.string.nb20);
+                    if (day15Status == 1) {
+                        breadName.setText(R.string.nb20);
+                    }
+                    else {
+                        breadName.setText(R.string.nbunknown);
+                    }
                     availability.setText(R.string.ud20);
                     selectedBread.setImageResource(R.drawable.bread_20);
                 }
                 else if (currentBread == 20) {
-                    soundPlayer.playButtonClicked();
                     currentBread += 1;
                     breadNum.setText(R.string.b21);
-                    breadName.setText(R.string.nb21);
+                    if (day16Status == 1) {
+                        breadName.setText(R.string.nb21);
+                    }
+                    else {
+                        breadName.setText(R.string.nbunknown);
+                    }
                     availability.setText(R.string.ud21);
                     selectedBread.setImageResource(R.drawable.bread_21);
                 }
                 else if (currentBread == 21) {
-                    soundPlayer.playButtonClicked();
                     currentBread += 1;
                     breadNum.setText(R.string.b22);
-                    breadName.setText(R.string.nb22);
+                    if (day17Status == 1) {
+                        breadName.setText(R.string.nb22);
+                    }
+                    else {
+                        breadName.setText(R.string.nbunknown);
+                    }
                     availability.setText(R.string.ud22);
                     selectedBread.setImageResource(R.drawable.bread_22);
                     // Hide Next Button
@@ -377,42 +442,70 @@ public class AlmanacActivity extends AppCompatActivity {
         prevBread.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                soundPlayer.playButtonClicked();
+                YoYo.with(Techniques.Pulse)
+                        .duration(400)
+                        .playOn(prevBread);
+
+                YoYo.with(Techniques.BounceInDown)
+                        .duration(400)
+                        .playOn(headerCon);
+
+                YoYo.with(Techniques.BounceInDown)
+                        .duration(400)
+                        .playOn(selectedBread);
+
                 if (currentBread == 22) {
-                    soundPlayer.playButtonClicked();
                     currentBread -= 1;
                     breadNum.setText(R.string.b21);
-                    breadName.setText(R.string.nb21);
+                    if (day16Status == 1) {
+                        breadName.setText(R.string.nb21);
+                    }
+                    else {
+                        breadName.setText(R.string.nbunknown);
+                    }
                     availability.setText(R.string.ud21);
                     selectedBread.setImageResource(R.drawable.bread_21);
                     // Show Next Button
                     nextBread.setVisibility(View.VISIBLE);
                 }
                 else if (currentBread == 21) {
-                    soundPlayer.playButtonClicked();
                     currentBread -= 1;
                     breadNum.setText(R.string.b20);
-                    breadName.setText(R.string.nb20);
+                    if (day15Status == 1) {
+                        breadName.setText(R.string.nb20);
+                    }
+                    else {
+                        breadName.setText(R.string.nbunknown);
+                    }
                     availability.setText(R.string.ud20);
                     selectedBread.setImageResource(R.drawable.bread_20);
                 }
                 else if (currentBread == 20) {
-                    soundPlayer.playButtonClicked();
                     currentBread -= 1;
                     breadNum.setText(R.string.b19);
-                    breadName.setText(R.string.nb19);
+                    if (day14Status == 1) {
+                        breadName.setText(R.string.nb19);
+                    }
+                    else {
+                        breadName.setText(R.string.nbunknown);
+                    }
                     availability.setText(R.string.ud19);
                     selectedBread.setImageResource(R.drawable.bread_19);
                 }
                 else if (currentBread == 19) {
-                    soundPlayer.playButtonClicked();
                     currentBread -= 1;
                     breadNum.setText(R.string.b18);
-                    breadName.setText(R.string.nb18);
+                    if (day13Status == 1) {
+                        breadName.setText(R.string.nb18);
+                    }
+                    else {
+                        breadName.setText(R.string.nbunknown);
+                    }
                     availability.setText(R.string.ud18);
                     selectedBread.setImageResource(R.drawable.bread_18);
                 }
                 else if (currentBread == 18) {
-                    soundPlayer.playButtonClicked();
                     currentBread -= 1;
                     breadNum.setText(R.string.b17);
                     if (day12Status == 1) {
@@ -425,7 +518,6 @@ public class AlmanacActivity extends AppCompatActivity {
                     selectedBread.setImageResource(R.drawable.bread_17);
                 }
                 else if (currentBread == 17) {
-                    soundPlayer.playButtonClicked();
                     currentBread -= 1;
                     breadNum.setText(R.string.b16);
                     if (day12Status == 1) {
@@ -438,7 +530,6 @@ public class AlmanacActivity extends AppCompatActivity {
                     selectedBread.setImageResource(R.drawable.bread_16);
                 }
                 else if (currentBread == 16) {
-                    soundPlayer.playButtonClicked();
                     currentBread -= 1;
                     breadNum.setText(R.string.b15);
                     if (day12Status == 1) {
@@ -451,7 +542,6 @@ public class AlmanacActivity extends AppCompatActivity {
                     selectedBread.setImageResource(R.drawable.bread_15);
                 }
                 else if (currentBread == 15) {
-                    soundPlayer.playButtonClicked();
                     currentBread -= 1;
                     breadNum.setText(R.string.b14);
                     if (day11Status == 1) {
@@ -464,7 +554,6 @@ public class AlmanacActivity extends AppCompatActivity {
                     selectedBread.setImageResource(R.drawable.bread_14);
                 }
                 else if (currentBread == 14) {
-                    soundPlayer.playButtonClicked();
                     currentBread -= 1;
                     breadNum.setText(R.string.b13);
                     if (day10Status == 1) {
@@ -477,7 +566,6 @@ public class AlmanacActivity extends AppCompatActivity {
                     selectedBread.setImageResource(R.drawable.bread_13);
                 }
                 else if (currentBread == 13) {
-                    soundPlayer.playButtonClicked();
                     currentBread -= 1;
                     breadNum.setText(R.string.b12);
                     if (day9Status == 1) {
@@ -490,7 +578,6 @@ public class AlmanacActivity extends AppCompatActivity {
                     selectedBread.setImageResource(R.drawable.bread_12);
                 }
                 else if (currentBread == 12) {
-                    soundPlayer.playButtonClicked();
                     currentBread -= 1;
                     breadNum.setText(R.string.b11);
                     if (day8Status == 1) {
@@ -503,7 +590,6 @@ public class AlmanacActivity extends AppCompatActivity {
                     selectedBread.setImageResource(R.drawable.bread_11);
                 }
                 else if (currentBread == 11) {
-                    soundPlayer.playButtonClicked();
                     currentBread -= 1;
                     breadNum.setText(R.string.b10);
                     if (day7Status == 1) {
@@ -516,7 +602,6 @@ public class AlmanacActivity extends AppCompatActivity {
                     selectedBread.setImageResource(R.drawable.bread_10);
                 }
                 else if (currentBread == 10) {
-                    soundPlayer.playButtonClicked();
                     currentBread -= 1;
                     breadNum.setText(R.string.b9);
                     if (day6Status == 1) {
@@ -529,7 +614,6 @@ public class AlmanacActivity extends AppCompatActivity {
                     selectedBread.setImageResource(R.drawable.bread_9);
                 }
                 else if (currentBread == 9) {
-                    soundPlayer.playButtonClicked();
                     currentBread -= 1;
                     breadNum.setText(R.string.b8);
                     if (day5Status == 1) {
@@ -542,7 +626,6 @@ public class AlmanacActivity extends AppCompatActivity {
                     selectedBread.setImageResource(R.drawable.bread_8);
                 }
                 else if (currentBread == 8) {
-                    soundPlayer.playButtonClicked();
                     currentBread -= 1;
                     breadNum.setText(R.string.b7);
                     if (day4Status == 1) {
@@ -555,7 +638,6 @@ public class AlmanacActivity extends AppCompatActivity {
                     selectedBread.setImageResource(R.drawable.bread_7);
                 }
                 else if (currentBread == 7) {
-                    soundPlayer.playButtonClicked();
                     currentBread -= 1;
                     breadNum.setText(R.string.b6);
                     if (day3Status == 1) {
@@ -568,7 +650,6 @@ public class AlmanacActivity extends AppCompatActivity {
                     selectedBread.setImageResource(R.drawable.bread_6);
                 }
                 else if (currentBread == 6) {
-                    soundPlayer.playButtonClicked();
                     currentBread -= 1;
                     breadNum.setText(R.string.b5);
                     if (day2Status == 1) {
@@ -581,7 +662,6 @@ public class AlmanacActivity extends AppCompatActivity {
                     selectedBread.setImageResource(R.drawable.bread_5);
                 }
                 else if (currentBread == 5) {
-                    soundPlayer.playButtonClicked();
                     currentBread -= 1;
                     breadNum.setText(R.string.b4);
                     if (day1Status == 1) {
@@ -594,7 +674,6 @@ public class AlmanacActivity extends AppCompatActivity {
                     selectedBread.setImageResource(R.drawable.bread_4);
                 }
                 else if (currentBread == 4) {
-                    soundPlayer.playButtonClicked();
                     currentBread -= 1;
                     breadNum.setText(R.string.b3);
                     breadName.setText(R.string.nb3);
@@ -602,7 +681,6 @@ public class AlmanacActivity extends AppCompatActivity {
                     selectedBread.setImageResource(R.drawable.bread_3);
                 }
                 else if (currentBread == 3) {
-                    soundPlayer.playButtonClicked();
                     currentBread -= 1;
                     breadNum.setText(R.string.b2);
                     breadName.setText(R.string.nb2);
@@ -610,7 +688,6 @@ public class AlmanacActivity extends AppCompatActivity {
                     selectedBread.setImageResource(R.drawable.bread_2);
                 }
                 else if (currentBread == 2) {
-                    soundPlayer.playButtonClicked();
                     currentBread -= 1;
                     breadNum.setText(R.string.b1);
                     breadName.setText(R.string.nb1);
@@ -741,6 +818,8 @@ public class AlmanacActivity extends AppCompatActivity {
 
     }
 
+    // Menu Buttons
+    Button mainMenu;
     Button musicBtn;
     Button soundBtn;
     Button creditsBtn;
@@ -748,21 +827,24 @@ public class AlmanacActivity extends AppCompatActivity {
     public void launchMenu() {
         hamburger.setBackgroundResource(R.drawable.close);
 
-        mainMenuDialog.setContentView(R.layout.popup_settings);
+        mainMenuDialog.setContentView(R.layout.popup_mainmenu);
         Objects.requireNonNull(mainMenuDialog.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
         mainMenuDialog.show();
         mainMenuDialog.getWindow().getDecorView().setSystemUiVisibility(getWindow().getDecorView().getSystemUiVisibility());
-        mainMenuDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         mainMenuDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         mainMenuDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
 
         mainMenuDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
+                YoYo.with(Techniques.Pulse)
+                        .duration(400)
+                        .playOn(hamburger);
                 hamburger.setBackgroundResource(R.drawable.menu);
             }
         });
 
+        mainMenu = mainMenuDialog.findViewById(R.id.btnMainMenu);
         musicBtn = mainMenuDialog.findViewById(R.id.btnMusic);
         soundBtn = mainMenuDialog.findViewById(R.id.btnSound);
         creditsBtn = mainMenuDialog.findViewById(R.id.btnCredits);
@@ -777,6 +859,14 @@ public class AlmanacActivity extends AppCompatActivity {
             currentMusicState = getString(R.string.music_off);
             musicBtn.setText(currentMusicState);
         }
+
+        mainMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent levelIntent = new Intent(AlmanacActivity.this, MainActivity.class);
+                startActivity(levelIntent);
+            }
+        });
 
         musicBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -810,7 +900,6 @@ public class AlmanacActivity extends AppCompatActivity {
                 SharedPreferences.Editor editorMusic = saveMusic.edit();
                 editorMusic.putBoolean("music", musicFlag);
                 editorMusic.apply();
-                soundPlayer.playButtonClicked();
             }
         });
 
@@ -830,7 +919,6 @@ public class AlmanacActivity extends AppCompatActivity {
                     soundText = getString(R.string.sound_on);
                     soundBtn.setText(soundText);
                     soundFlag = true;
-                    soundPlayer.playButtonClicked();
                     // TODO: Add Turn on Sound on SharedPreferences
                 }
             }
@@ -840,10 +928,21 @@ public class AlmanacActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO: Add Function Here
-                soundPlayer.playButtonClicked();
             }
         });
 
+
+    }
+
+    protected void revealActivity(int x, int y) {
+        float finalRadius = (float) (Math.max(mainLayout.getWidth(), mainLayout.getHeight()) * 1.1);
+
+        Animator circularReveal = ViewAnimationUtils.createCircularReveal(mainLayout, x, y, 0, finalRadius);
+        circularReveal.setDuration(1000);
+        circularReveal.setInterpolator(new AccelerateInterpolator());
+
+        mainLayout.setVisibility(View.VISIBLE);
+        circularReveal.start();
     }
 
     // For Music Service
