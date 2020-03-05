@@ -68,7 +68,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
     int day16Status, day16HighScore, day16EarnedStrawberries;
     int day17Status, day17HighScore, day17EarnedStrawberries;
     int day18Status, day18HighScore, day18EarnedStrawberries;
-    int currentWeek = 1;
+
+    private SharedPreferences dataWeek;
+    private int currentWeek = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -190,6 +192,9 @@ public class ChooseLevelActivity extends AppCompatActivity {
             }
         });
 
+//        dataWeek = getSharedPreferences("WEEK_DATA", Context.MODE_PRIVATE);
+//        currentWeek = dataWeek.getInt("CURRENT_WEEK", 1);
+
         nextPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -199,7 +204,7 @@ public class ChooseLevelActivity extends AppCompatActivity {
                         .playOn(nextPage);
 
                 if (currentWeek == 1) {
-                    currentWeek = 2;
+                    currentWeek += 1;
                     prevPage.setVisibility(View.VISIBLE);
                     weekNum.setText(R.string.w2);
                     week1.setVisibility(View.INVISIBLE);
@@ -212,7 +217,7 @@ public class ChooseLevelActivity extends AppCompatActivity {
 
                 }
                 else if (currentWeek == 2) {
-                    currentWeek = 3;
+                    currentWeek += 1;
                     nextPage.setVisibility(View.INVISIBLE);
                     weekNum.setText(R.string.w3);
                     week1.setVisibility(View.INVISIBLE);
@@ -223,7 +228,6 @@ public class ChooseLevelActivity extends AppCompatActivity {
                             .duration(500)
                             .playOn(week3);
                 }
-
             }
         });
 
@@ -236,7 +240,7 @@ public class ChooseLevelActivity extends AppCompatActivity {
                         .playOn(prevPage);
 
                 if (currentWeek == 3) {
-                    currentWeek = 2;
+                    currentWeek -= 1;
                     nextPage.setVisibility(View.VISIBLE);
                     weekNum.setText(R.string.w2);
                     week1.setVisibility(View.INVISIBLE);
@@ -248,7 +252,7 @@ public class ChooseLevelActivity extends AppCompatActivity {
                             .playOn(week2);
                 }
                 else if (currentWeek == 2) {
-                    currentWeek = 1;
+                    currentWeek -= 1;
                     prevPage.setVisibility(View.INVISIBLE);
                     nextPage.setVisibility(View.VISIBLE);
                     weekNum.setText(R.string.w1);

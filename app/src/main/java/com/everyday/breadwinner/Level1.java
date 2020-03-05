@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
@@ -24,6 +25,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -35,7 +39,7 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
     private int screenHeight, screenWidth;
 
     // Dialogs
-    Dialog successDialog, failDialog, mainMenuDialog;
+    Dialog instructionDialog, successDialog, failDialog, mainMenuDialog;
 
     // Images
     // TODO: Step 1: Add New Bread ImageView
@@ -134,6 +138,7 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
         bread3 = findViewById(R.id.bread_3);
 
         // Dialog Initialization
+        instructionDialog = new Dialog(this);
         mainMenuDialog = new Dialog(this);
         successDialog = new Dialog(this);
         failDialog = new Dialog(this);
@@ -184,6 +189,8 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
         bread1.setVisibility(View.VISIBLE);
         bread2.setVisibility(View.VISIBLE);
         bread3.setVisibility(View.VISIBLE);
+        hand.setVisibility(View.VISIBLE);
+        hand.setVisibility(View.INVISIBLE);
 
         // Set OnTouchListener
         hand.setOnTouchListener(this);
@@ -192,21 +199,60 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
         currentScore = 0;
         scoreLabel.setText(String.valueOf(currentScore));
 
-        // START TIMER
-        // TODO: Move this to New Bread Dialog
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
+        // LAUNCH INSTRUCTION DIALOG
+        launchInstructionDialog();
+    }
+
+    public void launchInstructionDialog() {
+        hamburger.setBackgroundResource(R.drawable.close);
+        instructionDialog.setContentView(R.layout.popup_instruction);
+        Objects.requireNonNull(instructionDialog.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+
+        // Initialization of Variables + Find IDs in  New Bread Dialog
+        Button accept;
+        accept = instructionDialog.findViewById(R.id.great);
+
+        // Show Dialog
+        instructionDialog.show();
+        // Prevent Dialog from Getting Dismissed
+        instructionDialog.setCancelable(false);
+        instructionDialog.setCanceledOnTouchOutside(false);
+
+        // Hide Shadows
+        instructionDialog.getWindow().getDecorView().setSystemUiVisibility(getWindow().getDecorView().getSystemUiVisibility());
+        instructionDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        instructionDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        instructionDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+
+        accept.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                handler.post(new Runnable() {
+            public void onClick(View v) {
+                soundPlayer.playButtonClicked();
+                instructionDialog.dismiss();
+            }
+        });
+
+        instructionDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                hand.setVisibility(View.VISIBLE);
+                YoYo.with(Techniques.BounceInUp)
+                        .duration(500)
+                        .playOn(hand);
+                timer = new Timer();
+                timer.schedule(new TimerTask() {
                     @Override
                     public void run() {
-                        dropBread();
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                dropBread();
+                            }
+                        });
                     }
-                });
+                }, 0, 20);
             }
-        }, 0, 20);
-
+        });
     }
 
     public void dropBread() {

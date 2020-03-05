@@ -183,6 +183,13 @@
     <string name="current_score">High Score: 0</string>
     <string name="strawberries_earned">Strawberries Earned</string>
     <string name="great">Great!</string>
+    <string name="instruction">Instructions!</string>
+    <string name="instruction_msg">Press &amp; Hold the hand icon and move it left or right to catch all the pastries. For every pastry that you\'ll catch, you\'ll gain points. Missed it, and you\'ll lose points.</string>
+    <string name="caution">Moldy Bread!</string>
+    <string name="caution_msg">We recently discovered that some pastries contain molds. These pastries appear greenish, AVOID them as much as possible.</string>
+    <string name="important">Important!</string>
+    <string name="important_msg">Strawberries are running out of stock. Be sure to CATCH them when they appear.</string>
+    <string name="got_it">Got It!</string>
 
     <!-- Target Score -->
     <string name="td1">Target Score: 2300</string>

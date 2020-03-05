@@ -25,6 +25,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -36,7 +39,7 @@ public class Level13 extends AppCompatActivity implements View.OnTouchListener {
     private int screenHeight, screenWidth;
 
     // Dialogs
-    Dialog successDialog, failDialog, mainMenuDialog, newBreadDialog;
+    Dialog importantDialog, successDialog, failDialog, mainMenuDialog, newBreadDialog;
 
     // Images
     // TODO: Step 1: Add New Bread ImageView
@@ -149,6 +152,7 @@ public class Level13 extends AppCompatActivity implements View.OnTouchListener {
         specialSb = findViewById(R.id.specialSb);
 
         // Dialog Initialization
+        importantDialog = new Dialog(this);
         mainMenuDialog = new Dialog(this);
         successDialog = new Dialog(this);
         failDialog = new Dialog(this);
@@ -232,6 +236,7 @@ public class Level13 extends AppCompatActivity implements View.OnTouchListener {
         rbread17.setVisibility(View.VISIBLE);
 
         specialSb.setVisibility(View.VISIBLE);
+        hand.setVisibility(View.INVISIBLE);
 
         // Set OnTouchListener
         hand.setOnTouchListener(this);
@@ -242,7 +247,48 @@ public class Level13 extends AppCompatActivity implements View.OnTouchListener {
 
         // START TIMER
 
-        // LAUNCH NEW BREAD DIALOG
+        // LAUNCH IMPORTANT DIALOG
+        launchImportantDialog();
+    }
+
+    public void launchImportantDialog () {
+        hamburger.setBackgroundResource(R.drawable.close);
+        importantDialog.setContentView(R.layout.popup_specialstrawberry);
+        Objects.requireNonNull(importantDialog.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+
+        // Initialization of Variables + Find IDs in  New Bread Dialog
+        Button accept;
+        accept = importantDialog.findViewById(R.id.great);
+
+        // Show Dialog
+        importantDialog.show();
+        // Prevent Dialog from Getting Dismissed
+        importantDialog.setCancelable(false);
+        importantDialog.setCanceledOnTouchOutside(false);
+
+        // Hide Shadows
+        importantDialog.getWindow().getDecorView().setSystemUiVisibility(getWindow().getDecorView().getSystemUiVisibility());
+        importantDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        importantDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        importantDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+
+        accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                soundPlayer.playButtonClicked();
+                importantDialog.dismiss();
+            }
+        });
+
+        importantDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                launchBreadDialog();
+            }
+        });
+    }
+
+    public void launchBreadDialog() {
         hamburger.setBackgroundResource(R.drawable.close);
         newBreadDialog.setContentView(R.layout.popup_twobreads);
         Objects.requireNonNull(newBreadDialog.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
@@ -282,6 +328,10 @@ public class Level13 extends AppCompatActivity implements View.OnTouchListener {
         newBreadDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
+                hand.setVisibility(View.VISIBLE);
+                YoYo.with(Techniques.BounceInUp)
+                        .duration(500)
+                        .playOn(hand);
                 timer = new Timer();
                 timer.schedule(new TimerTask() {
                     @Override

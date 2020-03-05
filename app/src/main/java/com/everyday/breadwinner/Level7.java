@@ -25,6 +25,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -36,7 +39,7 @@ public class Level7 extends AppCompatActivity implements View.OnTouchListener {
     private int screenHeight, screenWidth;
 
     // Dialogs
-    Dialog successDialog, failDialog, mainMenuDialog, newBreadDialog;
+    Dialog cautionDialog, successDialog, failDialog, mainMenuDialog, newBreadDialog;
 
     // Images
     // TODO: Step 1: Add New Bread ImageView
@@ -144,6 +147,7 @@ public class Level7 extends AppCompatActivity implements View.OnTouchListener {
         rbread10 = findViewById(R.id.rbread_10);
 
         // Dialog Initialization
+        cautionDialog = new Dialog(this);
         mainMenuDialog = new Dialog(this);
         successDialog = new Dialog(this);
         failDialog = new Dialog(this);
@@ -219,6 +223,8 @@ public class Level7 extends AppCompatActivity implements View.OnTouchListener {
         rbread9.setVisibility(View.VISIBLE);
         rbread10.setVisibility(View.VISIBLE);
 
+        hand.setVisibility(View.INVISIBLE);
+
         // Set OnTouchListener
         hand.setOnTouchListener(this);
 
@@ -226,9 +232,48 @@ public class Level7 extends AppCompatActivity implements View.OnTouchListener {
         currentScore = 0;
         scoreLabel.setText(String.valueOf(currentScore));
 
-        // START TIMER
+        // LAUNCH CAUTION DIALOG
+        launchCautionDialog();
+    }
 
-        // LAUNCH NEW BREAD DIALOG
+    public void launchCautionDialog () {
+        hamburger.setBackgroundResource(R.drawable.close);
+        cautionDialog.setContentView(R.layout.popup_rottenbread);
+        Objects.requireNonNull(cautionDialog.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+
+        // Initialization of Variables + Find IDs in  New Bread Dialog
+        Button accept;
+        accept = cautionDialog.findViewById(R.id.great);
+
+        // Show Dialog
+        cautionDialog.show();
+        // Prevent Dialog from Getting Dismissed
+        cautionDialog.setCancelable(false);
+        cautionDialog.setCanceledOnTouchOutside(false);
+
+        // Hide Shadows
+        cautionDialog.getWindow().getDecorView().setSystemUiVisibility(getWindow().getDecorView().getSystemUiVisibility());
+        cautionDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        cautionDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        cautionDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+
+        accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                soundPlayer.playButtonClicked();
+                cautionDialog.dismiss();
+            }
+        });
+
+        cautionDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+               launchBreadDialog();
+            }
+        });
+    }
+
+    public void launchBreadDialog () {
         hamburger.setBackgroundResource(R.drawable.close);
         newBreadDialog.setContentView(R.layout.popup_twobreads);
         Objects.requireNonNull(newBreadDialog.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
@@ -268,6 +313,10 @@ public class Level7 extends AppCompatActivity implements View.OnTouchListener {
         newBreadDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
+                hand.setVisibility(View.VISIBLE);
+                YoYo.with(Techniques.BounceInUp)
+                        .duration(500)
+                        .playOn(hand);
                 timer = new Timer();
                 timer.schedule(new TimerTask() {
                     @Override
@@ -282,7 +331,6 @@ public class Level7 extends AppCompatActivity implements View.OnTouchListener {
                 }, 0, 20);
             }
         });
-
     }
 
     public void dropBread() {
