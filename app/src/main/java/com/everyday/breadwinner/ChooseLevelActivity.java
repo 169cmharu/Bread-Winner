@@ -1,6 +1,8 @@
 package com.everyday.breadwinner;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
 
 import android.animation.Animator;
 import android.app.Dialog;
@@ -14,6 +16,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.text.Layout;
@@ -536,6 +539,18 @@ public class ChooseLevelActivity extends AppCompatActivity {
         circularReveal.start();
     }
 
+    public void presentLevel1(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, Level1.class);
+        intent.putExtra(Level1.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(Level1.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
     public void selectDay(int day) {
         if (day == 1) {
             hamburger.setBackgroundResource(R.drawable.close);
@@ -601,8 +616,18 @@ public class ChooseLevelActivity extends AppCompatActivity {
             startGame.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent startDay = new Intent(ChooseLevelActivity.this, Level1.class);
-                    startActivity(startDay);
+                    presentLevel1(v);
+                    new CountDownTimer(3000, 1000) {
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            finish();
+                        }
+                    }.start();
                     if (mServ != null) {
                         mServ.pauseMusic();
                     }

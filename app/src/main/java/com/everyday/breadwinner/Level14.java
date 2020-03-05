@@ -25,6 +25,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -246,6 +249,7 @@ public class Level14 extends AppCompatActivity implements View.OnTouchListener {
         rbread18.setVisibility(View.VISIBLE);
 
         specialSb.setVisibility(View.VISIBLE);
+        hand.setVisibility(View.INVISIBLE);
 
         // Set OnTouchListener
         hand.setOnTouchListener(this);
@@ -254,9 +258,12 @@ public class Level14 extends AppCompatActivity implements View.OnTouchListener {
         currentScore = 0;
         scoreLabel.setText(String.valueOf(currentScore));
 
-        // START TIMER
-
         // LAUNCH NEW BREAD DIALOG
+        launchBreadDialog();
+
+    }
+
+    public void launchBreadDialog() {
         hamburger.setBackgroundResource(R.drawable.close);
         newBreadDialog.setContentView(R.layout.popup_newbread);
         Objects.requireNonNull(newBreadDialog.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
@@ -294,6 +301,11 @@ public class Level14 extends AppCompatActivity implements View.OnTouchListener {
         newBreadDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
+                hamburger.setBackgroundResource(R.drawable.menu);
+                hand.setVisibility(View.VISIBLE);
+                YoYo.with(Techniques.BounceInUp)
+                        .duration(500)
+                        .playOn(hand);
                 timer = new Timer();
                 timer.schedule(new TimerTask() {
                     @Override
@@ -308,7 +320,6 @@ public class Level14 extends AppCompatActivity implements View.OnTouchListener {
                 }, 0, 20);
             }
         });
-
     }
 
     public void dropBread() {
@@ -510,7 +521,6 @@ public class Level14 extends AppCompatActivity implements View.OnTouchListener {
             if (!specialFlag && timeCount % 5000 == 0) {
                 specialFlag = true;
                 specialSbY = -500.0f;
-                specialSbX = (float)Math.floor(Math.random() * (screenWidth - specialSb.getWidth()));
             }
 
             if (specialFlag) {
@@ -518,6 +528,7 @@ public class Level14 extends AppCompatActivity implements View.OnTouchListener {
                 float specialSbCenterX = specialSbX + ((float) specialSb.getWidth()/2);
                 float specialSbCenterY = specialSbY + ((float) specialSb.getHeight()/2);
                 if (hitCheck(specialSbCenterX, specialSbCenterY)) {
+                    specialSbX = (float)Math.floor(Math.random() * (screenWidth - specialSb.getWidth()));
                     specialSbY = -500.0f;
                     currentScore += 1200;
                     scoreLabel.setText(String.valueOf(currentScore));

@@ -313,6 +313,7 @@ public class Level7 extends AppCompatActivity implements View.OnTouchListener {
         newBreadDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
+                hamburger.setBackgroundResource(R.drawable.menu);
                 hand.setVisibility(View.VISIBLE);
                 YoYo.with(Techniques.BounceInUp)
                         .duration(500)

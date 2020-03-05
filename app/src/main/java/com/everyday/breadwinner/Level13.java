@@ -328,6 +328,7 @@ public class Level13 extends AppCompatActivity implements View.OnTouchListener {
         newBreadDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
+                hamburger.setBackgroundResource(R.drawable.menu);
                 hand.setVisibility(View.VISIBLE);
                 YoYo.with(Techniques.BounceInUp)
                         .duration(500)
@@ -503,7 +504,6 @@ public class Level13 extends AppCompatActivity implements View.OnTouchListener {
             if (!specialFlag && timeCount % 5000 == 0) {
                 specialFlag = true;
                 specialSbY = -500.0f;
-                specialSbX = (float)Math.floor(Math.random() * (screenWidth - specialSb.getWidth()));
             }
 
             if (specialFlag) {
@@ -511,6 +511,7 @@ public class Level13 extends AppCompatActivity implements View.OnTouchListener {
                 float specialSbCenterX = specialSbX + ((float) specialSb.getWidth()/2);
                 float specialSbCenterY = specialSbY + ((float) specialSb.getHeight()/2);
                 if (hitCheck(specialSbCenterX, specialSbCenterY)) {
+                    specialSbX = (float)Math.floor(Math.random() * (screenWidth - specialSb.getWidth()));
                     specialSbY = -500.0f;
                     currentScore += 1200;
                     scoreLabel.setText(String.valueOf(currentScore));

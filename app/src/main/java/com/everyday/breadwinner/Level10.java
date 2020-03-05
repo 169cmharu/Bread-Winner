@@ -25,6 +25,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -261,6 +264,8 @@ public class Level10 extends AppCompatActivity implements View.OnTouchListener {
         rbread12.setVisibility(View.VISIBLE);
         rbread13.setVisibility(View.VISIBLE);
 
+        hand.setVisibility(View.INVISIBLE);
+
         // Set OnTouchListener
         hand.setOnTouchListener(this);
 
@@ -268,9 +273,12 @@ public class Level10 extends AppCompatActivity implements View.OnTouchListener {
         currentScore = 0;
         scoreLabel.setText(String.valueOf(currentScore));
 
-        // START TIMER
-
         // LAUNCH NEW BREAD DIALOG
+        launchBreadDialog();
+
+    }
+
+    public void launchBreadDialog() {
         hamburger.setBackgroundResource(R.drawable.close);
         newBreadDialog.setContentView(R.layout.popup_newbread);
         Objects.requireNonNull(newBreadDialog.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
@@ -308,6 +316,11 @@ public class Level10 extends AppCompatActivity implements View.OnTouchListener {
         newBreadDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
+                hamburger.setBackgroundResource(R.drawable.menu);
+                hand.setVisibility(View.VISIBLE);
+                YoYo.with(Techniques.BounceInUp)
+                        .duration(500)
+                        .playOn(hand);
                 timer = new Timer();
                 timer.schedule(new TimerTask() {
                     @Override
@@ -322,7 +335,6 @@ public class Level10 extends AppCompatActivity implements View.OnTouchListener {
                 }, 0, 20);
             }
         });
-
     }
 
     public void dropBread() {
