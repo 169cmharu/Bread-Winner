@@ -5,7 +5,7 @@
     android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/final_1"
+    android:background="@drawable/final_3"
     tools:context=".Scene1">
 
     <LinearLayout
@@ -14,10 +14,10 @@
         android:gravity="center"
         android:layout_marginTop="100dp">
         <ImageView
-            android:id="@+id/fsb_1"
+            android:id="@+id/fsb_3"
             android:layout_width="400dp"
             android:layout_height="135dp"
-            android:src="@drawable/fsb_1"/>
+            android:src="@drawable/fsb_4"/>
     </LinearLayout>
 
     <TextView

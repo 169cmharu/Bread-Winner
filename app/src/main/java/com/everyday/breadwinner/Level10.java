@@ -916,15 +916,6 @@ public class Level10 extends AppCompatActivity implements View.OnTouchListener {
                 currentStrawberries = 3;
             }
 
-            // UPDATE EARNED STRAWBERRIES
-            // TODO: Step 21 Change Data Level
-            if (currentStrawberries > earnedStrawberries) {
-                earnedStrawberries = currentStrawberries;
-                SharedPreferences.Editor editor = dataLevel.edit();
-                editor.putInt("LEVEL_10_STRAWBERRIES", earnedStrawberries);
-                editor.apply();
-            }
-
             // MARK DAY AS COMPLETED
             // TODO: Step 22: Change Data Level
             SharedPreferences.Editor editor = dataLevel.edit();
@@ -996,8 +987,15 @@ public class Level10 extends AppCompatActivity implements View.OnTouchListener {
             });
         }
 
+        // UPDATE EARNED STRAWBERRIES
+        if (currentStrawberries > earnedStrawberries) {
+            earnedStrawberries = currentStrawberries;
+            SharedPreferences.Editor editor = dataLevel.edit();
+            editor.putInt("LEVEL_10_STRAWBERRIES", earnedStrawberries);
+            editor.apply();
+        }
+
         // UPDATE HIGH SCORE
-        // TODO: Step 25: Change Data Level
         if (currentScore > highScore) {
             highScore = currentScore;
             SharedPreferences.Editor editor = dataLevel.edit();

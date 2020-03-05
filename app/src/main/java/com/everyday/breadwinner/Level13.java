@@ -490,10 +490,10 @@ public class Level13 extends AppCompatActivity implements View.OnTouchListener {
     }
 
     // TODO: Step 10: Max Score
-    int maxScore = 36400;
-    double firstCut = maxScore * 0.5;
-    double secondCut = maxScore * 0.75;
-    double thirdCut = maxScore * 0.95;
+    private int maxScore = 36400;
+    private double firstCut = maxScore * 0.5;
+    private double secondCut = maxScore * 0.75;
+    private double thirdCut = maxScore * 0.95;
 
     public void checkNumOfStrawberries () {
         if (currentScore >= firstCut) {
@@ -777,15 +777,6 @@ public class Level13 extends AppCompatActivity implements View.OnTouchListener {
                 currentStrawberries = 3;
             }
 
-            // UPDATE EARNED STRAWBERRIES
-            // TODO: Step 21 Change Data Level
-            if (currentStrawberries > earnedStrawberries) {
-                earnedStrawberries = currentStrawberries;
-                SharedPreferences.Editor editor = dataLevel.edit();
-                editor.putInt("LEVEL_13_STRAWBERRIES", earnedStrawberries);
-                editor.apply();
-            }
-
             // MARK DAY AS COMPLETED
             // TODO: Step 22: Change Data Level
             SharedPreferences.Editor editor = dataLevel.edit();
@@ -801,11 +792,15 @@ public class Level13 extends AppCompatActivity implements View.OnTouchListener {
 
             // Initialization of Variables + Find IDs in  Success Dialog
             TextView currentFailedDay, targetScoreOnly, currentScoreOnly;
+            ImageView strawberry1, strawberry2, strawberry3;
             Button retryDay, backToMenu;
 
             currentFailedDay = failDialog.findViewById(R.id.currentFailedDay);
             targetScoreOnly = failDialog.findViewById(R.id.targetScoreOnly);
             currentScoreOnly = failDialog.findViewById(R.id.currentScoreOnly);
+            strawberry1 = failDialog.findViewById(R.id.strawberry_1);
+            strawberry2 = failDialog.findViewById(R.id.strawberry_2);
+            strawberry3 = failDialog.findViewById(R.id.strawberry_3);
 
             // Get Values from string.xml
             // TODO: Step 23: Change d & td
@@ -820,6 +815,21 @@ public class Level13 extends AppCompatActivity implements View.OnTouchListener {
             targetScoreOnly.setText(strTargetScore);
             String currentScoreText = "Current Score: " + strCurrentScore;
             currentScoreOnly.setText(currentScoreText);
+
+            if (failedFlag) {
+                if (currentScore >= firstCut && currentScore < secondCut) {
+                    strawberry1.setImageResource(R.drawable.with_strawberry);
+                }
+                else if (currentScore >= secondCut && currentScore < thirdCut) {
+                    strawberry1.setImageResource(R.drawable.with_strawberry);
+                    strawberry2.setImageResource(R.drawable.with_strawberry);
+                }
+                else if (currentScore >= thirdCut) {
+                    strawberry1.setImageResource(R.drawable.with_strawberry);
+                    strawberry2.setImageResource(R.drawable.with_strawberry);
+                    strawberry3.setImageResource(R.drawable.with_strawberry);
+                }
+            }
 
             // Show Dialog
             failDialog.show();
@@ -857,8 +867,15 @@ public class Level13 extends AppCompatActivity implements View.OnTouchListener {
             });
         }
 
+        // UPDATE EARNED STRAWBERRIES
+        if (currentStrawberries > earnedStrawberries) {
+            earnedStrawberries = currentStrawberries;
+            SharedPreferences.Editor editor = dataLevel.edit();
+            editor.putInt("LEVEL_13_STRAWBERRIES", earnedStrawberries);
+            editor.apply();
+        }
+
         // UPDATE HIGH SCORE
-        // TODO: Step 25: Change Data Level
         if (currentScore > highScore) {
             highScore = currentScore;
             SharedPreferences.Editor editor = dataLevel.edit();

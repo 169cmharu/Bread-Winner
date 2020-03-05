@@ -1,6 +1,8 @@
 package com.everyday.breadwinner;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -14,6 +16,7 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.PowerManager;
@@ -31,6 +34,7 @@ import java.util.TimerTask;
 
 public class Level18 extends AppCompatActivity implements View.OnTouchListener {
     private View decorView;
+    private View mainLayout;
 
     // Frame
     private int screenHeight, screenWidth;
@@ -783,10 +787,10 @@ public class Level18 extends AppCompatActivity implements View.OnTouchListener {
     }
 
     // TODO: Step 10: Max Score
-    int maxScore = 113400;
-    double firstCut = maxScore * 0.5;
-    double secondCut = maxScore * 0.75;
-    double thirdCut = maxScore * 0.95;
+    private int maxScore = 113400;
+    private double firstCut = maxScore * 0.5;
+    private double secondCut = maxScore * 0.75;
+    private double thirdCut = maxScore * 0.95;
 
     public void checkNumOfStrawberries () {
         if (currentScore >= firstCut) {
@@ -829,6 +833,18 @@ public class Level18 extends AppCompatActivity implements View.OnTouchListener {
                 return false;
         }
         return true;
+    }
+
+    public void presentFinale1(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, Finale1.class);
+        intent.putExtra(Finale1.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(Finale1.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
     }
 
     public void endGame() {
@@ -913,9 +929,19 @@ public class Level18 extends AppCompatActivity implements View.OnTouchListener {
                     @Override
                     public void onClick(View v) {
                         soundPlayer.playButtonClicked();
-                        finish();
-                        Intent startDay = new Intent(Level18.this, Finale1.class);
-                        startActivity(startDay);
+                        presentFinale1(v);
+
+                        new CountDownTimer(3000, 1000) {
+                            @Override
+                            public void onTick(long millisUntilFinished) {
+
+                            }
+
+                            @Override
+                            public void onFinish() {
+                                finish();
+                            }
+                        }.start();
                     }
                 });
 
@@ -985,10 +1011,20 @@ public class Level18 extends AppCompatActivity implements View.OnTouchListener {
                 nextDay.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        finish();
                         soundPlayer.playButtonClicked();
-                        Intent startDay = new Intent(Level18.this, Finale1.class);
-                        startActivity(startDay);
+                        presentFinale1(v);
+
+                        new CountDownTimer(3000, 1000) {
+                            @Override
+                            public void onTick(long millisUntilFinished) {
+
+                            }
+
+                            @Override
+                            public void onFinish() {
+                                finish();
+                            }
+                        }.start();
                     }
                 });
 
@@ -1059,10 +1095,20 @@ public class Level18 extends AppCompatActivity implements View.OnTouchListener {
                 nextDay.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        finish();
                         soundPlayer.playButtonClicked();
-                        Intent startDay = new Intent(Level18.this, Finale1.class);
-                        startActivity(startDay);
+                        presentFinale1(v);
+
+                        new CountDownTimer(3000, 1000) {
+                            @Override
+                            public void onTick(long millisUntilFinished) {
+
+                            }
+
+                            @Override
+                            public void onFinish() {
+                                finish();
+                            }
+                        }.start();
                     }
                 });
 
@@ -1104,11 +1150,15 @@ public class Level18 extends AppCompatActivity implements View.OnTouchListener {
 
             // Initialization of Variables + Find IDs in  Success Dialog
             TextView currentFailedDay, targetScoreOnly, currentScoreOnly;
+            ImageView strawberry1, strawberry2, strawberry3;
             Button retryDay, backToMenu;
 
             currentFailedDay = failDialog.findViewById(R.id.currentFailedDay);
             targetScoreOnly = failDialog.findViewById(R.id.targetScoreOnly);
             currentScoreOnly = failDialog.findViewById(R.id.currentScoreOnly);
+            strawberry1 = failDialog.findViewById(R.id.strawberry_1);
+            strawberry2 = failDialog.findViewById(R.id.strawberry_2);
+            strawberry3 = failDialog.findViewById(R.id.strawberry_3);
 
             // Get Values from string.xml
             // TODO: Step 23: Change d & td
@@ -1123,6 +1173,21 @@ public class Level18 extends AppCompatActivity implements View.OnTouchListener {
             targetScoreOnly.setText(strTargetScore);
             String currentScoreText = "Current Score: " + strCurrentScore;
             currentScoreOnly.setText(currentScoreText);
+
+            if (failedFlag) {
+                if (currentScore >= firstCut && currentScore < secondCut) {
+                    strawberry1.setImageResource(R.drawable.with_strawberry);
+                }
+                else if (currentScore >= secondCut && currentScore < thirdCut) {
+                    strawberry1.setImageResource(R.drawable.with_strawberry);
+                    strawberry2.setImageResource(R.drawable.with_strawberry);
+                }
+                else if (currentScore >= thirdCut) {
+                    strawberry1.setImageResource(R.drawable.with_strawberry);
+                    strawberry2.setImageResource(R.drawable.with_strawberry);
+                    strawberry3.setImageResource(R.drawable.with_strawberry);
+                }
+            }
 
             // Show Dialog
             failDialog.show();

@@ -5,7 +5,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 
 import android.animation.Animator;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -35,6 +37,11 @@ public class Scene2 extends AppCompatActivity {
     private int revealX;
     private int revealY;
 
+    private SharedPreferences dataIntro;
+    private int introStatus;
+
+    private SoundPlayer soundPlayer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,13 +58,15 @@ public class Scene2 extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
         );
 
+        dataIntro = getSharedPreferences("INTRO_DATA", Context.MODE_PRIVATE);
+        soundPlayer = new SoundPlayer(this);
+
         mainLayout = findViewById(R.id.mainLayout);
         final Intent intent = getIntent();
         if (savedInstanceState == null && intent.hasExtra(EXTRA_CIRCULAR_REVEAL_X) && intent.hasExtra(EXTRA_CIRCULAR_REVEAL_Y)) {
             mainLayout.setVisibility(View.INVISIBLE);
             revealX = intent.getIntExtra(EXTRA_CIRCULAR_REVEAL_X, 0);
             revealY = intent.getIntExtra(EXTRA_CIRCULAR_REVEAL_Y, 0);
-
 
             ViewTreeObserver viewTreeObserver = mainLayout.getViewTreeObserver();
             if (viewTreeObserver.isAlive()) {
@@ -74,9 +83,25 @@ public class Scene2 extends AppCompatActivity {
         }
 
         speechBubble = findViewById(R.id.sb_2);
+        speechBubble.setVisibility(View.INVISIBLE);
+        new CountDownTimer(1000, 1000){
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                speechBubble.setVisibility(View.VISIBLE);
+                YoYo.with(Techniques.FadeIn)
+                        .duration(500)
+                        .playOn(speechBubble);
+            }
+        }.start();
         mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                soundPlayer.playButtonClicked();
                 presentScene3(v);
 
                 new CountDownTimer(3000, 1000) {
@@ -97,7 +122,12 @@ public class Scene2 extends AppCompatActivity {
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                soundPlayer.playButtonClicked();
                 presentMain(v);
+                introStatus = 1;
+                SharedPreferences.Editor editor = dataIntro.edit();
+                editor.putInt("INTRO_STATUS", introStatus);
+                editor.apply();
 
                 new CountDownTimer(3000, 1000) {
                     @Override

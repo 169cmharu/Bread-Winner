@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -28,6 +30,11 @@ public class Scene10 extends AppCompatActivity {
 
     private Button skip;
 
+    private SharedPreferences dataIntro;
+    private int introStatus;
+
+    private SoundPlayer soundPlayer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +51,9 @@ public class Scene10 extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
         );
 
+        dataIntro = getSharedPreferences("INTRO_DATA", Context.MODE_PRIVATE);
+        soundPlayer = new SoundPlayer(this);
+
         mainLayout = findViewById(R.id.mainLayout);
         speechBubble = findViewById(R.id.sb_10);
         YoYo.with(Techniques.FadeIn)
@@ -52,6 +62,7 @@ public class Scene10 extends AppCompatActivity {
         mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                soundPlayer.playButtonClicked();
                 if (clickCount == 0) {
                     clickCount += 1;
                     speechBubble.setImageResource(R.drawable.sb_12);
@@ -73,7 +84,12 @@ public class Scene10 extends AppCompatActivity {
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                soundPlayer.playButtonClicked();
                 presentMain(v);
+                introStatus = 1;
+                SharedPreferences.Editor editor = dataIntro.edit();
+                editor.putInt("INTRO_STATUS", introStatus);
+                editor.apply();
 
                 new CountDownTimer(3000, 1000) {
                     @Override
