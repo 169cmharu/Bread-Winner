@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 
+import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.ComponentName;
@@ -23,7 +24,10 @@ import android.os.PowerManager;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.ViewTreeObserver;
 import android.view.WindowManager;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,7 +41,6 @@ import java.util.TimerTask;
 
 public class Level18 extends AppCompatActivity implements View.OnTouchListener {
     private View decorView;
-    private View mainLayout;
 
     // Frame
     private int screenHeight, screenWidth;
@@ -99,6 +102,13 @@ public class Level18 extends AppCompatActivity implements View.OnTouchListener {
     HomeWatcher mHomeWatcher;
     private boolean musicFlag, specialFlag = false, failedFlag = false;
 
+    // Transition
+    public View mainLayout;
+    public static final String EXTRA_CIRCULAR_REVEAL_X = "EXTRA_CIRCULAR_REVEAL_X";
+    public static final String EXTRA_CIRCULAR_REVEAL_Y = "EXTRA_CIRCULAR_REVEAL_Y";
+    private int revealX;
+    private int revealY;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,6 +123,27 @@ public class Level18 extends AppCompatActivity implements View.OnTouchListener {
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
         );
+
+        mainLayout = findViewById(R.id.mainLayout);
+        final Intent intent = getIntent();
+        if (savedInstanceState == null && intent.hasExtra(EXTRA_CIRCULAR_REVEAL_X) && intent.hasExtra(EXTRA_CIRCULAR_REVEAL_Y)) {
+            mainLayout.setVisibility(View.INVISIBLE);
+            revealX = intent.getIntExtra(EXTRA_CIRCULAR_REVEAL_X, 0);
+            revealY = intent.getIntExtra(EXTRA_CIRCULAR_REVEAL_Y, 0);
+
+            ViewTreeObserver viewTreeObserver = mainLayout.getViewTreeObserver();
+            if (viewTreeObserver.isAlive()) {
+                viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        revealActivity(revealX, revealY);
+                        mainLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    }
+                });
+            }
+        } else {
+            mainLayout.setVisibility(View.VISIBLE);
+        }
 
         // Background Music
         SharedPreferences loadToggleState = this.getSharedPreferences("MusicStatus", Context.MODE_PRIVATE);
@@ -189,9 +220,21 @@ public class Level18 extends AppCompatActivity implements View.OnTouchListener {
         // TODO: Step 5: Change dataLevel
         dataLevel = getSharedPreferences("LEVEL_DATA", Context.MODE_PRIVATE);
         highScore = dataLevel.getInt("LEVEL_18_HIGH_SCORE", 0);
+        earnedStrawberries = dataLevel.getInt("LEVEL_18_STRAWBERRIES", 0);
 
         // START GAME
         startGame();
+    }
+
+    protected void revealActivity(int x, int y) {
+        float finalRadius = (float) (Math.max(mainLayout.getWidth(), mainLayout.getHeight()) * 1.1);
+
+        Animator circularReveal = ViewAnimationUtils.createCircularReveal(mainLayout, x, y, 0, finalRadius);
+        circularReveal.setDuration(1000);
+        circularReveal.setInterpolator(new AccelerateInterpolator());
+
+        mainLayout.setVisibility(View.VISIBLE);
+        circularReveal.start();
     }
 
     public void startGame() {
@@ -319,7 +362,17 @@ public class Level18 extends AppCompatActivity implements View.OnTouchListener {
         scoreLabel.setText(String.valueOf(currentScore));
 
         // LAUNCH NEW BREAD DIALOG
-        launchBreadDialog();
+        new CountDownTimer(1000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                launchBreadDialog();
+            }
+        }.start();
 
     }
 
@@ -846,18 +899,6 @@ public class Level18 extends AppCompatActivity implements View.OnTouchListener {
         return true;
     }
 
-    public void presentFinale1(View view) {
-        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
-        int revealX = (int) (view.getX() + view.getWidth() / 2);
-        int revealY = (int) (view.getY() + view.getHeight() / 2);
-
-        Intent intent = new Intent(this, Finale1.class);
-        intent.putExtra(Finale1.EXTRA_CIRCULAR_REVEAL_X, revealX);
-        intent.putExtra(Finale1.EXTRA_CIRCULAR_REVEAL_Y, revealY);
-
-        ActivityCompat.startActivity(this, intent, options.toBundle());
-    }
-
     public void endGame() {
         timer.cancel();
         timer = null;
@@ -887,253 +928,15 @@ public class Level18 extends AppCompatActivity implements View.OnTouchListener {
         if (currentScore >= firstCut && (!failedFlag)) {
             soundPlayer.playLevelPassed();
             if (currentScore >= firstCut && currentScore < secondCut) {
-                hamburger.setBackgroundResource(R.drawable.close);
-                successDialog.setContentView(R.layout.popup_daysuccess);
-                Objects.requireNonNull(successDialog.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
-
-                // Initialization of Variables + Find IDs in  Success Dialog
-                TextView currentDay, targetScore, currentScoreLabel;
-                ImageView strawberry1, strawberry2, strawberry3;
-                Button nextDay, backToMenu;
-
-                currentDay = successDialog.findViewById(R.id.currentDay);
-                targetScore = successDialog.findViewById(R.id.targetScore);
-                currentScoreLabel = successDialog.findViewById(R.id.currentScore);
-                strawberry1 = successDialog.findViewById(R.id.strawberry_1);
-                strawberry2 = successDialog.findViewById(R.id.strawberry_2);
-                strawberry3 = successDialog.findViewById(R.id.strawberry_3);
-
-                // Get Values from string.xml
-                // TODO: Step 12: Change d & td
-                String strCurrentDay = getString(R.string.d18);
-                String strTargetScore = getString(R.string.td18);
-
-                // Convert Score to String
-                String strCurrentScore = Integer.toString(currentScore);
-
-                // Set Values
-                currentDay.setText(strCurrentDay);
-                targetScore.setText(strTargetScore);
-                String currentScoreText = "Current Score: " + strCurrentScore;
-                currentScoreLabel.setText(currentScoreText);
-
-                //Show Strawberries
-                strawberry1.setImageResource(R.drawable.with_strawberry);
-                strawberry2.setImageResource(R.drawable.without_strawberry);
-                strawberry3.setImageResource(R.drawable.without_strawberry);
-
-                // Show Dialog
-                successDialog.show();
-                // Prevent Dialog from Getting Dismissed
-                successDialog.setCancelable(false);
-                successDialog.setCanceledOnTouchOutside(false);
-
-                // Hide Shadows
-                successDialog.getWindow().getDecorView().setSystemUiVisibility(getWindow().getDecorView().getSystemUiVisibility());
-                successDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                successDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                successDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
-
-                // TODO: Step 13: Change Next Day
-                nextDay = successDialog.findViewById(R.id.btnNext);
-                nextDay.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        soundPlayer.playButtonClicked();
-                        presentFinale1(v);
-
-                        new CountDownTimer(3000, 1000) {
-                            @Override
-                            public void onTick(long millisUntilFinished) {
-
-                            }
-
-                            @Override
-                            public void onFinish() {
-                                finish();
-                            }
-                        }.start();
-                    }
-                });
-
-                // TODO: Step 14: Change packageContext
-                backToMenu = successDialog.findViewById(R.id.btnMenu);
-                backToMenu.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        soundPlayer.playButtonClicked();
-                        finish();
-                        Intent startDay = new Intent(Level18.this, ChooseLevelActivity.class);
-                        startActivity(startDay);
-                    }
-                });
+                launchSuccessDialog(1);
                 currentStrawberries = 1;
             }
             else if (currentScore >= secondCut && currentScore < thirdCut) {
-                hamburger.setBackgroundResource(R.drawable.close);
-                successDialog.setContentView(R.layout.popup_daysuccess);
-                Objects.requireNonNull(successDialog.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
-
-                // Initialization of Variables + Find IDs in  Success Dialog
-                TextView currentDay, targetScore, currentScoreLabel;
-                ImageView strawberry1, strawberry2, strawberry3;
-                Button nextDay, backToMenu;
-
-                currentDay = successDialog.findViewById(R.id.currentDay);
-                targetScore = successDialog.findViewById(R.id.targetScore);
-                currentScoreLabel = successDialog.findViewById(R.id.currentScore);
-                strawberry1 = successDialog.findViewById(R.id.strawberry_1);
-                strawberry2 = successDialog.findViewById(R.id.strawberry_2);
-                strawberry3 = successDialog.findViewById(R.id.strawberry_3);
-
-                // Get Values from string.xml
-                // TODO: Step 15: Change d & td
-                String strCurrentDay = getString(R.string.d18);
-                String strTargetScore = getString(R.string.td18);
-
-                // Convert Score to String
-                String strCurrentScore = Integer.toString(currentScore);
-
-                // Set Values
-                currentDay.setText(strCurrentDay);
-                targetScore.setText(strTargetScore);
-                String currentScoreText = "Current Score: " + strCurrentScore;
-                currentScoreLabel.setText(currentScoreText);
-
-                //Show Strawberries
-                strawberry1.setImageResource(R.drawable.with_strawberry);
-                strawberry2.setImageResource(R.drawable.with_strawberry);
-                strawberry3.setImageResource(R.drawable.without_strawberry);
-
-                // Show Dialog
-                successDialog.show();
-                // Prevent Dialog from Getting Dismissed
-                successDialog.setCancelable(false);
-                successDialog.setCanceledOnTouchOutside(false);
-
-                // Hide Shadows
-                successDialog.getWindow().getDecorView().setSystemUiVisibility(getWindow().getDecorView().getSystemUiVisibility());
-                successDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                successDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                successDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
-
-                // TODO: Step 16: Change Next Day
-                nextDay = successDialog.findViewById(R.id.btnNext);
-                nextDay.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        soundPlayer.playButtonClicked();
-                        presentFinale1(v);
-
-                        new CountDownTimer(3000, 1000) {
-                            @Override
-                            public void onTick(long millisUntilFinished) {
-
-                            }
-
-                            @Override
-                            public void onFinish() {
-                                finish();
-                            }
-                        }.start();
-                    }
-                });
-
-                // TODO: Step 17: Change packageContext
-                backToMenu = successDialog.findViewById(R.id.btnMenu);
-                backToMenu.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                        soundPlayer.playButtonClicked();
-                        Intent startDay = new Intent(Level18.this, ChooseLevelActivity.class);
-                        startActivity(startDay);
-                    }
-                });
-
+                launchSuccessDialog(2);
                 currentStrawberries = 2;
             }
             else if (currentScore >= thirdCut) {
-                hamburger.setBackgroundResource(R.drawable.close);
-                successDialog.setContentView(R.layout.popup_daysuccess);
-                Objects.requireNonNull(successDialog.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
-
-                // Initialization of Variables + Find IDs in  Success Dialog
-                TextView currentDay, targetScore, currentScoreLabel;
-                ImageView strawberry1, strawberry2, strawberry3;
-                Button nextDay, backToMenu;
-
-                currentDay = successDialog.findViewById(R.id.currentDay);
-                targetScore = successDialog.findViewById(R.id.targetScore);
-                currentScoreLabel = successDialog.findViewById(R.id.currentScore);
-                strawberry1 = successDialog.findViewById(R.id.strawberry_1);
-                strawberry2 = successDialog.findViewById(R.id.strawberry_2);
-                strawberry3 = successDialog.findViewById(R.id.strawberry_3);
-
-                // Get Values from string.xml
-                // TODO: Step 18: Change d & td
-                String strCurrentDay = getString(R.string.d18);
-                String strTargetScore = getString(R.string.td18);
-
-                // Convert Score to String
-                String strCurrentScore = Integer.toString(currentScore);
-
-                // Set Values
-                currentDay.setText(strCurrentDay);
-                targetScore.setText(strTargetScore);
-                String currentScoreText = "Current Score: " + strCurrentScore;
-                currentScoreLabel.setText(currentScoreText);
-
-                //Show Strawberries
-                strawberry1.setImageResource(R.drawable.with_strawberry);
-                strawberry2.setImageResource(R.drawable.with_strawberry);
-                strawberry3.setImageResource(R.drawable.with_strawberry);
-
-                // Show Dialog
-                successDialog.show();
-                // Prevent Dialog from Getting Dismissed
-                successDialog.setCancelable(false);
-                successDialog.setCanceledOnTouchOutside(false);
-
-                // Hide Shadows
-                successDialog.getWindow().getDecorView().setSystemUiVisibility(getWindow().getDecorView().getSystemUiVisibility());
-                successDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                successDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                successDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
-
-                // TODO: Step 19: Change Next Day
-                nextDay = successDialog.findViewById(R.id.btnNext);
-                nextDay.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        soundPlayer.playButtonClicked();
-                        presentFinale1(v);
-
-                        new CountDownTimer(3000, 1000) {
-                            @Override
-                            public void onTick(long millisUntilFinished) {
-
-                            }
-
-                            @Override
-                            public void onFinish() {
-                                finish();
-                            }
-                        }.start();
-                    }
-                });
-
-                // TODO: Step 20: Change packageContext
-                backToMenu = successDialog.findViewById(R.id.btnMenu);
-                backToMenu.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                        soundPlayer.playButtonClicked();
-                        Intent startDay = new Intent(Level18.this, ChooseLevelActivity.class);
-                        startActivity(startDay);
-                    }
-                });
+                launchSuccessDialog(3);
                 currentStrawberries = 3;
             }
 
@@ -1154,86 +957,7 @@ public class Level18 extends AppCompatActivity implements View.OnTouchListener {
         }
         else if (currentScore < firstCut || (failedFlag)){
             soundPlayer.playLevelFailed();
-
-            hamburger.setBackgroundResource(R.drawable.close);
-            failDialog.setContentView(R.layout.popup_dayfailed);
-            Objects.requireNonNull(failDialog.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
-
-            // Initialization of Variables + Find IDs in  Success Dialog
-            TextView currentFailedDay, targetScoreOnly, currentScoreOnly;
-            ImageView strawberry1, strawberry2, strawberry3;
-            Button retryDay, backToMenu;
-
-            currentFailedDay = failDialog.findViewById(R.id.currentFailedDay);
-            targetScoreOnly = failDialog.findViewById(R.id.targetScoreOnly);
-            currentScoreOnly = failDialog.findViewById(R.id.currentScoreOnly);
-            strawberry1 = failDialog.findViewById(R.id.strawberry_1);
-            strawberry2 = failDialog.findViewById(R.id.strawberry_2);
-            strawberry3 = failDialog.findViewById(R.id.strawberry_3);
-
-            // Get Values from string.xml
-            // TODO: Step 23: Change d & td
-            String strCurrentDay = getString(R.string.d18);
-            String strTargetScore = getString(R.string.td18);
-
-            // Convert Score to String
-            String strCurrentScore = Integer.toString(currentScore);
-
-            // Set Values
-            currentFailedDay.setText(strCurrentDay);
-            targetScoreOnly.setText(strTargetScore);
-            String currentScoreText = "Current Score: " + strCurrentScore;
-            currentScoreOnly.setText(currentScoreText);
-
-            if (failedFlag) {
-                if (currentScore >= firstCut && currentScore < secondCut) {
-                    strawberry1.setImageResource(R.drawable.with_strawberry);
-                }
-                else if (currentScore >= secondCut && currentScore < thirdCut) {
-                    strawberry1.setImageResource(R.drawable.with_strawberry);
-                    strawberry2.setImageResource(R.drawable.with_strawberry);
-                }
-                else if (currentScore >= thirdCut) {
-                    strawberry1.setImageResource(R.drawable.with_strawberry);
-                    strawberry2.setImageResource(R.drawable.with_strawberry);
-                    strawberry3.setImageResource(R.drawable.with_strawberry);
-                }
-            }
-
-            // Show Dialog
-            failDialog.show();
-            // Prevent Dialog from Getting Dismissed
-            failDialog.setCancelable(false);
-            failDialog.setCanceledOnTouchOutside(false);
-
-            // Hide Shadows
-            failDialog.getWindow().getDecorView().setSystemUiVisibility(getWindow().getDecorView().getSystemUiVisibility());
-            failDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            failDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-            failDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
-
-            retryDay = failDialog.findViewById(R.id.btnRetry);
-            retryDay.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    soundPlayer.playButtonClicked();
-                    Intent restartDay = getIntent();
-                    finish();
-                    startActivity(restartDay);
-                }
-            });
-
-            // TODO: Step 24: Change packageContext
-            backToMenu = failDialog.findViewById(R.id.btnRetryMenu);
-            backToMenu.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    finish();
-                    soundPlayer.playButtonClicked();
-                    Intent backMenu = new Intent(Level18.this, ChooseLevelActivity.class);
-                    startActivity(backMenu);
-                }
-            });
+            launchFailedDialog();
         }
 
         // UPDATE HIGH SCORE
@@ -1244,6 +968,225 @@ public class Level18 extends AppCompatActivity implements View.OnTouchListener {
             editor.putInt("LEVEL_18_HIGH_SCORE", highScore);
             editor.apply();
         }
+    }
+
+    public void launchSuccessDialog(int strawberries) {
+        hamburger.setBackgroundResource(R.drawable.close);
+        successDialog.setContentView(R.layout.popup_daysuccess);
+        Objects.requireNonNull(successDialog.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+
+        // Initialization of Variables + Find IDs in  Success Dialog
+        TextView currentDay, targetScore, currentScoreLabel;
+        ImageView strawberry1, strawberry2, strawberry3;
+        Button nextDay, backToMenu;
+
+        currentDay = successDialog.findViewById(R.id.currentDay);
+        targetScore = successDialog.findViewById(R.id.targetScore);
+        currentScoreLabel = successDialog.findViewById(R.id.currentScore);
+        strawberry1 = successDialog.findViewById(R.id.strawberry_1);
+        strawberry2 = successDialog.findViewById(R.id.strawberry_2);
+        strawberry3 = successDialog.findViewById(R.id.strawberry_3);
+
+        // Get Values from string.xml
+        // TODO: Step 12: Change d & td
+        String strCurrentDay = getString(R.string.d18);
+        String strTargetScore = getString(R.string.td18);
+
+        // Convert Score to String
+        String strCurrentScore = Integer.toString(currentScore);
+
+        // Set Values
+        currentDay.setText(strCurrentDay);
+        targetScore.setText(strTargetScore);
+        String currentScoreText = "Current Score: " + strCurrentScore;
+        currentScoreLabel.setText(currentScoreText);
+
+        //Show Strawberries
+        if (strawberries == 1) {
+            strawberry1.setImageResource(R.drawable.with_strawberry);
+            strawberry2.setImageResource(R.drawable.without_strawberry);
+            strawberry3.setImageResource(R.drawable.without_strawberry);
+        }
+        else if (strawberries == 2) {
+            strawberry1.setImageResource(R.drawable.with_strawberry);
+            strawberry2.setImageResource(R.drawable.with_strawberry);
+            strawberry3.setImageResource(R.drawable.without_strawberry);
+        }
+        else if (strawberries == 3) {
+            strawberry1.setImageResource(R.drawable.with_strawberry);
+            strawberry2.setImageResource(R.drawable.with_strawberry);
+            strawberry3.setImageResource(R.drawable.with_strawberry);
+        }
+
+        // Show Dialog
+        successDialog.show();
+        // Prevent Dialog from Getting Dismissed
+        successDialog.setCancelable(false);
+        successDialog.setCanceledOnTouchOutside(false);
+
+        // Hide Shadows
+        successDialog.getWindow().getDecorView().setSystemUiVisibility(getWindow().getDecorView().getSystemUiVisibility());
+        successDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        successDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        successDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+
+        // TODO: Step 13: Change Next Day
+        nextDay = successDialog.findViewById(R.id.btnNext);
+        nextDay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                soundPlayer.playButtonClicked();
+                presentFinale1(v);
+
+                new CountDownTimer(1000, 1000) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        finish();
+                    }
+                }.start();
+            }
+        });
+
+        // TODO: Step 14: Change packageContext
+        backToMenu = successDialog.findViewById(R.id.btnMenu);
+        backToMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                soundPlayer.playButtonClicked();
+                presentChooseLevel(v);
+                new CountDownTimer(1000, 1000) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        finish();
+                    }
+                }.start();
+            }
+        });
+    }
+
+    public void launchFailedDialog() {
+        hamburger.setBackgroundResource(R.drawable.close);
+        failDialog.setContentView(R.layout.popup_dayfailed);
+        Objects.requireNonNull(failDialog.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+
+        // Initialization of Variables + Find IDs in  Success Dialog
+        TextView currentFailedDay, targetScoreOnly, currentScoreOnly;
+        ImageView strawberry1, strawberry2, strawberry3;
+        Button retryDay, backToMenu;
+
+        currentFailedDay = failDialog.findViewById(R.id.currentFailedDay);
+        targetScoreOnly = failDialog.findViewById(R.id.targetScoreOnly);
+        currentScoreOnly = failDialog.findViewById(R.id.currentScoreOnly);
+        strawberry1 = failDialog.findViewById(R.id.strawberry_1);
+        strawberry2 = failDialog.findViewById(R.id.strawberry_2);
+        strawberry3 = failDialog.findViewById(R.id.strawberry_3);
+
+        // Get Values from string.xml
+        // TODO: Step 23: Change d & td
+        String strCurrentDay = getString(R.string.d18);
+        String strTargetScore = getString(R.string.td18);
+
+        // Convert Score to String
+        String strCurrentScore = Integer.toString(currentScore);
+
+        // Set Values
+        currentFailedDay.setText(strCurrentDay);
+        targetScoreOnly.setText(strTargetScore);
+        String currentScoreText = "Current Score: " + strCurrentScore;
+        currentScoreOnly.setText(currentScoreText);
+
+        if (failedFlag) {
+            if (currentScore >= firstCut && currentScore < secondCut) {
+                strawberry1.setImageResource(R.drawable.with_strawberry);
+            }
+            else if (currentScore >= secondCut && currentScore < thirdCut) {
+                strawberry1.setImageResource(R.drawable.with_strawberry);
+                strawberry2.setImageResource(R.drawable.with_strawberry);
+            }
+            else if (currentScore >= thirdCut) {
+                strawberry1.setImageResource(R.drawable.with_strawberry);
+                strawberry2.setImageResource(R.drawable.with_strawberry);
+                strawberry3.setImageResource(R.drawable.with_strawberry);
+            }
+        }
+
+        // Show Dialog
+        failDialog.show();
+        // Prevent Dialog from Getting Dismissed
+        failDialog.setCancelable(false);
+        failDialog.setCanceledOnTouchOutside(false);
+
+        // Hide Shadows
+        failDialog.getWindow().getDecorView().setSystemUiVisibility(getWindow().getDecorView().getSystemUiVisibility());
+        failDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        failDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        failDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+
+        retryDay = failDialog.findViewById(R.id.btnRetry);
+        retryDay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                soundPlayer.playButtonClicked();
+                Intent restartDay = getIntent();
+                finish();
+                startActivity(restartDay);
+            }
+        });
+
+        // TODO: Step 24: Change packageContext
+        backToMenu = failDialog.findViewById(R.id.btnRetryMenu);
+        backToMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                soundPlayer.playButtonClicked();
+                presentChooseLevel(v);
+                new CountDownTimer(1000, 1000) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        finish();
+                    }
+                }.start();
+            }
+        });
+    }
+
+    public void presentFinale1(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, Finale1.class);
+        intent.putExtra(Finale1.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(Finale1.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentChooseLevel(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, ChooseLevelActivity.class);
+        intent.putExtra(ChooseLevelActivity.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(ChooseLevelActivity.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
     }
 
     // For Music Service

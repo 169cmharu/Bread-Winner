@@ -551,6 +551,210 @@ public class ChooseLevelActivity extends AppCompatActivity {
         ActivityCompat.startActivity(this, intent, options.toBundle());
     }
 
+    public void presentLevel2(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, Level2.class);
+        intent.putExtra(Level2.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(Level2.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentLevel3(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, Level3.class);
+        intent.putExtra(Level3.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(Level3.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentLevel4(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, Level4.class);
+        intent.putExtra(Level4.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(Level4.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentLevel5(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, Level5.class);
+        intent.putExtra(Level5.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(Level5.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentLevel6(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, Level6.class);
+        intent.putExtra(Level6.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(Level6.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentLevel7(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, Level7.class);
+        intent.putExtra(Level7.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(Level7.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentLevel8(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, Level8.class);
+        intent.putExtra(Level8.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(Level8.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentLevel9(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, Level9.class);
+        intent.putExtra(Level9.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(Level9.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentLevel10(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, Level10.class);
+        intent.putExtra(Level10.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(Level10.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentLevel11(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, Level11.class);
+        intent.putExtra(Level11.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(Level11.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentLevel12(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, Level12.class);
+        intent.putExtra(Level12.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(Level12.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentLevel13(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, Level13.class);
+        intent.putExtra(Level13.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(Level13.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentLevel14(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, Level14.class);
+        intent.putExtra(Level14.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(Level14.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentLevel15(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, Level15.class);
+        intent.putExtra(Level15.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(Level15.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentLevel16(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, Level16.class);
+        intent.putExtra(Level16.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(Level16.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentLevel17(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, Level17.class);
+        intent.putExtra(Level17.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(Level17.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentLevel18(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, Level18.class);
+        intent.putExtra(Level18.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(Level18.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
     public void selectDay(int day) {
         if (day == 1) {
             hamburger.setBackgroundResource(R.drawable.close);
@@ -708,8 +912,18 @@ public class ChooseLevelActivity extends AppCompatActivity {
             startGame.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent startDay = new Intent(ChooseLevelActivity.this, Level2.class);
-                    startActivity(startDay);
+                    presentLevel2(v);
+                    new CountDownTimer(3000, 1000) {
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            finish();
+                        }
+                    }.start();
                     if (mServ != null) {
                         mServ.pauseMusic();
                     }
@@ -790,8 +1004,18 @@ public class ChooseLevelActivity extends AppCompatActivity {
             startGame.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent startDay = new Intent(ChooseLevelActivity.this, Level3.class);
-                    startActivity(startDay);
+                    presentLevel3(v);
+                    new CountDownTimer(3000, 1000) {
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            finish();
+                        }
+                    }.start();
                     if (mServ != null) {
                         mServ.pauseMusic();
                     }
@@ -872,8 +1096,18 @@ public class ChooseLevelActivity extends AppCompatActivity {
             startGame.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent startDay = new Intent(ChooseLevelActivity.this, Level4.class);
-                    startActivity(startDay);
+                    presentLevel4(v);
+                    new CountDownTimer(3000, 1000) {
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            finish();
+                        }
+                    }.start();
                     if (mServ != null) {
                         mServ.pauseMusic();
                     }
@@ -954,8 +1188,18 @@ public class ChooseLevelActivity extends AppCompatActivity {
             startGame.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent startDay = new Intent(ChooseLevelActivity.this, Level5.class);
-                    startActivity(startDay);
+                    presentLevel5(v);
+                    new CountDownTimer(3000, 1000) {
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            finish();
+                        }
+                    }.start();
                     if (mServ != null) {
                         mServ.pauseMusic();
                     }
@@ -1036,8 +1280,18 @@ public class ChooseLevelActivity extends AppCompatActivity {
             startGame.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent startDay = new Intent(ChooseLevelActivity.this, Level6.class);
-                    startActivity(startDay);
+                    presentLevel6(v);
+                    new CountDownTimer(3000, 1000) {
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            finish();
+                        }
+                    }.start();
                     if (mServ != null) {
                         mServ.pauseMusic();
                     }
@@ -1118,8 +1372,18 @@ public class ChooseLevelActivity extends AppCompatActivity {
             startGame.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent startDay = new Intent(ChooseLevelActivity.this, Level7.class);
-                    startActivity(startDay);
+                    presentLevel7(v);
+                    new CountDownTimer(3000, 1000) {
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            finish();
+                        }
+                    }.start();
                     if (mServ != null) {
                         mServ.pauseMusic();
                     }
@@ -1200,8 +1464,18 @@ public class ChooseLevelActivity extends AppCompatActivity {
             startGame.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent startDay = new Intent(ChooseLevelActivity.this, Level8.class);
-                    startActivity(startDay);
+                    presentLevel8(v);
+                    new CountDownTimer(3000, 1000) {
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            finish();
+                        }
+                    }.start();
                     if (mServ != null) {
                         mServ.pauseMusic();
                     }
@@ -1282,8 +1556,18 @@ public class ChooseLevelActivity extends AppCompatActivity {
             startGame.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent startDay = new Intent(ChooseLevelActivity.this, Level9.class);
-                    startActivity(startDay);
+                    presentLevel9(v);
+                    new CountDownTimer(3000, 1000) {
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            finish();
+                        }
+                    }.start();
                     if (mServ != null) {
                         mServ.pauseMusic();
                     }
@@ -1364,8 +1648,18 @@ public class ChooseLevelActivity extends AppCompatActivity {
             startGame.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent startDay = new Intent(ChooseLevelActivity.this, Level10.class);
-                    startActivity(startDay);
+                    presentLevel10(v);
+                    new CountDownTimer(3000, 1000) {
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            finish();
+                        }
+                    }.start();
                     if (mServ != null) {
                         mServ.pauseMusic();
                     }
@@ -1446,8 +1740,18 @@ public class ChooseLevelActivity extends AppCompatActivity {
             startGame.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent startDay = new Intent(ChooseLevelActivity.this, Level11.class);
-                    startActivity(startDay);
+                    presentLevel11(v);
+                    new CountDownTimer(3000, 1000) {
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            finish();
+                        }
+                    }.start();
                     if (mServ != null) {
                         mServ.pauseMusic();
                     }
@@ -1528,8 +1832,18 @@ public class ChooseLevelActivity extends AppCompatActivity {
             startGame.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent startDay = new Intent(ChooseLevelActivity.this, Level12.class);
-                    startActivity(startDay);
+                    presentLevel12(v);
+                    new CountDownTimer(3000, 1000) {
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            finish();
+                        }
+                    }.start();
                     if (mServ != null) {
                         mServ.pauseMusic();
                     }
@@ -1610,8 +1924,18 @@ public class ChooseLevelActivity extends AppCompatActivity {
             startGame.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent startDay = new Intent(ChooseLevelActivity.this, Level13.class);
-                    startActivity(startDay);
+                    presentLevel13(v);
+                    new CountDownTimer(3000, 1000) {
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            finish();
+                        }
+                    }.start();
                     if (mServ != null) {
                         mServ.pauseMusic();
                     }
@@ -1692,8 +2016,18 @@ public class ChooseLevelActivity extends AppCompatActivity {
             startGame.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent startDay = new Intent(ChooseLevelActivity.this, Level14.class);
-                    startActivity(startDay);
+                    presentLevel14(v);
+                    new CountDownTimer(3000, 1000) {
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            finish();
+                        }
+                    }.start();
                     if (mServ != null) {
                         mServ.pauseMusic();
                     }
@@ -1774,8 +2108,18 @@ public class ChooseLevelActivity extends AppCompatActivity {
             startGame.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent startDay = new Intent(ChooseLevelActivity.this, Level15.class);
-                    startActivity(startDay);
+                    presentLevel15(v);
+                    new CountDownTimer(3000, 1000) {
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            finish();
+                        }
+                    }.start();
                     if (mServ != null) {
                         mServ.pauseMusic();
                     }
@@ -1856,8 +2200,18 @@ public class ChooseLevelActivity extends AppCompatActivity {
             startGame.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent startDay = new Intent(ChooseLevelActivity.this, Level16.class);
-                    startActivity(startDay);
+                    presentLevel16(v);
+                    new CountDownTimer(3000, 1000) {
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            finish();
+                        }
+                    }.start();
                     if (mServ != null) {
                         mServ.pauseMusic();
                     }
@@ -1938,8 +2292,18 @@ public class ChooseLevelActivity extends AppCompatActivity {
             startGame.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent startDay = new Intent(ChooseLevelActivity.this, Level17.class);
-                    startActivity(startDay);
+                    presentLevel17(v);
+                    new CountDownTimer(3000, 1000) {
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            finish();
+                        }
+                    }.start();
                     if (mServ != null) {
                         mServ.pauseMusic();
                     }
@@ -2020,8 +2384,18 @@ public class ChooseLevelActivity extends AppCompatActivity {
             startGame.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent startDay = new Intent(ChooseLevelActivity.this, Level18.class);
-                    startActivity(startDay);
+                    presentLevel18(v);
+                    new CountDownTimer(3000, 1000) {
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            finish();
+                        }
+                    }.start();
                     if (mServ != null) {
                         mServ.pauseMusic();
                     }

@@ -72,8 +72,8 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
 
     // Score
     private TextView scoreLabel;
-    private int currentScore, highScore, currentStrawberries, earnedStrawberries, timeCount;
     private SharedPreferences dataLevel;
+    private int currentScore, highScore, currentStrawberries, earnedStrawberries, timeCount;
 
     // Class
     private Timer timer;
@@ -187,6 +187,7 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
         // TODO: Step 5: Change dataLevel
         dataLevel = getSharedPreferences("LEVEL_DATA", Context.MODE_PRIVATE);
         highScore = dataLevel.getInt("LEVEL_1_HIGH_SCORE", 0);
+        earnedStrawberries = dataLevel.getInt("LEVEL_1_STRAWBERRIES", 0);
 
         // START GAME
         startGame();
@@ -472,12 +473,15 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
             soundPlayer.playLevelPassed();
             if (currentScore >= firstCut && currentScore < secondCut) {
                 launchSuccessDialog(1);
+                currentStrawberries = 1;
             }
             else if (currentScore >= secondCut && currentScore < thirdCut) {
                 launchSuccessDialog(2);
+                currentStrawberries = 2;
             }
             else if (currentScore >= thirdCut) {
                 launchSuccessDialog(3);
+                currentStrawberries = 3;
             }
 
             // MARK DAY AS COMPLETED
@@ -544,19 +548,16 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
             strawberry1.setImageResource(R.drawable.with_strawberry);
             strawberry2.setImageResource(R.drawable.without_strawberry);
             strawberry3.setImageResource(R.drawable.without_strawberry);
-            currentStrawberries = 1;
         }
         else if (strawberries == 2) {
             strawberry1.setImageResource(R.drawable.with_strawberry);
             strawberry2.setImageResource(R.drawable.with_strawberry);
             strawberry3.setImageResource(R.drawable.without_strawberry);
-            currentStrawberries = 2;
         }
         else if (strawberries == 3) {
             strawberry1.setImageResource(R.drawable.with_strawberry);
             strawberry2.setImageResource(R.drawable.with_strawberry);
             strawberry3.setImageResource(R.drawable.with_strawberry);
-            currentStrawberries = 3;
         }
 
         // Show Dialog
@@ -577,9 +578,18 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
             @Override
             public void onClick(View v) {
                 soundPlayer.playButtonClicked();
-                finish();
-                Intent startDay = new Intent(Level1.this, Level2.class);
-                startActivity(startDay);
+                presentLevel2(v);
+                new CountDownTimer(1000, 1000) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        finish();
+                    }
+                }.start();
             }
         });
 
@@ -589,9 +599,18 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
             @Override
             public void onClick(View v) {
                 soundPlayer.playButtonClicked();
-                finish();
-                Intent startDay = new Intent(Level1.this, ChooseLevelActivity.class);
-                startActivity(startDay);
+                presentChooseLevel(v);
+                new CountDownTimer(1000, 1000) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        finish();
+                    }
+                }.start();
             }
         });
 
@@ -653,12 +672,45 @@ public class Level1 extends AppCompatActivity implements View.OnTouchListener {
         backToMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
                 soundPlayer.playButtonClicked();
-                Intent backMenu = new Intent(Level1.this, ChooseLevelActivity.class);
-                startActivity(backMenu);
+                presentChooseLevel(v);
+                new CountDownTimer(1000, 1000) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        finish();
+                    }
+                }.start();
             }
         });
+    }
+
+    public void presentLevel2(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, Level2.class);
+        intent.putExtra(Level2.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(Level2.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentChooseLevel(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, ChooseLevelActivity.class);
+        intent.putExtra(ChooseLevelActivity.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(ChooseLevelActivity.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
     }
 
     // For Music Service
