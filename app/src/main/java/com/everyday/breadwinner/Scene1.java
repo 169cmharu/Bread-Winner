@@ -121,7 +121,7 @@ public class Scene1 extends AppCompatActivity {
 
     public void presentScene2(View view) {
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
-        int revealX = (int) (view.getX() + view.getWidth() / 2);
+            int revealX = (int) (view.getX() + view.getWidth() / 2);
         int revealY = (int) (view.getY() + view.getHeight() / 2);
 
         Intent intent = new Intent(this, Scene2.class);

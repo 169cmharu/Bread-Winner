@@ -2,16 +2,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/breadinfo_bg"
-    tools:context=".B1_Cupcake">
+    tools:context=".B14_Altamura">
 
     <LinearLayout
+        android:id="@+id/titleContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="55dp"
-        android:orientation="vertical">
+        android:layout_marginTop="35dp"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/bread_14" />
 
         <!-- Title -->
         <TextView
@@ -20,163 +28,165 @@
             android:fontFamily="@font/kg_always_a_good_time"
             android:gravity="center"
             android:text="@string/nb14"
-            android:layout_marginLeft="90dp"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="38sp"/>
-
-        <ImageView
-            android:layout_width="90dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="-85dp"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/bread_14"/>
+            android:textSize="45sp" />
 
     </LinearLayout>
 
-
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="500dp"
-        android:layout_marginVertical="60dp"
-        android:orientation="vertical"
-        android:layout_alignParentLeft="true">
-
-        <!--Actual bread-->
-        <ImageView
-            android:layout_width="200dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="60dp"
-            android:src="@drawable/b14_actual"/>
-
-        <!-- Details -->
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:text="@string/def"
-            android:fontFamily="@font/josefin_sans_bold"
-            android:textSize="20sp"
-            android:layout_marginLeft="10dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:layout_marginBottom="15dp"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="165dp"
-            android:text="@string/def_b14"
-            android:textSize="18sp"
-            android:fontFamily="@font/josefin_sans"
-            android:layout_marginLeft="10dp"
-            android:layout_marginBottom="15dp"
-            android:textAlignment="gravity"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:text="@string/origin"
-            android:fontFamily="@font/josefin_sans_bold"
-            android:textSize="20sp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginBottom="15dp"
-            android:textColor="@color/colorPrimaryDark"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:text="@string/origin_b14"
-            android:layout_marginLeft="10dp"
-            android:fontFamily="@font/josefin_sans"
-            android:textSize="20sp"/>
-    </LinearLayout>
-
-    <!--Main Ingredients Text -->
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="1000dp"
-        android:layout_marginTop="140dp"
-        android:orientation="vertical"
-        android:layout_alignParentRight="true">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:text="@string/ing"
-            android:textSize="20sp"
-            android:fontFamily="@font/josefin_sans_bold"
-            android:textColor="@color/colorPrimaryDark"
-            android:layout_marginRight="52dp"
-            android:layout_marginBottom="100dp"
-            android:layout_marginTop="20dp"/>
-
-    </LinearLayout>
-
-    <!---List of Ingredients -->
-
-    <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
-        android:orientation="vertical"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="52dp">
+        android:orientation="horizontal"
+        android:layout_below="@+id/titleContainer">
 
-
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginLeft="50dp"
-            android:src="@drawable/flour"/>
-
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:text="@string/flour"
-            android:fontFamily="@font/josefin_sans"
-            android:textSize="19sp"
-            android:layout_marginLeft="75dp"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginLeft="50dp"
-            android:src="@drawable/yeast"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/josefin_sans_bold"
+                android:text="@string/def"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:text="@string/yeast"
-            android:fontFamily="@font/josefin_sans"
-            android:textSize="19sp"
-            android:layout_marginLeft="75dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:fontFamily="@font/josefin_sans"
+                android:text="@string/def_b14"
+                android:textAlignment="gravity"
+                android:textSize="18sp" />
 
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginLeft="50dp"
-            android:src="@drawable/water"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/josefin_sans_bold"
+                android:text="@string/origin"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:text="@string/water"
-            android:fontFamily="@font/josefin_sans"
-            android:textSize="19sp"
-            android:layout_marginLeft="75dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/josefin_sans"
+                android:text="@string/origin_b14"
+                android:textSize="20sp" />
 
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginLeft="50dp"
-            android:src="@drawable/salt"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/josefin_sans_bold"
+                android:text="@string/ing"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:text="@string/salt"
-            android:fontFamily="@font/josefin_sans"
-            android:textSize="19sp"
-            android:layout_marginLeft="75dp"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginEnd="8dp">
+
+                    <ImageView
+                        android:layout_width="85dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/flour"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:text="@string/flour"
+                        android:fontFamily="@font/josefin_sans"
+                        android:textSize="18sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginEnd="8dp">
+
+                    <ImageView
+                        android:layout_width="85dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/yeast"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:text="@string/yeast"
+                        android:fontFamily="@font/josefin_sans"
+                        android:textSize="18sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginEnd="8dp">
+
+                    <ImageView
+                        android:layout_width="85dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/water"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:text="@string/water"
+                        android:fontFamily="@font/josefin_sans"
+                        android:textSize="19sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="85dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/salt"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:text="@string/salt"
+                        android:fontFamily="@font/josefin_sans"
+                        android:textSize="19sp" />
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
@@ -184,7 +194,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="50dp"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -192,7 +202,7 @@
             android:id="@+id/back"
             android:layout_width="146dp"
             android:layout_height="54dp"
-            android:background="@drawable/back"/>
+            android:background="@drawable/back" />
     </LinearLayout>
 
 </RelativeLayout>

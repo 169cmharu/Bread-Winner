@@ -73,6 +73,7 @@ public class ChooseLevelActivity extends AppCompatActivity {
     int day18Status, day18HighScore, day18EarnedStrawberries;
 
     private SharedPreferences dataWeek;
+    private int weekCounter = 1;
     private int currentWeek = 1;
 
     @Override
@@ -196,11 +197,11 @@ public class ChooseLevelActivity extends AppCompatActivity {
         });
 
 //        dataWeek = getSharedPreferences("WEEK_DATA", Context.MODE_PRIVATE);
-//        currentWeek = dataWeek.getInt("CURRENT_WEEK", 1);
 
         nextPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                currentWeek = dataWeek.getInt("CURRENT_WEEK", 1);
                 soundPlayer.playButtonClicked();
                 YoYo.with(Techniques.Pulse)
                         .duration(400)
@@ -231,12 +232,14 @@ public class ChooseLevelActivity extends AppCompatActivity {
                             .duration(500)
                             .playOn(week3);
                 }
+
             }
         });
 
         prevPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                currentWeek = dataWeek.getInt("CURRENT_WEEK", 1);
                 soundPlayer.playButtonClicked();
                 YoYo.with(Techniques.Pulse)
                         .duration(400)
@@ -267,6 +270,7 @@ public class ChooseLevelActivity extends AppCompatActivity {
                             .duration(500)
                             .playOn(week1);
                 }
+
             }
         });
 

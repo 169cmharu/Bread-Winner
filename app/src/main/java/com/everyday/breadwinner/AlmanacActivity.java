@@ -1,8 +1,11 @@
 package com.everyday.breadwinner;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -14,6 +17,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.view.View;
@@ -705,117 +709,425 @@ public class AlmanacActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (currentBread == 1) {
                     soundPlayer.playButtonClicked();
-                    Intent detailsBread = new Intent(AlmanacActivity.this, B1_Cupcake.class);
-                    startActivity(detailsBread);
+                    presentBread1(v);
+                    if (mServ != null) {
+                        mServ.pauseMusic();
+                    }
                 }
                 else if (currentBread == 2) {
                     soundPlayer.playButtonClicked();
-                    Intent detailsBread = new Intent(AlmanacActivity.this, B2_Sprinkle.class);
-                    startActivity(detailsBread);
+                    presentBread2(v);
+                    if (mServ != null) {
+                        mServ.pauseMusic();
+                    }
                 }
                 else if (currentBread == 3) {
                     soundPlayer.playButtonClicked();
-                    Intent detailsBread = new Intent(AlmanacActivity.this, B3_Muffin.class);
-                    startActivity(detailsBread);
+                    presentBread3(v);
+                    if (mServ != null) {
+                        mServ.pauseMusic();
+                    }
                 }
                 else if (currentBread == 4) {
                     soundPlayer.playButtonClicked();
-                    Intent detailsBread = new Intent(AlmanacActivity.this, B4_Anadama.class);
-                    startActivity(detailsBread);
+                    presentBread4(v);
+                    if (mServ != null) {
+                        mServ.pauseMusic();
+                    }
                 }
                 else if (currentBread == 5) {
                     soundPlayer.playButtonClicked();
-                    Intent detailsBread = new Intent(AlmanacActivity.this, B5_FBaguette.class);
-                    startActivity(detailsBread);
+                    presentBread5(v);
+                    if (mServ != null) {
+                        mServ.pauseMusic();
+                    }
                 }
                 else if (currentBread == 6) {
                     soundPlayer.playButtonClicked();
-                    Intent detailsBread = new Intent(AlmanacActivity.this, B6_Scotch.class);
-                    startActivity(detailsBread);
+                    presentBread6(v);
+                    if (mServ != null) {
+                        mServ.pauseMusic();
+                    }
                 }
                 else if (currentBread == 7) {
                     soundPlayer.playButtonClicked();
-                    Intent detailsBread = new Intent(AlmanacActivity.this, B7_LBaccia.class);
-                    startActivity(detailsBread);
+                    presentBread7(v);
+                    if (mServ != null) {
+                        mServ.pauseMusic();
+                    }
                 }
                 else if (currentBread == 8) {
                     soundPlayer.playButtonClicked();
-                    Intent detailsBread = new Intent(AlmanacActivity.this, B8_Marraqueta.class);
-                    startActivity(detailsBread);
+                    presentBread8(v);
+                    if (mServ != null) {
+                        mServ.pauseMusic();
+                    }
                 }
                 else if (currentBread == 9) {
                     soundPlayer.playButtonClicked();
-                    Intent detailsBread = new Intent(AlmanacActivity.this, B9_Zopf.class);
-                    startActivity(detailsBread);
+                    presentBread9(v);
+                    if (mServ != null) {
+                        mServ.pauseMusic();
+                    }
                 }
                 else if (currentBread == 10) {
                     soundPlayer.playButtonClicked();
-                    Intent detailsBread = new Intent(AlmanacActivity.this, B10_broll.class);
-                    startActivity(detailsBread);
+                    presentBread10(v);
+                    if (mServ != null) {
+                        mServ.pauseMusic();
+                    }
                 }
                 else if (currentBread == 11) {
                     soundPlayer.playButtonClicked();
-                    Intent detailsBread = new Intent(AlmanacActivity.this, B11_Borodinsky.class);
-                    startActivity(detailsBread);
+                    presentBread11(v);
+                    if (mServ != null) {
+                        mServ.pauseMusic();
+                    }
                 }
                 else if (currentBread == 12) {
                     soundPlayer.playButtonClicked();
-                    Intent detailsBread = new Intent(AlmanacActivity.this, B12_Pretzel.class);
-                    startActivity(detailsBread);
+                    presentBread12(v);
+                    if (mServ != null) {
+                        mServ.pauseMusic();
+                    }
                 }
                 else if (currentBread == 13) {
                     soundPlayer.playButtonClicked();
-                    Intent detailsBread = new Intent(AlmanacActivity.this, B13_Bsticks.class);
-                    startActivity(detailsBread);
+                    presentBread13(v);
+                    if (mServ != null) {
+                        mServ.pauseMusic();
+                    }
                 }
                 else if (currentBread == 14) {
                     soundPlayer.playButtonClicked();
-                    Intent detailsBread = new Intent(AlmanacActivity.this, B14_Altamura.class);
-                    startActivity(detailsBread);
+                    presentBread14(v);
+                    if (mServ != null) {
+                        mServ.pauseMusic();
+                    }
                 }
                 else if (currentBread == 15) {
                     soundPlayer.playButtonClicked();
-                    Intent detailsBread = new Intent(AlmanacActivity.this, B15_Croissant.class);
-                    startActivity(detailsBread);
+                    presentBread15(v);
+                    if (mServ != null) {
+                        mServ.pauseMusic();
+                    }
                 }
                 else if (currentBread == 16) {
                     soundPlayer.playButtonClicked();
-                    Intent detailsBread = new Intent(AlmanacActivity.this, B16_Rbread.class);
-                    startActivity(detailsBread);
+                    presentBread16(v);
+                    if (mServ != null) {
+                        mServ.pauseMusic();
+                    }
                 }
                 else if (currentBread == 17) {
                     soundPlayer.playButtonClicked();
-                    Intent detailsBread = new Intent(AlmanacActivity.this, B17_Brioche.class);
-                    startActivity(detailsBread);
+                    presentBread17(v);
+                    if (mServ != null) {
+                        mServ.pauseMusic();
+                    }
                 }
                 else if (currentBread == 18) {
                     soundPlayer.playButtonClicked();
-                    Intent detailsBread = new Intent(AlmanacActivity.this, B18_Sufganiyah.class);
-                    startActivity(detailsBread);
+                    presentBread18(v);
+                    if (mServ != null) {
+                        mServ.pauseMusic();
+                    }
                 }
                 else if (currentBread == 19) {
                     soundPlayer.playButtonClicked();
-                    Intent detailsBread = new Intent(AlmanacActivity.this, B19_Bammy.class);
-                    startActivity(detailsBread);
+                    presentBread19(v);
+                    if (mServ != null) {
+                        mServ.pauseMusic();
+                    }
                 }
                 else if (currentBread == 20) {
                     soundPlayer.playButtonClicked();
-                    Intent detailsBread = new Intent(AlmanacActivity.this, B20_Cookies.class);
-                    startActivity(detailsBread);
+                    presentBread20(v);
+                    if (mServ != null) {
+                        mServ.pauseMusic();
+                    }
                 }
                 else if (currentBread == 21) {
                     soundPlayer.playButtonClicked();
-                    Intent detailsBread = new Intent(AlmanacActivity.this, B21_PButter.class);
-                    startActivity(detailsBread);
+                    presentBread21(v);
+                    if (mServ != null) {
+                        mServ.pauseMusic();
+                    }
                 }
                 else if (currentBread == 22) {
                     soundPlayer.playButtonClicked();
-                    Intent detailsBread = new Intent(AlmanacActivity.this, B22_GDonut.class);
-                    startActivity(detailsBread);
+                    presentBread22(v);
+                    if (mServ != null) {
+                        mServ.pauseMusic();
+                    }
                 }
             }
         });
 
+    }
+
+    public void presentBread1(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, B1_Cupcake.class);
+        intent.putExtra(B1_Cupcake.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(B1_Cupcake.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentBread2(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, B2_Sprinkle.class);
+        intent.putExtra(B2_Sprinkle.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(B2_Sprinkle.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentBread3(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, B3_Muffin.class);
+        intent.putExtra(B3_Muffin.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(B3_Muffin.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentBread4(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, B4_Anadama.class);
+        intent.putExtra(B4_Anadama.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(B4_Anadama.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentBread5(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, B5_FBaguette.class);
+        intent.putExtra(B5_FBaguette.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(B5_FBaguette.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentBread6(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, B6_Scotch.class);
+        intent.putExtra(B6_Scotch.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(B6_Scotch.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentBread7(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, B7_LBaccia.class);
+        intent.putExtra(B7_LBaccia.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(B7_LBaccia.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentBread8(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, B8_Marraqueta.class);
+        intent.putExtra(B8_Marraqueta.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(B8_Marraqueta.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentBread9(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, B9_Zopf.class);
+        intent.putExtra(B9_Zopf.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(B9_Zopf.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentBread10(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, B10_broll.class);
+        intent.putExtra(B10_broll.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(B10_broll.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentBread11(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, B11_Borodinsky.class);
+        intent.putExtra(B11_Borodinsky.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(B11_Borodinsky.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentBread12(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, B12_Pretzel.class);
+        intent.putExtra(B12_Pretzel.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(B12_Pretzel.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentBread13(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, B13_Bsticks.class);
+        intent.putExtra(B13_Bsticks.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(B13_Bsticks.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentBread14(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, B14_Altamura.class);
+        intent.putExtra(B14_Altamura.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(B14_Altamura.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentBread15(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, B15_Croissant.class);
+        intent.putExtra(B15_Croissant.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(B15_Croissant.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentBread16(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, B16_Rbread.class);
+        intent.putExtra(B16_Rbread.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(B16_Rbread.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentBread17(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, B17_Brioche.class);
+        intent.putExtra(B17_Brioche.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(B17_Brioche.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentBread18(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, B18_Sufganiyah.class);
+        intent.putExtra(B18_Sufganiyah.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(B18_Sufganiyah.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentBread19(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, B19_Bammy.class);
+        intent.putExtra(B19_Bammy.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(B19_Bammy.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentBread20(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, B20_Cookies.class);
+        intent.putExtra(B20_Cookies.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(B20_Cookies.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentBread21(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, B21_PButter.class);
+        intent.putExtra(B21_PButter.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(B21_PButter.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentBread22(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, B22_GDonut.class);
+        intent.putExtra(B22_GDonut.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(B22_GDonut.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
     }
 
     // Menu Buttons
@@ -943,6 +1255,11 @@ public class AlmanacActivity extends AppCompatActivity {
 
         mainLayout.setVisibility(View.VISIBLE);
         circularReveal.start();
+    }
+
+    @Override
+    public void onBackPressed() {
+        unRevealActivity();
     }
 
     // For Music Service

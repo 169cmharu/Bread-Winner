@@ -215,9 +215,9 @@
 
     <!--Cupcake-->
 
-    <string name="def">Definition: </string>
-    <string name="ing">Main Ingredients: </string>
-    <string name="origin">Place of Origin: </string>
+    <string name="def">Description </string>
+    <string name="ing">Main Ingredients </string>
+    <string name="origin">Place of Origin </string>
 
     <string name="def_b1">A cupcake is a small cake designed to serve one person,
                         which may be baked in a small thin paper or aluminum
@@ -240,9 +240,7 @@
 
     <string name="def_b3">A muffin is an individual-sized, baked product. It can
                           refer to two distinct items, a part-raised flatbread that
-                          is baked and then cooked on a griddle (typically un-
-                          sweetened) and a cupcake-like quickbread (often
-                          sweetened) that is chemically leavened and then
+                          is baked and then cooked on a griddle and a cupcake-like quickbread that is chemically leavened and then
                           baked in a mold.
     </string>
 

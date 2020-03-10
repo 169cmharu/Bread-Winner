@@ -32,63 +32,79 @@
         <activity
             android:name=".Scene1"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".Scene2"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".Scene3"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".Scene4"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".Scene5"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".Scene6"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".Scene7"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".Scene8"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".Scene9"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".Scene10"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".Scene11"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".Scene12"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" /> <!-- Landing Pages -->
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
+        <!-- Landing Pages -->
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".ChooseLevelActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".AlmanacActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" /> <!-- Levels -->
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" /> <!-- Levels -->
         <activity
             android:name=".Level1"
             android:configChanges="orientation"
@@ -160,95 +176,119 @@
         <activity
             android:name=".Level18"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" /> <!-- Almanac Pages -->
+            android:screenOrientation="portrait" />
+
+        <!-- Almanac Pages -->
         <activity
             android:name=".B1_Cupcake"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".B2_Sprinkle"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".B3_Muffin"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".B4_Anadama"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".B5_FBaguette"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".B6_Scotch"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".B7_LBaccia"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".B8_Marraqueta"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".B9_Zopf"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".B10_broll"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".B11_Borodinsky"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".B12_Pretzel"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".B13_Bsticks"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".B14_Altamura"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".B15_Croissant"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".B16_Rbread"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".B17_Brioche"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".B18_Sufganiyah"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".B19_Bammy"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".B20_Cookies"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".B21_PButter"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".B22_GDonut"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
     </application>
 
 </manifest>
