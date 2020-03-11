@@ -99,7 +99,8 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:src="@drawable/right_hand"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"/>
 
     <ImageView
         android:id="@+id/bread_1"

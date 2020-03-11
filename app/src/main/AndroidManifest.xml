@@ -82,22 +82,18 @@
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.Transparent" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ChooseLevelActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.Transparent" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".AlmanacActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.Transparent" />
+            android:screenOrientation="portrait" />
         <activity android:name=".CreditsActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.Transparent" />
+            android:screenOrientation="portrait" />
 
         <!-- Levels -->
         <activity
