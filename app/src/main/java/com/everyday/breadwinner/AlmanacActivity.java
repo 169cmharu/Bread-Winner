@@ -866,6 +866,30 @@ public class AlmanacActivity extends AppCompatActivity {
 
     }
 
+    public void presentMain(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra(MainActivity.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(MainActivity.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
+    public void presentCredits(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, CreditsActivity.class);
+        intent.putExtra(CreditsActivity.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(CreditsActivity.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
+    }
+
     public void presentBread1(View view) {
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
         int revealX = (int) (view.getX() + view.getWidth() / 2);
@@ -1175,14 +1199,15 @@ public class AlmanacActivity extends AppCompatActivity {
         mainMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent levelIntent = new Intent(AlmanacActivity.this, MainActivity.class);
-                startActivity(levelIntent);
+                soundPlayer.playButtonClicked();
+                unRevealActivity();
             }
         });
 
         musicBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                soundPlayer.playButtonClicked();
                 String musicText;
                 if (musicFlag) {
                     musicText = getString(R.string.music_off);
@@ -1239,7 +1264,8 @@ public class AlmanacActivity extends AppCompatActivity {
         creditsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: Add Function Here
+                soundPlayer.playButtonClicked();
+                presentCredits(v);
             }
         });
 
@@ -1254,6 +1280,23 @@ public class AlmanacActivity extends AppCompatActivity {
         circularReveal.setInterpolator(new AccelerateInterpolator());
 
         mainLayout.setVisibility(View.VISIBLE);
+        circularReveal.start();
+    }
+
+    protected void unRevealActivity() {
+        float finalRadius = (float) (Math.max(mainLayout.getWidth(), mainLayout.getHeight()) * 1.1);
+        Animator circularReveal = ViewAnimationUtils.createCircularReveal(
+                mainLayout, revealX, revealY, finalRadius, 0);
+
+        circularReveal.setDuration(1000);
+        circularReveal.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                mainLayout.setVisibility(View.INVISIBLE);
+                finish();
+            }
+        });
+
         circularReveal.start();
     }
 

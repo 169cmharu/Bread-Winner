@@ -1,11 +1,9 @@
 package com.everyday.breadwinner;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.ActivityOptionsCompat;
 
 import android.animation.Animator;
-import android.annotation.SuppressLint;
+import android.animation.AnimatorListenerAdapter;
 import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -13,43 +11,31 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewTreeObserver;
-import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
-import android.view.animation.Animation;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.Objects;
+
+public class CreditsActivity extends AppCompatActivity {
     private View decorView;
+    private View mainLayout;
+
     HomeWatcher mHomeWatcher;
     Dialog mainMenuDialog;
     Button hamburger;
     boolean musicFlag, soundFlag = true;
     private SoundPlayer soundPlayer;
-    Button startButton;
-    Button settingsButton;
-    Button almanacButton;
-    ImageView logo;
 
-    private long backPressedTime;
-    private Toast backToast;
-
-    private View mainLayout;
     public static final String EXTRA_CIRCULAR_REVEAL_X = "EXTRA_CIRCULAR_REVEAL_X";
     public static final String EXTRA_CIRCULAR_REVEAL_Y = "EXTRA_CIRCULAR_REVEAL_Y";
     private int revealX;
@@ -58,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_credits);
 
         // decorView
         decorView = getWindow().getDecorView();
@@ -93,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         soundPlayer = new SoundPlayer(this);
+        mainMenuDialog = new Dialog(this);
+        hamburger = findViewById(R.id.btnHamburger);
 
         // Background Music
         SharedPreferences loadToggleState = this.getSharedPreferences("MusicStatus", Context.MODE_PRIVATE);
@@ -124,60 +112,6 @@ public class MainActivity extends AppCompatActivity {
         });
         mHomeWatcher.startWatch();
 
-        // START MAIN CODE
-        mainMenuDialog = new Dialog(this);
-
-        // Find Buttons by their ID
-        startButton = findViewById(R.id.btnPlay);
-        almanacButton = findViewById(R.id.btnAlmanac);
-        settingsButton = findViewById(R.id.btnSettings);
-        hamburger = findViewById(R.id.btnHamburger);
-
-        logo = findViewById(R.id.logoIcon);
-        YoYo.with(Techniques.Bounce)
-                .duration(1000)
-                .repeat(Animation.INFINITE)
-                .playOn(logo);
-
-        // Add Click Listener
-        startButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                YoYo.with(Techniques.Pulse)
-                        .duration(400)
-                        .playOn(startButton);
-                soundPlayer.playButtonClicked();
-                presentSelectDay(v);
-            }
-        });
-
-        almanacButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                YoYo.with(Techniques.Pulse)
-                        .duration(400)
-                        .playOn(almanacButton);
-                soundPlayer.playButtonClicked();
-                presentAlmanac(v);
-            }
-        });
-
-        settingsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                YoYo.with(Techniques.Pulse)
-                        .duration(400)
-                        .playOn(settingsButton);
-
-                YoYo.with(Techniques.Pulse)
-                        .duration(400)
-                        .playOn(hamburger);
-
-                launchMenu();
-                soundPlayer.playButtonClicked();
-            }
-        });
-
         hamburger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -188,55 +122,11 @@ public class MainActivity extends AppCompatActivity {
                 soundPlayer.playButtonClicked();
             }
         });
+
     }
 
-    protected void revealActivity(int x, int y) {
-        float finalRadius = (float) (Math.max(mainLayout.getWidth(), mainLayout.getHeight()) * 1.1);
-
-        Animator circularReveal = ViewAnimationUtils.createCircularReveal(mainLayout, x, y, 0, finalRadius);
-        circularReveal.setDuration(1000);
-        circularReveal.setInterpolator(new AccelerateInterpolator());
-
-        mainLayout.setVisibility(View.VISIBLE);
-        circularReveal.start();
-    }
-
-    public void presentSelectDay(View view) {
-        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
-        int revealX = (int) (view.getX() + view.getWidth() / 2);
-        int revealY = (int) (view.getY() + view.getHeight() / 2);
-
-        Intent intent = new Intent(this, ChooseLevelActivity.class);
-        intent.putExtra(ChooseLevelActivity.EXTRA_CIRCULAR_REVEAL_X, revealX);
-        intent.putExtra(ChooseLevelActivity.EXTRA_CIRCULAR_REVEAL_Y, revealY);
-
-        ActivityCompat.startActivity(this, intent, options.toBundle());
-    }
-
-    public void presentAlmanac(View view) {
-        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
-        int revealX = (int) (view.getX() + view.getWidth() / 2);
-        int revealY = (int) (view.getY() + view.getHeight() / 2);
-
-        Intent intent = new Intent(this, AlmanacActivity.class);
-        intent.putExtra(AlmanacActivity.EXTRA_CIRCULAR_REVEAL_X, revealX);
-        intent.putExtra(AlmanacActivity.EXTRA_CIRCULAR_REVEAL_Y, revealY);
-
-        ActivityCompat.startActivity(this, intent, options.toBundle());
-    }
-
-    public void presentCredits(View view) {
-        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
-        int revealX = (int) (view.getX() + view.getWidth() / 2);
-        int revealY = (int) (view.getY() + view.getHeight() / 2);
-
-        Intent intent = new Intent(this, CreditsActivity.class);
-        intent.putExtra(CreditsActivity.EXTRA_CIRCULAR_REVEAL_X, revealX);
-        intent.putExtra(CreditsActivity.EXTRA_CIRCULAR_REVEAL_Y, revealY);
-
-        ActivityCompat.startActivity(this, intent, options.toBundle());
-    }
-
+    // Menu Buttons
+    Button mainMenu;
     Button musicBtn;
     Button soundBtn;
     Button creditsBtn;
@@ -244,8 +134,8 @@ public class MainActivity extends AppCompatActivity {
     public void launchMenu() {
         hamburger.setBackgroundResource(R.drawable.close);
 
-        mainMenuDialog.setContentView(R.layout.popup_settings);
-        mainMenuDialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+        mainMenuDialog.setContentView(R.layout.popup_mainmenu);
+        Objects.requireNonNull(mainMenuDialog.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
         mainMenuDialog.show();
         mainMenuDialog.getWindow().getDecorView().setSystemUiVisibility(getWindow().getDecorView().getSystemUiVisibility());
         mainMenuDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
@@ -261,9 +151,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        mainMenu = mainMenuDialog.findViewById(R.id.btnMainMenu);
         musicBtn = mainMenuDialog.findViewById(R.id.btnMusic);
         soundBtn = mainMenuDialog.findViewById(R.id.btnSound);
         creditsBtn = mainMenuDialog.findViewById(R.id.btnCredits);
+
+        creditsBtn.setVisibility(View.INVISIBLE);
 
         // Initiate Current Music State
         String currentMusicState;
@@ -275,6 +168,15 @@ public class MainActivity extends AppCompatActivity {
             currentMusicState = getString(R.string.music_off);
             musicBtn.setText(currentMusicState);
         }
+
+        mainMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                soundPlayer.playButtonClicked();
+                unRevealActivity();
+                mainMenuDialog.dismiss();
+            }
+        });
 
         musicBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -297,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
                     // Play Music Again
                     doBindService();
                     Intent music = new Intent();
-                    music.setClass(MainActivity.this, HomeMusicService.class);
+                    music.setClass(CreditsActivity.this, HomeMusicService.class);
                     startService(music);
                     if (mServ != null) {
                         mServ.startMusic();
@@ -309,11 +211,8 @@ public class MainActivity extends AppCompatActivity {
                 SharedPreferences.Editor editorMusic = saveMusic.edit();
                 editorMusic.putBoolean("music", musicFlag);
                 editorMusic.apply();
-                soundPlayer.playButtonClicked();
             }
         });
-
-        // TODO: Initiate Current Sound Status
 
         soundBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -329,34 +228,44 @@ public class MainActivity extends AppCompatActivity {
                     soundText = getString(R.string.sound_on);
                     soundBtn.setText(soundText);
                     soundFlag = true;
-                    soundPlayer.playButtonClicked();
                     // TODO: Add Turn on Sound on SharedPreferences
                 }
             }
         });
+    }
 
-        creditsBtn.setOnClickListener(new View.OnClickListener() {
+
+    protected void revealActivity(int x, int y) {
+        float finalRadius = (float) (Math.max(mainLayout.getWidth(), mainLayout.getHeight()) * 1.1);
+
+        Animator circularReveal = ViewAnimationUtils.createCircularReveal(mainLayout, x, y, 0, finalRadius);
+        circularReveal.setDuration(1000);
+        circularReveal.setInterpolator(new AccelerateInterpolator());
+
+        mainLayout.setVisibility(View.VISIBLE);
+        circularReveal.start();
+    }
+
+    protected void unRevealActivity() {
+        float finalRadius = (float) (Math.max(mainLayout.getWidth(), mainLayout.getHeight()) * 1.1);
+        Animator circularReveal = ViewAnimationUtils.createCircularReveal(
+                mainLayout, revealX, revealY, finalRadius, 0);
+
+        circularReveal.setDuration(1000);
+        circularReveal.addListener(new AnimatorListenerAdapter() {
             @Override
-            public void onClick(View v) {
-                soundPlayer.playButtonClicked();
-                presentCredits(v);
+            public void onAnimationEnd(Animator animation) {
+                mainLayout.setVisibility(View.INVISIBLE);
+                finish();
             }
         });
 
+        circularReveal.start();
     }
 
     @Override
     public void onBackPressed() {
-        if (backPressedTime + 2000 > System.currentTimeMillis()) {
-            backToast.cancel();
-            super.onBackPressed();
-            return;
-        } else {
-            backToast = Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT);
-            backToast.show();
-        }
-
-        backPressedTime = System.currentTimeMillis();
+        unRevealActivity();
     }
 
     // For Music Service
@@ -440,17 +349,14 @@ public class MainActivity extends AppCompatActivity {
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                decorView.setSystemUiVisibility(
-                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                                | View.SYSTEM_UI_FLAG_FULLSCREEN
-                                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                );
-            }
+            decorView.setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+            );
         }
     }
-
 }

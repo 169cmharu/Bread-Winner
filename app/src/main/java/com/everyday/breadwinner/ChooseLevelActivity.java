@@ -5,6 +5,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -541,6 +542,40 @@ public class ChooseLevelActivity extends AppCompatActivity {
 
         mainLayout.setVisibility(View.VISIBLE);
         circularReveal.start();
+    }
+
+    protected void unRevealActivity() {
+        float finalRadius = (float) (Math.max(mainLayout.getWidth(), mainLayout.getHeight()) * 1.1);
+        Animator circularReveal = ViewAnimationUtils.createCircularReveal(
+                mainLayout, revealX, revealY, finalRadius, 0);
+
+        circularReveal.setDuration(1000);
+        circularReveal.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                mainLayout.setVisibility(View.INVISIBLE);
+                finish();
+            }
+        });
+
+        circularReveal.start();
+    }
+
+    @Override
+    public void onBackPressed() {
+        unRevealActivity();
+    }
+
+    public void presentCredits(View view) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "transition");
+        int revealX = (int) (view.getX() + view.getWidth() / 2);
+        int revealY = (int) (view.getY() + view.getHeight() / 2);
+
+        Intent intent = new Intent(this, CreditsActivity.class);
+        intent.putExtra(CreditsActivity.EXTRA_CIRCULAR_REVEAL_X, revealX);
+        intent.putExtra(CreditsActivity.EXTRA_CIRCULAR_REVEAL_Y, revealY);
+
+        ActivityCompat.startActivity(this, intent, options.toBundle());
     }
 
     public void presentLevel1(View view) {
@@ -2454,14 +2489,15 @@ public class ChooseLevelActivity extends AppCompatActivity {
         mainMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent levelIntent = new Intent(ChooseLevelActivity.this, MainActivity.class);
-                startActivity(levelIntent);
+                soundPlayer.playButtonClicked();
+                unRevealActivity();
             }
         });
 
         musicBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                soundPlayer.playButtonClicked();
                 String musicText;
                 if (musicFlag) {
                     musicText = getString(R.string.music_off);
@@ -2494,8 +2530,6 @@ public class ChooseLevelActivity extends AppCompatActivity {
             }
         });
 
-        // TODO: Initiate Current Sound Status
-
         soundBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -2518,7 +2552,8 @@ public class ChooseLevelActivity extends AppCompatActivity {
         creditsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: Add Function Here
+                soundPlayer.playButtonClicked();
+                presentCredits(v);
             }
         });
 
